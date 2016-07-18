@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 默认列表项点击效果-->
+    <attr name="item_default_background" />
+    <!-- 默认CardView列表项点击效果-->
+    <attr name="item_card_background" />
+
+</resources>

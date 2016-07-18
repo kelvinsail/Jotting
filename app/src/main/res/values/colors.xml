@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- 主颜色 -->
+    <color name="colorPrimary">#ff33b5e5</color>
+    <color name="colorPrimaryDark">#ff0099cc</color>
+    <color name="colorAccent">#ff33b5e5</color>
+
+    <!-- 字体黑色 -->
+    <color name="text_black">#666666</color>
+
+    <!-- 点击效果颜色 -->
+    <color name="click_bg_white">#FFFFFF</color>
+    <color name="click_bg_gray_alaph">#32000000</color>
+
 </resources>
