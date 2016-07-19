@@ -5,8 +5,19 @@
     <color name="colorPrimaryDark">#ff0099cc</color>
     <color name="colorAccent">#ff33b5e5</color>
 
+    <!-- 背景色 -->
+    <color name="background_black_alpha">#8F000000</color>
+    <color name="background_main">#FFFFFF</color>
+    <color name="background_gray">#F5F5F5</color>
+    <color name="background_stroke">#DDDDDD</color>
+
     <!-- 字体黑色 -->
     <color name="text_black">#666666</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_orange">#FF8811</color>
+    <color name="text_white">#ffffff</color>
+    <color name="text_hint">#DDDDDD</color>
+    <color name="text_tips">#CCCCCC</color>
 
     <!-- 点击效果颜色 -->
     <color name="click_bg_white">#FFFFFF</color>

@@ -31,24 +31,24 @@ public class ResourcesUtils {
     }
 
 
-    public String[] getStringArray(@ArrayRes int id) {
+    public static String[] getStringArray(@ArrayRes int id) {
         return JottingApplication.getInstance().getResources().getStringArray(id);
     }
 
-    public int[] getIntArray(@ArrayRes int id) {
+    public static int[] getIntArray(@ArrayRes int id) {
         return JottingApplication.getInstance().getResources().getIntArray(id);
     }
 
 
-    public float getDimension(@DimenRes int id) {
+    public static float getDimension(@DimenRes int id) {
         return JottingApplication.getInstance().getResources().getDimension(id);
     }
 
-    public int getDimensionPixelOffset(@DimenRes int id) {
+    public static int getDimensionPixelOffset(@DimenRes int id) {
         return JottingApplication.getInstance().getResources().getDimensionPixelOffset(id);
     }
 
-    public int getDimensionPixelSize(@DimenRes int id) {
+    public static int getDimensionPixelSize(@DimenRes int id) {
         return JottingApplication.getInstance().getResources().getDimensionPixelSize(id);
     }
 
@@ -56,12 +56,12 @@ public class ResourcesUtils {
      * @deprecated
      */
     @Deprecated
-    public Drawable getDrawable(@DrawableRes int id) {
+    public static Drawable getDrawable(@DrawableRes int id) {
         return JottingApplication.getInstance().getResources().getDrawable(id);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public Drawable getDrawable(@DrawableRes int id, Resources.Theme theme) {
+    public static Drawable getDrawable(@DrawableRes int id, Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return JottingApplication.getInstance().getResources().getDrawable(id, theme);
         }
@@ -72,11 +72,11 @@ public class ResourcesUtils {
      * @deprecated
      */
     @Deprecated
-    public int getColor(@ColorRes int id) {
+    public static int getColor(@ColorRes int id) {
         return JottingApplication.getInstance().getResources().getColor(id);
     }
 
-    public int getColor(@ColorRes int id, Resources.Theme theme) {
+    public static int getColor(@ColorRes int id, Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return JottingApplication.getInstance().getResources().getColor(id, theme);
         }
@@ -87,22 +87,22 @@ public class ResourcesUtils {
      * @deprecated
      */
     @Deprecated
-    public ColorStateList getColorStateList(@ColorRes int id) {
+    public static ColorStateList getColorStateList(@ColorRes int id) {
         return JottingApplication.getInstance().getResources().getColorStateList(id);
     }
 
-    public ColorStateList getColorStateList(@ColorRes int id, Resources.Theme theme) {
+    public static ColorStateList getColorStateList(@ColorRes int id, Resources.Theme theme) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return JottingApplication.getInstance().getResources().getColorStateList(id, theme);
         }
         return JottingApplication.getInstance().getResources().getColorStateList(id);
     }
 
-    public boolean getBoolean(@BoolRes int id) throws Resources.NotFoundException {
+    public static boolean getBoolean(@BoolRes int id) throws Resources.NotFoundException {
         return JottingApplication.getInstance().getResources().getBoolean(id);
     }
 
-    public int getInteger(@IntegerRes int id) throws Resources.NotFoundException {
+    public static int getInteger(@IntegerRes int id) throws Resources.NotFoundException {
         return JottingApplication.getInstance().getResources().getInteger(id);
     }
 

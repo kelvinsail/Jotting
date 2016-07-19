@@ -4,7 +4,8 @@
     android:id="@+id/rv_projects"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:clipToPadding="false"
     android:paddingBottom="@dimen/margin_carview"
-    android:clipToPadding="false"/>
+    android:paddingTop="?attr/actionBarSize"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

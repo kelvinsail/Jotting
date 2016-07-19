@@ -6,4 +6,9 @@
     <!-- 默认CardView列表项点击效果-->
     <attr name="item_card_background" />
 
+    <!-- 正在加载弹窗-->
+    <attr name="loading_dialog_progress_bar_style"/>
+    <attr name="loading_dialog_background" />
+    <attr name="loading_dialog_text_color" />
+    <attr name="loading_dialog_text_size" />
 </resources>

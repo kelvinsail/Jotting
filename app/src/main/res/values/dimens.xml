@@ -15,6 +15,12 @@
     <!-- CardView内边距-->
     <dimen name="padding_carview">18dp</dimen>
 
+    <!-- LoadingDialog -->
+    <dimen name="loading_dialog_corners">3dp</dimen>
+    <dimen name="loading_dialog_progressbar_height">36dp</dimen>
+    <dimen name="loading_dialog_progressbar_width">36dp</dimen>
+    <dimen name="cloud_progressbar_height">4dp</dimen>
+
     <!-- 字体大小 -->
     <dimen name="text_mirco">10dp</dimen>
     <dimen name="text_small">12dp</dimen>

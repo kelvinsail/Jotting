@@ -10,6 +10,8 @@ import android.view.View;
 import com.yifan.jotting2.base.impl.PagerImpl;
 
 /**
+ * 生命周期Fragment基类
+ * <p/>
  * Created by yifan on 2016/7/16.
  */
 public abstract class LifeCycleFragment extends Fragment implements PagerImpl {

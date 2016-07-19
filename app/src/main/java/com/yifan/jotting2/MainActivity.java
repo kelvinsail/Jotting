@@ -3,6 +3,8 @@ package com.yifan.jotting2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,13 +14,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.yifan.jotting2.base.BaseActivity;
 import com.yifan.jotting2.base.BaseFragment;
+import com.yifan.jotting2.base.TitleBarActivity;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
 
-public class MainActivity extends BaseActivity
+/**
+ * 主界面
+ */
+public class MainActivity extends TitleBarActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final String TAG = "MainActivity";
@@ -49,6 +55,16 @@ public class MainActivity extends BaseActivity
     private DrawerLayout mDrawerLayout;
 
     /**
+     * 抽屉
+     */
+    private NavigationView mNavigationView;
+
+    /**
+     * 浮动按钮
+     */
+    private FloatingActionButton mFloatingActionButton;
+
+    /**
      * Fragment事务
      */
     private FragmentTransaction mFragmentTransaction;
@@ -56,28 +72,45 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolBar);
+        setContentView(R.layout.activity_main, 0, true);
+    }
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+    @Override
+    public void initView() {
+        super.initView();
+        //导航栏
+//        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar = getSupportTitleBar();
+        //浮动按钮
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        //包含抽屉的根布局
+        mDrawerLayout = getDrawerLayout();
+        //抽屉控件
+        mNavigationView = getNavigationView();
+        //加载菜单
+        mNavigationView.inflateMenu(R.menu.activity_main_drawer);
+        //加载抽屉头部
+        mNavigationView.inflateHeaderView(R.layout.nav_header_main);
+    }
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+    @Override
+    public void setListener() {
+        super.setListener();
+        //浮动按钮
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        //抽屉控件
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        mNavigationView.setNavigationItemSelectedListener(this);
+        //设置首页
         switchFragment(INTENT_MAIN_ACTION_PROJECTS);
     }
 
@@ -99,8 +132,10 @@ public class MainActivity extends BaseActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            getSupportFragmentManager().popBackStack();
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 
@@ -140,8 +175,7 @@ public class MainActivity extends BaseActivity
                 break;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
@@ -174,7 +208,9 @@ public class MainActivity extends BaseActivity
                     finish();
                     return true;
                 case INTENT_MAIN_ACTION_PROJECTS://返回首页
-
+                    while (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+                        getSupportFragmentManager().popBackStack();
+                    }
                     return true;
                 default:
                     break;
@@ -231,5 +267,10 @@ public class MainActivity extends BaseActivity
         mToolBar.setTitle(baseFragment.getTitleName());
         ft.addToBackStack(baseFragment.getTAG());
         startFragment(ft);
+    }
+
+    @Override
+    public boolean hasNavigationView() {
+        return true;
     }
 }

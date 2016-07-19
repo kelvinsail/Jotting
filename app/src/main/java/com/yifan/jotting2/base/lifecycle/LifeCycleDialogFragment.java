@@ -11,8 +11,8 @@ import android.view.View;
 import com.yifan.jotting2.base.impl.PagerImpl;
 
 /**
- * DialogFragment基类
- * <p>
+ * 生命周期DialogFragment基类
+ * <p/>
  * Created by yifan on 2016/7/18.
  */
 public abstract class LifeCycleDialogFragment extends DialogFragment implements PagerImpl {
@@ -21,7 +21,6 @@ public abstract class LifeCycleDialogFragment extends DialogFragment implements 
      * 是否为活动状态
      */
     private boolean mIsActived;
-
 
     public LifeCycleDialogFragment() {
         super();

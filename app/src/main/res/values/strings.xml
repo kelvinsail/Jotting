@@ -1,10 +1,22 @@
 <resources>
+
+    <!-- 半个中文空格：&#8194; 一个中文空格：&#12288; 省略号：&#8230;-->
+
     <string name="app_name">Jotting2</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_exit">Exit</string>
+
+    <!-- Loading -->
+    <string name="loading">正在加载&#8230;</string>
+    <string name="progressing">正在处理&#8230;</string>
+    <string name="submiting">正在提交&#8230;</string>
+    <string name="calculating">正在计算&#8230;</string>
+    <string name="load_out_time_to_reload">数据过期，点击后重新加载&#8230;</string>
+    <string name="load_fail">加载失败&#8230;</string>
+    <string name="toast_submit_fail">提交失败&#8230;</string>
 
     <!-- 首页的抽屉菜单 -->
     <string name="nav_menu_prijects">所有项目</string>

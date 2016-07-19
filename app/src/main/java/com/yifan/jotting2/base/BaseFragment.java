@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yifan.jotting2.base.impl.LoadImpl;
 import com.yifan.jotting2.base.lifecycle.LifeCycleFragment;
 
 /**
@@ -14,7 +15,7 @@ import com.yifan.jotting2.base.lifecycle.LifeCycleFragment;
  * <p/>
  * Created by yifan on 2016/7/16.
  */
-public abstract class BaseFragment extends LifeCycleFragment {
+public abstract class BaseFragment extends LifeCycleFragment implements LoadImpl {
 
     /**
      * 获取标题的名字
@@ -37,6 +38,26 @@ public abstract class BaseFragment extends LifeCycleFragment {
 
     @Override
     public void setListener() {
+
+    }
+
+    @Override
+    public void createLoadingdialog() {
+
+    }
+
+    @Override
+    public void createLoadingdialog(String message) {
+
+    }
+
+    @Override
+    public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+
+    }
+
+    @Override
+    public void dissmissLoadingDialog() {
 
     }
 }

@@ -14,11 +14,22 @@
         <!-- 点击背景 -->
         <item name="item_default_background">@drawable/item_click_bg_transparent</item>
         <item name="item_card_background">@drawable/item_click_bg_transparent</item>
+
+        <!-- LoadingDialog -->
+        <item name="loading_dialog_progress_bar_style">@style/Loading.ProgressBar</item>
+        <item name="loading_dialog_background">@drawable/background_loading_dialog_dark</item>
+        <item name="loading_dialog_text_color">@color/text_white</item>
+        <item name="loading_dialog_text_size">@dimen/text_small</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="Loading.ProgressBar" parent="@android:style/Widget.Holo.Light.ProgressBar.Inverse" />
+
+    <style name="Loading.ProgressBar.Large" parent="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse" />
+
+    <style name="Loading.ProgressBar.Small" parent="@android:style/Widget.Holo.Light.ProgressBar.Small.Inverse" />
 
 </resources>
