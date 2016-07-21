@@ -22,13 +22,28 @@ import com.yifan.jotting2.JottingApplication;
  */
 public class ResourcesUtils {
 
+    public static Resources getResources() {
+        return JottingApplication.getInstance().getResources();
+    }
+
     public static String getString(@StringRes int resID) {
         return JottingApplication.getInstance().getResources().getString(resID);
     }
 
-    public static String getString(@StringRes int resID, Object... formatArgs) {
-        return JottingApplication.getInstance().getResources().getString(resID, formatArgs);
+//    public static String getString(@StringRes int resID, Object... formatArgs) {
+//        return JottingApplication.getInstance().getResources().getString(resID, formatArgs);
+//    }
+
+    /**
+     * 获取定义的字符串
+     *
+     * @param id
+     * @return
+     */
+    public static String getString(@StringRes int id, Object... formatArgs) {
+        return JottingApplication.getInstance().getResources().getString(id, formatArgs);
     }
+
 
 
     public static String[] getStringArray(@ArrayRes int id) {

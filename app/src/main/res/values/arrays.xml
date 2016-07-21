@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="project_types">
+        <item>普通账本</item>
+        <item>流水账</item>
+        <item>清单</item>
+    </string-array>
+
+</resources>

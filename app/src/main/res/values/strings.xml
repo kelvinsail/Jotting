@@ -4,9 +4,11 @@
 
     <string name="app_name">Jotting2</string>
 
+    <!-- NavigationView -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- menu -->
     <string name="action_exit">Exit</string>
 
     <!-- Loading -->
@@ -17,6 +19,9 @@
     <string name="load_out_time_to_reload">数据过期，点击后重新加载&#8230;</string>
     <string name="load_fail">加载失败&#8230;</string>
     <string name="toast_submit_fail">提交失败&#8230;</string>
+
+    <!-- 主界面 -->
+    <string name="press_again_to_leave">再按一次退出程序</string>
 
     <!-- 首页的抽屉菜单 -->
     <string name="nav_menu_prijects">所有项目</string>
@@ -31,4 +36,13 @@
     <!-- 界面标题名 -->
     <string name="title_name_project">@string/app_name</string>
     <string name="title_name_files">@string/nav_menu_file_manager</string>
+
+    <!-- Projects -->
+    <string name="description_total_money">总消费：¥ %s</string>
+    <string name="description_startTime">建档时间：%1$tF %2$tT</string>
+    <string name="description_modifyTime">修改时间：%1$tF %2$tT</string>
+    <string name="description_state">状态：%s</string>
+    <string name="description_state_normal">正常</string>
+    <string name="description_state_end">已结束</string>
+    <string name="description_type">类型：%s</string>
 </resources>

@@ -14,6 +14,15 @@
     <dimen name="margin_carview">12dp</dimen>
     <!-- CardView内边距-->
     <dimen name="padding_carview">18dp</dimen>
+    <!-- 通用间距 -->
+    <dimen name="padding_mirco">2dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_xlarge">16dp</dimen>
+
+    <!-- RoundImageView -->
+    <dimen name="border_width">3dp</dimen>
 
     <!-- LoadingDialog -->
     <dimen name="loading_dialog_corners">3dp</dimen>
@@ -22,14 +31,15 @@
     <dimen name="cloud_progressbar_height">4dp</dimen>
 
     <!-- 字体大小 -->
-    <dimen name="text_mirco">10dp</dimen>
-    <dimen name="text_small">12dp</dimen>
-    <dimen name="text_little">14dp</dimen>
-    <dimen name="text_middle">16dp</dimen>
-    <dimen name="text_large">18dp</dimen>
-    <dimen name="text_xlarge">20dp</dimen>
-    <dimen name="text_xxlarge">22dp</dimen>
+    <dimen name="text_mirco">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_little">14sp</dimen>
+    <dimen name="text_middle">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">22sp</dimen>
+    <dimen name="text_xxxlarge">26sp</dimen>
 
     <dimen name="size_project_label">72dp</dimen>
-    <dimen name="start_local_project_name">108dp</dimen>
+    <dimen name="start_local_project_name">0dp</dimen>
 </resources>

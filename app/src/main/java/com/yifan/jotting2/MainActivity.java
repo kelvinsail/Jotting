@@ -2,6 +2,7 @@ package com.yifan.jotting2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,17 +13,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yifan.jotting2.base.BaseFragment;
 import com.yifan.jotting2.base.TitleBarActivity;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
+import com.yifan.jotting2.utils.database.ProjectsDataHelp;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 主界面
+ * <p/>
+ * Created by yifan on 2016/7/13.
  */
 public class MainActivity extends TitleBarActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,6 +77,21 @@ public class MainActivity extends TitleBarActivity
      */
     private FragmentTransaction mFragmentTransaction;
 
+    /**
+     * 返回键点击计数
+     */
+    private AtomicInteger mPressCount = new AtomicInteger();
+
+    /**
+     * 最后一次点击返回键时间
+     */
+    private long mLastestBackPressTime;
+
+    /**
+     * 当前页卡序号
+     */
+    private int mCurrentPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +102,6 @@ public class MainActivity extends TitleBarActivity
     public void initView() {
         super.initView();
         //导航栏
-//        mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mToolBar = getSupportTitleBar();
         //浮动按钮
         mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
@@ -100,8 +122,11 @@ public class MainActivity extends TitleBarActivity
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                for (int i = 0; i < 3; i++) {
+                    ProjectsDataHelp.getInstance().insertNewProject(i, "较场尾", "夏日海滩",
+                            123, System.currentTimeMillis() - 10000, System.currentTimeMillis(), false);
+                }
+
             }
         });
         //抽屉控件
@@ -132,10 +157,24 @@ public class MainActivity extends TitleBarActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            getSupportFragmentManager().popBackStack();
+            //} else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            //    getSupportFragmentManager().popBackStack();
+        } else if (mCurrentPosition != INTENT_MAIN_ACTION_PROJECTS) {
+            switchFragment(INTENT_MAIN_ACTION_PROJECTS);
         } else {
-            finish();
+            //第一次点击初始化赋值
+            if (mLastestBackPressTime <= 0) {
+                mLastestBackPressTime = System.currentTimeMillis();
+            }
+            // 计算时差
+            long i = Math.abs(System.currentTimeMillis() - mLastestBackPressTime);
+            // 判断时差及点击次数
+            if (mPressCount.incrementAndGet() > 1 && i < 1 * 1000) {
+                this.finish();
+            } else {
+                Toast.makeText(this, R.string.press_again_to_leave, Toast.LENGTH_SHORT).show();
+                mLastestBackPressTime = System.currentTimeMillis();
+            }
         }
     }
 
@@ -236,6 +275,9 @@ public class MainActivity extends TitleBarActivity
      * 切换Fragment
      */
     public void switchFragment(int position) {
+        if (mCurrentPosition == position) {
+            return;
+        }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         BaseFragment baseFragment = null;
         Fragment fragment = null;
@@ -244,6 +286,7 @@ public class MainActivity extends TitleBarActivity
                 fragment = getSupportFragmentManager().findFragmentByTag(ProjectsFragment.TAG);
                 if (null == fragment || (null != fragment && !(fragment instanceof ProjectsFragment))) {
                     fragment = ProjectsFragment.newInstance();
+                    //ft.addToBackStack(((BaseFragment) fragment).getTAG());
                 }
                 baseFragment = (BaseFragment) fragment;
                 break;
@@ -251,13 +294,14 @@ public class MainActivity extends TitleBarActivity
                 fragment = getSupportFragmentManager().findFragmentByTag(FilesManagerFragment.TAG);
                 if (null == fragment || (null != fragment && !(fragment instanceof FilesManagerFragment))) {
                     fragment = FilesManagerFragment.newInstance();
+                    //ft.addToBackStack(((BaseFragment) fragment).getTAG());
                 }
                 baseFragment = (BaseFragment) fragment;
                 break;
         }
         if (baseFragment.isAdded()) {
             if (baseFragment.isActived()) {
-                // isShowing,do nothing
+
             } else {
                 ft.show(baseFragment);
             }
@@ -265,7 +309,7 @@ public class MainActivity extends TitleBarActivity
             ft.replace(R.id.layout_main_content, baseFragment, baseFragment.getTAG());
         }
         mToolBar.setTitle(baseFragment.getTitleName());
-        ft.addToBackStack(baseFragment.getTAG());
+        mCurrentPosition = position;
         startFragment(ft);
     }
 

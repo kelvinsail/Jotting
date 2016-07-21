@@ -1,7 +1,5 @@
 package com.yifan.jotting2.base.widget;
 
-import android.icu.text.TimeZoneFormat;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +27,18 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerAdapter.BaseVie
     @Override
     public void onBindViewHolder(VH holder, int position) {
         if (null != holder) {
-            holder.setPosition(position);
+            holder.bindPosition(position);
+            holder.bindData(getItem(position));
         }
     }
+
+    /**
+     * 获取序号相对应的列表数据
+     *
+     * @param postion
+     * @return
+     */
+    public abstract Object getItem(int postion);
 
     @Override
     public abstract int getItemCount();
@@ -65,13 +72,13 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerAdapter.BaseVie
             }
         }
 
-        public void setPosition(int position) {
+        public void bindPosition(int position) {
             if (null != itemView) {
                 itemView.setId(position);
             }
         }
 
-        public void setData(Object data) {
+        public void bindData(Object data) {
             if (null != itemView) {
                 itemView.setTag(data);
             }

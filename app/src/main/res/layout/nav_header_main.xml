@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/side_nav_bar"
@@ -12,13 +13,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/riv_navi_header_image"
         android:layout_width="84dp"
         android:layout_height="84dp"
         android:layout_marginTop="@dimen/nav_header_vertical_spacing"
         android:scaleType="centerCrop"
-        android:src="@drawable/header" />
+        android:src="@drawable/header"
+        app:riv_border_color="@color/text_white"
+        app:riv_border_width="@dimen/border_width"
+        app:riv_oval="true" />
 
     <TextView
         android:id="@+id/tv_navi_header_name"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.yifan.jotting2.widget.ColorCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,23 +11,36 @@
     android:padding="@dimen/padding_carview"
     app:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/iv_item_project_label"
-        android:layout_width="@dimen/size_project_label"
-        android:layout_height="@dimen/size_project_label"
-        android:layout_gravity="left"
-        android:layout_margin="@dimen/padding_carview"
-        android:src="@drawable/icon_inventory" />
+    <View
+        android:id="@+id/view_project_label"
+        android:layout_width="5dp"
+        android:layout_height="match_parent"
+        android:background="@color/text_orange" />
 
-    <TextView
-        android:id="@+id/tv_project_name"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_carview"
-        android:layout_marginLeft="@dimen/start_local_project_name"
-        android:layout_marginRight="@dimen/padding_carview"
-        android:layout_marginTop="@dimen/padding_carview"
-        android:text="面试需知"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_xxlarge" />
-</android.support.v7.widget.CardView>
+        android:layout_margin="@dimen/padding_carview">
+
+        <TextView
+            android:id="@+id/tv_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_xxlarge"
+            tools:text="Tavel" />
+
+        <TextView
+            android:id="@+id/tv_description_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_below="@id/tv_project_name"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text_small"
+            tools:text="2016/07/20" />
+    </RelativeLayout>
+
+</com.yifan.jotting2.widget.ColorCardView>
