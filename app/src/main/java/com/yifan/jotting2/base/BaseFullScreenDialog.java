@@ -68,7 +68,7 @@ public abstract class BaseFullScreenDialog extends LifeCycleDialogFragment {
     public View setContentView(@LayoutRes int resID) {
         if (null != mViewStubCompat) {
             mViewStubCompat.setLayoutInflater(LayoutInflater.from(getActivity()));
-            mViewStubCompat.setLayoutResource(R.layout.dialog_project_details);
+            mViewStubCompat.setLayoutResource(resID);
             mContentView = mViewStubCompat.inflate();
         }
         return mContentView;

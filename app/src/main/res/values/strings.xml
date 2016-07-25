@@ -3,6 +3,8 @@
     <!-- 半个中文空格：&#8194; 一个中文空格：&#12288; 省略号：&#8230;-->
 
     <string name="app_name">Jotting2</string>
+    <string name="measure">确定</string>
+    <string name="cancel">取消</string>
 
     <!-- NavigationView -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -22,6 +24,13 @@
 
     <!-- 主界面 -->
     <string name="press_again_to_leave">再按一次退出程序</string>
+    <string name="new_project">新建项目</string>
+    <string name="project_name">项目名称</string>
+    <string name="project_name_hint">请输入项目名称</string>
+    <string name="project_type">项目类型</string>
+    <string name="project_type_hint">请输入项目类型</string>
+    <string name="project_total_money">总金额</string>
+    <string name="project_total_money_hint">请输入总金额</string>
 
     <!-- 首页的抽屉菜单 -->
     <string name="nav_menu_prijects">所有项目</string>

@@ -40,6 +40,12 @@
     <dimen name="text_xxlarge">22sp</dimen>
     <dimen name="text_xxxlarge">26sp</dimen>
 
-    <dimen name="size_project_label">72dp</dimen>
-    <dimen name="start_local_project_name">0dp</dimen>
+
+    <!--<dimen name="size_project_label">72dp</dimen>-->
+    <!--<dimen name="start_local_project_name">0dp</dimen>-->
+
+    <dimen name="dialog_new_project_title_height">42dp</dimen>
+    <dimen name="dialog_new_project_name_height">36dp</dimen>
+    <dimen name="dialog_new_project_name_width">80dp</dimen>
+    <dimen name="dialog_new_project_content_width">240dp</dimen>
 </resources>

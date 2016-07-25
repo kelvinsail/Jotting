@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.yifan.jotting2.base.BaseFragment;
 import com.yifan.jotting2.base.TitleBarActivity;
 import com.yifan.jotting2.ui.FilesManagerFragment;
+import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
 
@@ -122,10 +123,12 @@ public class MainActivity extends TitleBarActivity
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (int i = 0; i < 3; i++) {
-                    ProjectsDataHelp.getInstance().insertNewProject(i, "较场尾", "夏日海滩",
-                            123, System.currentTimeMillis() - 10000, System.currentTimeMillis(), false);
-                }
+//                for (int i = 0; i < 3; i++) {
+//                    ProjectsDataHelp.getInstance().insertNewProject(i, "较场尾", "夏日海滩",
+//                            123, System.currentTimeMillis() - 10000, System.currentTimeMillis(), false);
+//                }
+                NewProjectDialog dialog = NewProjectDialog.newInstance();
+                dialog.show(getSupportFragmentManager(),NewProjectDialog.TAG);
 
             }
         });

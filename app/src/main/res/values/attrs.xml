@@ -11,4 +11,7 @@
     <attr name="loading_dialog_background" />
     <attr name="loading_dialog_text_color" />
     <attr name="loading_dialog_text_size" />
+
+    <!-- 确认弹窗按钮 -->
+    <attr name="dialog_measure_button_style"/>
 </resources>
