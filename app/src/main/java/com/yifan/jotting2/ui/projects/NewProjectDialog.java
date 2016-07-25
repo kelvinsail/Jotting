@@ -1,6 +1,5 @@
 package com.yifan.jotting2.ui.projects;
 
-import android.provider.Settings;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.base.MeasureDialog;
+import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.utils.ResourcesUtils;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
 
@@ -20,7 +19,7 @@ import com.yifan.jotting2.utils.database.ProjectsDataHelp;
  * <p/>
  * Created by yifan on 2016/7/24.
  */
-public class NewProjectDialog extends MeasureDialog implements View.OnClickListener {
+public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickListener {
 
     public static final String TAG = "NewProjectDialog";
 
@@ -113,10 +112,14 @@ public class NewProjectDialog extends MeasureDialog implements View.OnClickListe
                     if (TextUtils.isEmpty(mProjectNameEdit.getText())) {
                         Toast.makeText(getActivity(), ResourcesUtils.getString(R.string.project_name_hint),
                                 Toast.LENGTH_SHORT).show();
-                        break;
+                        return;
                     }
-                    String totalMoney = mTotalMoneyEdit.getVisibility() == View.VISIBLE ?
-                            mTotalMoneyEdit.getText().toString() : String.valueOf(0);
+                    //项目总金额文本
+                    String totalMoney = mTotalMoneyEdit.getText().toString();
+                    if (TextUtils.isEmpty(totalMoney) ||
+                            mProjectTypeSpinner.getSelectedItemPosition() == 1) {
+                        totalMoney = String.valueOf(0);
+                    }
                     //插入数据
                     ProjectsDataHelp.getInstance().insertNewProject(mProjectTypeSpinner.getSelectedItemPosition()
                             , mProjectNameEdit.getText().toString(), null, Double.valueOf(totalMoney),

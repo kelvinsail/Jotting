@@ -1,5 +1,24 @@
 <resources>
 
+    <!-- 通用间距 -->
+    <dimen name="padding_mirco">2dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_large">12dp</dimen>
+    <dimen name="padding_xlarge">16dp</dimen>
+    <!-- 字体大小 -->
+    <dimen name="text_mirco">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_little">14sp</dimen>
+    <dimen name="text_middle">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_xlarge">20sp</dimen>
+    <dimen name="text_xxlarge">22sp</dimen>
+    <dimen name="text_xxxlarge">26sp</dimen>
+    <!-- Dialog -->
+    <dimen name="dialog_width_normal">320dp</dimen>
+    <dimen name="dialog_width_large">480dp</dimen>
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">240dp</dimen>
@@ -14,12 +33,6 @@
     <dimen name="margin_carview">12dp</dimen>
     <!-- CardView内边距-->
     <dimen name="padding_carview">18dp</dimen>
-    <!-- 通用间距 -->
-    <dimen name="padding_mirco">2dp</dimen>
-    <dimen name="padding_small">4dp</dimen>
-    <dimen name="padding_normal">8dp</dimen>
-    <dimen name="padding_large">12dp</dimen>
-    <dimen name="padding_xlarge">16dp</dimen>
 
     <!-- RoundImageView -->
     <dimen name="border_width">3dp</dimen>
@@ -30,20 +43,7 @@
     <dimen name="loading_dialog_progressbar_width">36dp</dimen>
     <dimen name="cloud_progressbar_height">4dp</dimen>
 
-    <!-- 字体大小 -->
-    <dimen name="text_mirco">10sp</dimen>
-    <dimen name="text_small">12sp</dimen>
-    <dimen name="text_little">14sp</dimen>
-    <dimen name="text_middle">16sp</dimen>
-    <dimen name="text_large">18sp</dimen>
-    <dimen name="text_xlarge">20sp</dimen>
-    <dimen name="text_xxlarge">22sp</dimen>
-    <dimen name="text_xxxlarge">26sp</dimen>
-
-
-    <!--<dimen name="size_project_label">72dp</dimen>-->
-    <!--<dimen name="start_local_project_name">0dp</dimen>-->
-
+    <!-- NewProjectDialog -->
     <dimen name="dialog_new_project_title_height">42dp</dimen>
     <dimen name="dialog_new_project_name_height">36dp</dimen>
     <dimen name="dialog_new_project_name_width">80dp</dimen>

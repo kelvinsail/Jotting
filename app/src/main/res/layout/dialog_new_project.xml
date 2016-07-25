@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minWidth="320dp"
+    android:minWidth="@dimen/dialog_width_normal"
     android:padding="@dimen/padding_normal"
     app:columnCount="2"
     app:orientation="horizontal"

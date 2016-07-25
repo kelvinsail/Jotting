@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/dialog_width_normal"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -34,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/iv_project_details_header"
             android:layout_margin="@dimen/padding_normal"
-            android:textColor="@color/text_gray"
             android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/text_large"
             tools:text="anywhere" />
 

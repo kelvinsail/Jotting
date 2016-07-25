@@ -16,7 +16,7 @@ import com.yifan.jotting2.utils.ResourcesUtils;
  * <p/>
  * Created by yifan on 2016/7/24.
  */
-public abstract class MeasureDialog extends BaseFullScreenDialog {
+public abstract class BaseMeasureDialog extends BaseFullScreenDialog {
 
     /**
      * 布局加载器
@@ -60,7 +60,7 @@ public abstract class MeasureDialog extends BaseFullScreenDialog {
         if (mLayoutBtns.getChildCount() > 0) {
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(ResourcesUtils.getDimensionPixelSize(R.dimen.padding_normal), 0, 0, 0);
+            layoutParams.setMargins(ResourcesUtils.getDimensionPixelSize(R.dimen.padding_large), 0, 0, 0);
             mLayoutBtns.addView(button, layoutParams);
         } else {
             mLayoutBtns.addView(button);

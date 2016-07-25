@@ -114,4 +114,6 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerAdapter.BaseVie
     public interface OnItemLongClickListener {
         boolean onLongClick(View v, int position, Object data);
     }
+
+
 }
