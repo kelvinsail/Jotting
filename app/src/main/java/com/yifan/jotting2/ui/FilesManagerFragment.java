@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.thinksky.utils.base.BaseFragment;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.base.BaseFragment;
-import com.yifan.jotting2.utils.ResourcesUtils;
 
 /**
  * 备份文件管理器
- * <p/>
+ *
  * Created by yifan on 2016/7/16.
  */
 public class FilesManagerFragment extends BaseFragment {

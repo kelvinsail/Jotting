@@ -1,22 +1,20 @@
 package com.yifan.jotting2.utils.database;
 
-import com.yifan.jotting2.pojo.Projects;
-import com.yifan.jotting2.utils.database.gen.ProjectsDao;
+import com.yifan.jotting2.pojo.Project;
+import com.yifan.jotting2.utils.database.gen.ProjectDao;
+
+import org.greenrobot.greendao.AbstractDao;
 
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
+ * 项目数据管理工具
+ *
  * Created by yifan on 2016/7/20.
  */
-public class ProjectsDataHelp implements DataHelpObservable {
-
-    ProjectsObservable mObservable = new ProjectsObservable();
-
-    private ProjectsDataHelp() {
-
-    }
+public class ProjectsDataHelp extends DataHelper<Project> implements DataHelpObservable {
 
     private static class ProjectHelp {
 
@@ -28,42 +26,8 @@ public class ProjectsDataHelp implements DataHelpObservable {
         return ProjectHelp.mInstance;
     }
 
-    @Override
-    public void regesiterDataObserver(Observer observer) {
-        mObservable.addObserver(observer);
-    }
-
-    @Override
-    public void unregesiterDataObservers() {
-        mObservable.deleteObservers();
-    }
-
-    @Override
-    public void unregesiterDataObserver(Observer observer) {
-        mObservable.deleteObserver(observer);
-    }
-
-    @Override
-    public void notifyDataChanged() {
-        mObservable.notifyObservers();
-    }
-
-    @Override
-    public void notifyDataChanged(Object object) {
-        mObservable.notifyObservers(object);
-    }
-
-    /**
-     * 获取所有项目数据
-     *
-     * @param count
-     * @return
-     */
-    public List<Projects> getProject(long count) {
-        return DataBaseManager.getInstance().getProjectsDao()
-                .queryBuilder().where(ProjectsDao.Properties.Id.notEq(count))
-                .orderAsc(ProjectsDao.Properties.Id)
-                .build().list();
+    private ProjectsDataHelp() {
+        super();
     }
 
     /**
@@ -77,43 +41,49 @@ public class ProjectsDataHelp implements DataHelpObservable {
      * @param modifyTime
      * @param isEnded
      */
-    public void insertNewProject(int projectType, String projectName, String description,
-                                 double totalMoney, long startTime, long modifyTime, boolean isEnded) {
+    public void insertNewData(int projectType, String projectName, String description,
+                              double totalMoney, long startTime, long modifyTime, boolean isEnded) {
         //插入数据
-        Projects projects = new Projects(null, projectType,
+        Project project = new Project(null, projectType,
                 projectName, description, totalMoney, startTime, modifyTime, isEnded);
-        DataBaseManager.getInstance().getProjectsDao().insert(projects);
+        insert(project);
+    }
+
+    @Override
+    public void insert(Project project) {
+        getDao().insert(project);
         //通知所有观察者
-        notifyDataChanged(projects);
+        notifyDataChanged(project);
     }
 
-    /**
-     * 批量插入新项目
-     *
-     * @param projects
-     */
-    public void insertNewProjects(Projects... projects) {
-        for (Projects pj : projects) {
-            DataBaseManager.getInstance().getProjectsDao().insert(pj);
+    @Override
+    public void insert(Project... projects) {
+        for (Project project : projects) {
+            getDao().insert(project);
         }
         notifyDataChanged(projects);
     }
 
-    /**
-     * 观察数据者实例
-     */
-    public class ProjectsObservable extends Observable {
+    @Override
+    public void delete(Project project) {
 
-        @Override
-        public void notifyObservers() {
-            setChanged();
-            super.notifyObservers();
-        }
+    }
 
-        @Override
-        public void notifyObservers(Object arg) {
-            setChanged();
-            super.notifyObservers(arg);
-        }
+    @Override
+    public void alert(Project project) {
+
+    }
+
+    @Override
+    public List<Project> query(int count, String... value) {
+        return getDao()
+                .queryBuilder().where(ProjectDao.Properties.Id.notEq(count))
+                .orderAsc(ProjectDao.Properties.Id)
+                .build().list();
+    }
+
+    @Override
+    public ProjectDao getDao() {
+        return DataBaseManager.getInstance().getProjectsDao();
     }
 }

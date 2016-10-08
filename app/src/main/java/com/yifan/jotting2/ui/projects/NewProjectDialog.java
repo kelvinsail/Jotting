@@ -9,14 +9,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
-import com.yifan.jotting2.utils.ResourcesUtils;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
 
 /**
  * 新建项目弹窗
- * <p/>
+ *
  * Created by yifan on 2016/7/24.
  */
 public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickListener {
@@ -65,8 +65,8 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
     public void initView() {
         super.initView();
         //初始化布局
-        getViewStubCompat().setLayoutResource(R.layout.dialog_new_project);
-        mRootView = getViewStubCompat().inflate();
+        getViewStub().setLayoutResource(R.layout.dialog_new_project);
+        mRootView = getViewStub().inflate();
         mProjectNameEdit = (EditText) mRootView.findViewById(R.id.et_dialog_new_project_name);
         mProjectTypeSpinner = (AppCompatSpinner) mRootView.findViewById(R.id.sp_dialog_new_project_type);
         mTotalMoneyEdit = (EditText) mRootView.findViewById(R.id.et_dialog_new_project_total_money);
@@ -88,8 +88,8 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
         mProjectTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mTotalMoneyEdit.setVisibility(i != 1 ? View.VISIBLE : View.GONE);
-                mTatolMoneyText.setVisibility(i != 1 ? View.VISIBLE : View.GONE);
+                mTotalMoneyEdit.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
+                mTatolMoneyText.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
             }
 
             @Override
@@ -121,7 +121,7 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
                         totalMoney = String.valueOf(0);
                     }
                     //插入数据
-                    ProjectsDataHelp.getInstance().insertNewProject(mProjectTypeSpinner.getSelectedItemPosition()
+                    ProjectsDataHelp.getInstance().insertNewData(mProjectTypeSpinner.getSelectedItemPosition()
                             , mProjectNameEdit.getText().toString(), null, Double.valueOf(totalMoney),
                             System.currentTimeMillis(), System.currentTimeMillis(), false);
                 }

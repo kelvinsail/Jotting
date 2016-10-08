@@ -2,7 +2,7 @@ package com.yifan.jotting2.base.impl;
 
 /**
  * 界面上下文环境统一接口
- * <p/>
+ *
  * Created by yifan on 2016/7/15.
  */
 public interface PagerImpl {

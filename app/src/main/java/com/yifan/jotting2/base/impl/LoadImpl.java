@@ -6,7 +6,7 @@ import com.yifan.jotting2.R;
 
 /**
  * 弹窗接口抽取
- * <p/>
+ *
  * Created by yifan on 2016/7/18.
  */
 public interface LoadImpl {

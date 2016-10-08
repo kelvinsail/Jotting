@@ -8,7 +8,7 @@ import com.yifan.jotting2.MainActivity;
 
 /**
  * Intent统一管理工具
- * <p/>
+ *
  * Created by yifan on 2016/7/16.
  */
 public class IntentUtils {

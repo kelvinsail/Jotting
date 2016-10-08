@@ -46,7 +46,7 @@
     <string name="title_name_project">@string/app_name</string>
     <string name="title_name_files">@string/nav_menu_file_manager</string>
 
-    <!-- Projects -->
+    <!-- Project -->
     <string name="description_total_money">总消费：¥ %s</string>
     <string name="description_startTime">建档时间：%1$tF %2$tT</string>
     <string name="description_modifyTime">修改时间：%1$tF %2$tT</string>

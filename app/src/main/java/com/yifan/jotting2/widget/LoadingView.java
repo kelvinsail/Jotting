@@ -1,9 +1,7 @@
 package com.yifan.jotting2.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
@@ -13,12 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.utils.ResourcesUtils;
 
 /**
  * 加载Loading界面
- * <p/>
+ *
  * Created by yifan on 2016/7/18.
  */
 public class LoadingView extends LinearLayout implements View.OnClickListener {

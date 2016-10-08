@@ -1,33 +1,33 @@
 package com.yifan.jotting2.ui.projects;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.thinksky.utils.base.BaseActivity;
+import com.thinksky.utils.base.BaseFragment;
+import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.base.BaseFragment;
-import com.yifan.jotting2.pojo.Projects;
-import com.yifan.jotting2.utils.ResourcesUtils;
-import com.yifan.jotting2.utils.database.DataBaseManager;
+import com.yifan.jotting2.pojo.Project;
+import com.yifan.jotting2.ui.inventory.InventoryActivity;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
-import com.yifan.jotting2.utils.database.gen.ProjectsDao;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * 所有项目列表
- * <p/>
+ *
  * Created by yifan on 2016/7/16.
  */
-public class ProjectsFragment extends BaseFragment implements Observer {
+public class ProjectsFragment extends BaseFragment implements Observer, BaseRecyclerAdapter.OnItemClickListener, BaseRecyclerAdapter.OnItemLongClickListener {
 
     public static final String TAG = "ProjectsFragment";
 
@@ -44,7 +44,7 @@ public class ProjectsFragment extends BaseFragment implements Observer {
     /**
      * 列表页数据
      */
-    List<Projects> mList;
+    List<Project> mList;
 
     public static ProjectsFragment newInstance() {
         return new ProjectsFragment();
@@ -57,7 +57,7 @@ public class ProjectsFragment extends BaseFragment implements Observer {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //获取列表数据
-        mList = ProjectsDataHelp.getInstance().getProject(999);
+        mList = ProjectsDataHelp.getInstance().query(999);
         ProjectsDataHelp.getInstance().regesiterDataObserver(this);
     }
 
@@ -76,6 +76,8 @@ public class ProjectsFragment extends BaseFragment implements Observer {
             mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
             mProjectsAdapter = new ProjectsAdapter(mList);
             mListView.setAdapter(mProjectsAdapter);
+            mProjectsAdapter.setOnItemClickListener(this);
+            mProjectsAdapter.setOnOnItemLongClickListener(this);
         }
     }
 
@@ -103,17 +105,35 @@ public class ProjectsFragment extends BaseFragment implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         if (null != o) {
-            if (o instanceof Projects) {
+            if (o instanceof Project) {
                 if (null != mList) {
-                    mList.add((Projects) o);
+                    mList.add((Project) o);
                     mProjectsAdapter.notifyDataSetChanged();
                 }
-            } else if (o instanceof List && ((List) o).size() > 0 && ((List) o).get(0) instanceof Projects) {
+            } else if (o instanceof List && ((List) o).size() > 0 && ((List) o).get(0) instanceof Project) {
                 if (null != mList) {
                     mList.addAll((List) o);
                     mProjectsAdapter.notifyDataSetChanged();
                 }
             }
         }
+    }
+
+    @Override
+    public void onItemClick(View view, int itemType, int position) {
+        Project project = mList.get(position);
+        Intent intent = new Intent(this.getActivity(), InventoryActivity.class);
+        intent.putExtra(InventoryActivity.BUNDLE_KEY_PROJECT, project);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onLongClick(View v, int itemType, int position) {
+        if (null != v.getContext() && v.getContext() instanceof BaseActivity) {
+            ProjectDetailsDialog dialog = ProjectDetailsDialog.newInstance(mList.get(position));
+            dialog.show(((BaseActivity) v.getContext()).getSupportFragmentManager(), ProjectDetailsDialog.TAG);
+            return true;
+        }
+        return false;
     }
 }

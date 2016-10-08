@@ -8,15 +8,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.thinksky.utils.base.BaseDialogFragment;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.utils.ResourcesUtils;
+
 
 /**
  * 带确认取消按钮的弹窗基类
- * <p/>
+ *
  * Created by yifan on 2016/7/24.
  */
-public abstract class BaseMeasureDialog extends BaseFullScreenDialog {
+public abstract class BaseMeasureDialog extends BaseDialogFragment {
 
     /**
      * 布局加载器
@@ -30,19 +32,22 @@ public abstract class BaseMeasureDialog extends BaseFullScreenDialog {
 
     @Override
     public void initView() {
-        View view = setContentView(R.layout.dialog_measure);
-        mStub = (ViewStubCompat) view.findViewById(R.id.vsc_measure_dialog_content);
-        mLayoutBtns = (LinearLayout) view.findViewById(R.id.layout_measure_dialog_btns);
+        mStub = (ViewStubCompat) getDialog().findViewById(R.id.vsc_measure_dialog_content);
+        mLayoutBtns = (LinearLayout) getDialog().findViewById(R.id.layout_measure_dialog_btns);
     }
 
-    @Override
-    public final View setContentView(@LayoutRes int resID) {
-        return super.setContentView(resID);
-    }
-
-    @Override
-    public ViewStubCompat getViewStubCompat() {
+    public ViewStubCompat getViewStub() {
         return mStub;
+    }
+
+    @Override
+    public int getLayoutResID() {
+        return R.layout.dialog_measure;
+    }
+
+    @Override
+    public View getLayoutView() {
+        return null;
     }
 
     /**

@@ -2,14 +2,18 @@ package com.yifan.jotting2;
 
 import android.app.Application;
 
+import com.thinksky.utils.base.BaseApplication;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.utils.database.DataBaseManager;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Application实例
- * <p/>
+ *
  * Created by yifan on 2016/7/16.
  */
-public class JottingApplication extends Application {
+public class JottingApplication extends BaseApplication {
 
     /**
      * 全局单例模式

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yifan.jotting2">
+          package="com.yifan.jotting2">
 
     <application
+        android:name=".JottingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="false"
-        android:name=".JottingApplication"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
@@ -15,11 +15,15 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.inventory.InventoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/app_name"/>
     </application>
 
 </manifest>

@@ -1,47 +1,39 @@
 package com.yifan.jotting2.ui.projects;
 
-import android.graphics.Color;
 import android.text.SpannableStringBuilder;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.thinksky.utils.base.BaseActivity;
+import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
+import com.thinksky.utils.base.widget.BaseRecyclerHolder;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.base.BaseActivity;
-import com.yifan.jotting2.base.BaseFragment;
-import com.yifan.jotting2.base.widget.BaseRecyclerAdapter;
-import com.yifan.jotting2.pojo.Projects;
-import com.yifan.jotting2.utils.ResourcesUtils;
+import com.yifan.jotting2.pojo.Project;
 
 import java.util.List;
 
 /**
  * 所有项目列表页数据适配器
- * <p/>
+ *
  * Created by yifan on 2016/7/18.
  */
-public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.ProjectViewHolder>
-        implements BaseRecyclerAdapter.OnItemClickListener, BaseRecyclerAdapter.OnItemLongClickListener {
+public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.BaseHolder> {
 
     private static final String TAG = "ProjectsAdapter";
 
-    private List<Projects> mList;
+    /**
+     * 列表数据
+     */
+    private List<Project> mList;
 
     private int[] colors = new int[]{R.color.text_orange,
             R.color.colorPrimary, R.color.text_gray};
 
-    public ProjectsAdapter(List<Projects> projectses) {
+    public ProjectsAdapter(List<Project> projectses) {
         mList = projectses;
-        setOnItemClickListener(this);
-        setOnOnItemLongClickListener(this);
-    }
-
-    @Override
-    public ProjectViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProjectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_projects, parent, false));
     }
 
     @Override
@@ -52,8 +44,21 @@ public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.Project
         return mList.get(position).getProjectType();
     }
 
+
     @Override
-    public int getItemCount() {
+    public ProjectViewHolder onCreate(ViewGroup parent, int viewType) {
+        return new ProjectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_project, parent, false));
+    }
+
+    @Override
+    public void onBind(BaseHolder viewHolder, int realPosition) {
+        if (null != mList && realPosition < mList.size()) {
+            viewHolder.setData(mList.get(realPosition), getItemViewType(realPosition));
+        }
+    }
+
+    @Override
+    public int getRealItemCount() {
         if (null == mList) {
             return 0;
         }
@@ -61,44 +66,39 @@ public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.Project
     }
 
     @Override
-    public Object getItem(int postion) {
-        if (null == mList) {
-            return null;
-        } else {
-            if (postion >= mList.size()) {
-                return null;
-            } else {
-                return mList.get(postion);
-            }
-        }
+    public BaseHolder getFakeHolder(View view) {
+        return new BaseHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ProjectViewHolder holder, int position) {
+    public void onBindViewHolder(BaseHolder holder, int position) {
         super.onBindViewHolder(holder, position);
-        if (null != mList && position < mList.size()) {
-            holder.setData(mList.get(position), getItemViewType(position));
-        }
+
     }
 
-    @Override
-    public void onClick(View v, int position, Object data) {
-    }
+//    @Override
+//    public boolean onLongClick(View v, int position, Object data) {
+//        if (null != v.getContext() && v.getContext() instanceof BaseActivity) {
+//            ProjectDetailsDialog dialog = ProjectDetailsDialog.newInstance((Project) data);
+//            dialog.show(((BaseActivity) v.getContext()).getSupportFragmentManager(), ProjectDetailsDialog.TAG);
+//            return true;
+//        }
+//        return false;
+//    }
 
-    @Override
-    public boolean onLongClick(View v, int position, Object data) {
-        if (null != v.getContext() && v.getContext() instanceof BaseActivity) {
-            ProjectDetailsDialog dialog = ProjectDetailsDialog.newInstance((Projects) data);
-            dialog.show(((BaseActivity) v.getContext()).getSupportFragmentManager(), ProjectDetailsDialog.TAG);
-            return true;
+    class BaseHolder extends BaseRecyclerHolder {
+        public BaseHolder(View itemView) {
+            super(itemView);
         }
-        return false;
+
+        public void setData(Project project, int itemViewType) {
+        }
     }
 
     /**
      * 项目列表条目ViewHolder
      */
-    public class ProjectViewHolder extends BaseRecyclerAdapter.BaseViewHolder {
+    public class ProjectViewHolder extends BaseHolder {
 
         /**
          * 项目名字
@@ -125,35 +125,35 @@ public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.Project
         /**
          * 设置数据
          *
-         * @param projects
+         * @param project
          * @param type
          */
-        public void setData(Projects projects, int type) {
-            if (null != projects) {
+        public void setData(Project project, int type) {
+            if (null != project) {
                 if (null != colors && colors.length > type) {
                     label.setBackgroundColor(ResourcesUtils.getColor(colors[type]));
                 }
                 //设置项目名
-                if (null != projectName && null != projects.getProjectName()) {
-                    projectName.setText(projects.getProjectName().toString());
+                if (null != projectName && null != project.getProjectName()) {
+                    projectName.setText(project.getProjectName().toString());
                 }
                 //设置项目信息
                 SpannableStringBuilder description = new SpannableStringBuilder();
                 //开始时间
-                if (projects.getStartTime() > 0) {
+                if (project.getStartTime() > 0) {
                     if (description.length() > 0) {
                         description.append("\n");
                     }
                     description.append(ResourcesUtils.getString(R.string.description_startTime,
-                            projects.getStartTime(), projects.getStartTime()));
+                            project.getStartTime(), project.getStartTime()));
                 }
                 //修改时间
-                if (projects.getModifyTime() > 0) {
+                if (project.getModifyTime() > 0) {
                     if (description.length() > 0) {
                         description.append("\n");
                     }
                     description.append(ResourcesUtils.getString(R.string.description_modifyTime,
-                            projects.getModifyTime(), projects.getModifyTime()));
+                            project.getModifyTime(), project.getModifyTime()));
                 }
                 if (description.length() > 0) {
                     descriptionText.setText(description);

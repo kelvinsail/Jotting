@@ -5,14 +5,15 @@ import android.content.Context;
 import com.yifan.jotting2.JottingApplication;
 import com.yifan.jotting2.utils.database.gen.DaoMaster;
 import com.yifan.jotting2.utils.database.gen.DaoSession;
-import com.yifan.jotting2.utils.database.gen.ProjectsDao;
+import com.yifan.jotting2.utils.database.gen.InventoryDao;
+import com.yifan.jotting2.utils.database.gen.ProjectDao;
 
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 /**
  * DataBase数据库管理工具实例（ GreenDAO ）
- * <p/>
+ *
  * Created by yifan on 2016/7/19.
  */
 public class DataBaseManager {
@@ -26,7 +27,6 @@ public class DataBaseManager {
 
     /**
      * SQLHelp以及DAO的管理器实例
-     *
      */
     private DaoMaster mDaoMaster;
 
@@ -50,6 +50,7 @@ public class DataBaseManager {
 
     /**
      * 获取数据库管理实例
+     *
      * @return
      */
     public static DataBaseManager getInstance() {
@@ -75,10 +76,19 @@ public class DataBaseManager {
     /**
      * 获取Projects表DAO类
      *
-     * @return
+     * @return {@link ProjectDao}
      */
-    public ProjectsDao getProjectsDao() {
-        return mDaoSession.getProjectsDao();
+    public ProjectDao getProjectsDao() {
+        return mDaoSession.getProjectDao();
+    }
+
+    /**
+     * 获取Inventories表DAO类
+     *
+     * @return {@link InventoryDao}
+     */
+    public InventoryDao getInventoryDao() {
+        return mDaoSession.getInventoryDao();
     }
 
     /**
@@ -93,7 +103,7 @@ public class DataBaseManager {
 
     /**
      * 封装数据库OpenHelp，自定义onUpgrade等数据库版本升级函数
-     * <p/>
+     *
      * Created by yifan on 2016/7/20.
      */
     private class GDOpenHelper extends DaoMaster.OpenHelper {

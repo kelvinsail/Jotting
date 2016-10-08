@@ -4,11 +4,11 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
 
-import com.yifan.jotting2.widget.TitleBar;
+import com.thinksky.utils.widget.TitleBar;
 
 /**
  * TitleBarPager接口抽取
- * <p/>
+ *
  * Created by yifan on 2016/7/18.
  */
 public interface TitleImpl {

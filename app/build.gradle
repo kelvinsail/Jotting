@@ -21,7 +21,7 @@ android {
 }
 
 greendao {
-    schemaVersion 1 //指定数据库schema版本号，迁移等操作会用到
+    schemaVersion 2 //指定数据库schema版本号，迁移等操作会用到
     daoPackage 'com.yifan.jotting2.utils.database.gen' //通过gradle插件生成的数据库相关文件的包名及路径
     targetGenDir 'src/main/java/' //自定义生成数据库文件的目录
 }
@@ -39,13 +39,15 @@ buildscript {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:24.0.0'
-    compile 'com.android.support:cardview-v7:24.0.0'
-    compile 'com.android.support:gridlayout-v7:24.0.0'
-    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    compile 'com.android.support:cardview-v7:24.2.0'
+    compile 'com.android.support:gridlayout-v7:24.2.0'
+    compile 'com.android.support:design:24.2.0'
     //圆角图片
     compile 'com.makeramen:roundedimageview:2.2.1'
     //数据库
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'org.greenrobot:greendao-generator:3.0.0'
+
+    compile project(':libraries:utils')
 }

@@ -17,20 +17,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.yifan.jotting2.base.BaseFragment;
-import com.yifan.jotting2.base.TitleBarActivity;
+
+import com.thinksky.utils.base.BaseFragment;
+import com.thinksky.utils.base.TitleBarActivity;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
+import com.yifan.jotting2.utils.WidgetUtils;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 主界面
- * <p/>
+ *
  * Created by yifan on 2016/7/13.
  */
 public class MainActivity extends TitleBarActivity
@@ -96,7 +100,7 @@ public class MainActivity extends TitleBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main, 0, true);
+        setContentView(R.layout.activity_main, 0, false);
     }
 
     @Override
@@ -114,6 +118,10 @@ public class MainActivity extends TitleBarActivity
         mNavigationView.inflateMenu(R.menu.activity_main_drawer);
         //加载抽屉头部
         mNavigationView.inflateHeaderView(R.layout.nav_header_main);
+
+       ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
+        lp.bottomMargin = WidgetUtils.getNavigationBarHeight()+ ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
+        mFloatingActionButton.setLayoutParams(lp);
     }
 
     @Override
@@ -123,12 +131,8 @@ public class MainActivity extends TitleBarActivity
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                for (int i = 0; i < 3; i++) {
-//                    ProjectsDataHelp.getInstance().insertNewProject(i, "较场尾", "夏日海滩",
-//                            123, System.currentTimeMillis() - 10000, System.currentTimeMillis(), false);
-//                }
                 NewProjectDialog dialog = NewProjectDialog.newInstance();
-                dialog.show(getSupportFragmentManager(),NewProjectDialog.TAG);
+                dialog.show(getSupportFragmentManager(), NewProjectDialog.TAG);
 
             }
         });
@@ -160,8 +164,6 @@ public class MainActivity extends TitleBarActivity
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
-            //} else if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            //    getSupportFragmentManager().popBackStack();
         } else if (mCurrentPosition != INTENT_MAIN_ACTION_PROJECTS) {
             switchFragment(INTENT_MAIN_ACTION_PROJECTS);
         } else {

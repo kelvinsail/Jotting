@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 /**
  * 自定义的CardView
- * <p/>
+ *
  * Created by yifan on 2016/7/20.
  */
 public class RadiusLayout extends CardView {

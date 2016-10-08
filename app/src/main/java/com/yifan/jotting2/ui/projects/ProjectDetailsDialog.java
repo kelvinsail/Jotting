@@ -5,17 +5,17 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
+import com.thinksky.utils.base.BaseDialogFragment;
+import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
-import com.yifan.jotting2.base.BaseFullScreenDialog;
-import com.yifan.jotting2.pojo.Projects;
-import com.yifan.jotting2.utils.ResourcesUtils;
+import com.yifan.jotting2.pojo.Project;
 
 /**
  * 项目详情Dialog
- * <p/>
+ *
  * Created by yifan on 2016/7/20.
  */
-public class ProjectDetailsDialog extends BaseFullScreenDialog {
+public class ProjectDetailsDialog extends BaseDialogFragment {
 
     public static final String TAG = "ProjectDetailsDialog";
 
@@ -29,10 +29,10 @@ public class ProjectDetailsDialog extends BaseFullScreenDialog {
      */
     private TextView mProjectDesText;
 
-    public static ProjectDetailsDialog newInstance(Projects projects) {
+    public static ProjectDetailsDialog newInstance(Project project) {
         ProjectDetailsDialog f = new ProjectDetailsDialog();
         Bundle data = new Bundle();
-        data.putParcelable("data", projects);
+        data.putParcelable("data", project);
         f.setArguments(data);
         return f;
     }
@@ -42,24 +42,23 @@ public class ProjectDetailsDialog extends BaseFullScreenDialog {
 
     @Override
     public void initView() {
-        setContentView(R.layout.dialog_project_details);
-        mProjectNameText = (TextView) findViewByID(R.id.tv_project_details_name);
-        mProjectDesText = (TextView) findViewByID(R.id.tv_project_details_description);
+        mProjectNameText = (TextView) getDialog().findViewById(R.id.tv_project_details_name);
+        mProjectDesText = (TextView) getDialog().findViewById(R.id.tv_project_details_description);
         //实现滚动
         mProjectDesText.setMovementMethod(ScrollingMovementMethod.getInstance());
         if (null != getArguments()) {
-            Projects projects = getArguments().getParcelable("data");
-            if (null != projects) {
-                mProjectNameText.setText(projects.getProjectName());
+            Project project = getArguments().getParcelable("data");
+            if (null != project) {
+                mProjectNameText.setText(project.getProjectName());
                 StringBuilder str = new StringBuilder();
-                str.append(ResourcesUtils.getString(R.string.description_total_money, projects.getTotalMoney()));
-                str.append("\n").append(ResourcesUtils.getString(R.string.description_state, projects.getIsEnded() ?
+                str.append(ResourcesUtils.getString(R.string.description_total_money, project.getTotalMoney()));
+                str.append("\n").append(ResourcesUtils.getString(R.string.description_state, project.getIsEnded() ?
                         ResourcesUtils.getString(R.string.description_state_end) :
                         ResourcesUtils.getString(R.string.description_state_normal)));
                 str.append("\n").append(ResourcesUtils.getString(R.string.description_startTime,
-                        projects.getStartTime(), projects.getStartTime()));
+                        project.getStartTime(), project.getStartTime()));
                 str.append("\n").append(ResourcesUtils.getString(R.string.description_modifyTime,
-                        projects.getModifyTime(), projects.getModifyTime()));
+                        project.getModifyTime(), project.getModifyTime()));
                 mProjectDesText.setText(str);
             }
         }
@@ -67,6 +66,16 @@ public class ProjectDetailsDialog extends BaseFullScreenDialog {
 
     @Override
     public void setListener() {
+    }
+
+    @Override
+    public int getLayoutResID() {
+        return R.layout.dialog_project_details;
+    }
+
+    @Override
+    public View getLayoutView() {
+        return null;
     }
 
     @Override
