@@ -3,6 +3,7 @@ package com.yifan.jotting2.utils.database;
 import android.content.Context;
 
 import com.yifan.jotting2.JottingApplication;
+import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.utils.database.gen.DaoMaster;
 import com.yifan.jotting2.utils.database.gen.DaoSession;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
@@ -108,6 +109,11 @@ public class DataBaseManager {
      */
     private class GDOpenHelper extends DaoMaster.OpenHelper {
 
+        /**
+         * 升级清单项数据库，增加标签颜色字段
+         */
+        private static final String UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR = "alter table INVENTORY add column LABELCOLOR Integer";
+
         public GDOpenHelper(Context context, String name) {
             super(context, name);
         }
@@ -115,6 +121,11 @@ public class DataBaseManager {
         @Override
         public void onUpgrade(Database db, int oldVersion, int newVersion) {
             super.onUpgrade(db, oldVersion, newVersion);
+            switch (oldVersion) {
+                case 2:
+                    db.execSQL(UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
+                    break;
+            }
         }
     }
 

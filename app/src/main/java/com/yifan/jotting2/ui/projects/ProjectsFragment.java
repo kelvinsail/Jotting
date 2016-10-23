@@ -13,6 +13,7 @@ import com.thinksky.utils.base.BaseActivity;
 import com.thinksky.utils.base.BaseFragment;
 import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
 import com.thinksky.utils.utils.ResourcesUtils;
+import com.thinksky.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
@@ -73,8 +74,10 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
         super.initView();
         if (null != getView()) {
             mListView = (RecyclerView) getView().findViewById(R.id.rv_projects);
+            mListView.setPadding(mListView.getPaddingLeft(), mListView.getPaddingTop()
+                    , mListView.getPaddingRight(), mListView.getPaddingBottom() + WidgetUtils.getNavigationBarHeight());
             mListView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mProjectsAdapter = new ProjectsAdapter(mList);
+            mProjectsAdapter = new ProjectsAdapter(getActivity(), mList);
             mListView.setAdapter(mProjectsAdapter);
             mProjectsAdapter.setOnItemClickListener(this);
             mProjectsAdapter.setOnOnItemLongClickListener(this);

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                      xmlns:app="http://schemas.android.com/apk/res-auto"
+                                      xmlns:tools="http://schemas.android.com/tools"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:minWidth="@dimen/dialog_width_normal"
+                                      android:padding="@dimen/padding_normal"
+                                      app:columnCount="2"
+                                      app:orientation="horizontal"
+                                      app:useDefaultMargins="@dimen/padding_normal">
+
+    <TextView
+        style="@style/TextAppearance.Dialog.Title"
+        android:text="@string/new_inventory"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1"/>
+
+    <TextView
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/inventory_name"/>
+
+
+    <EditText
+        android:id="@+id/et_dialog_new_inventory_name"
+        style="@style/TextAppearance.Dialog.ValueEdit"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/inventory_name_hint"
+        app:layout_columnWeight="1"/>
+
+    <CheckBox
+        android:id="@+id/cb_dialog_new_inventory_advance"
+        android:layout_height="@dimen/dialog_new_item_name_height"
+        android:text="@string/inventory_advance"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1"/>
+
+    <android.support.v7.widget.GridLayout
+        android:id="@+id/layout_dialog_new_inventory_advance"
+        android:visibility="gone"
+        app:columnCount="2"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1"
+        app:orientation="horizontal"
+        app:useDefaultMargins="@dimen/padding_normal">
+
+        <TextView
+            style="@style/TextAppearance.Dialog.NameText"
+            android:text="@string/inventory_money"/>
+
+        <EditText
+            android:id="@+id/et_dialog_new_inventory_money"
+            style="@style/TextAppearance.Dialog.ValueEdit"
+            android:hint="@string/inventory_money_hint"
+            android:inputType="numberDecimal"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            style="@style/TextAppearance.Dialog.NameText"
+            android:text="@string/inventory_count"/>
+
+        <EditText
+            android:id="@+id/et_dialog_new_inventory_count"
+            style="@style/TextAppearance.Dialog.ValueEdit"
+            android:hint="@string/inventory_count_hint"
+            android:inputType="number"
+            app:layout_columnWeight="1"/>
+
+        <TextView
+            style="@style/TextAppearance.Dialog.NameText"
+            android:text="@string/inventory_description"/>
+
+        <EditText
+            android:id="@+id/et_dialog_new_inventory_description"
+            style="@style/TextAppearance.Dialog.ValueEdit"
+            android:hint="@string/inventory_description_hint"
+            app:layout_columnWeight="1"/>
+
+    </android.support.v7.widget.GridLayout>
+
+    <TextView
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/color_label"/>
+
+    <RadioGroup
+        android:id="@+id/rg_dialog_new_inventory_label_color"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/padding_normal"
+        app:columnCount="2"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1">
+
+        <!--<RadioButton-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:background="@color/label_green"-->
+            <!--android:button="@null"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:layout_marginLeft="@dimen/padding_normal"-->
+            <!--android:background="@color/label_red"-->
+            <!--android:button="@null"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:layout_marginLeft="@dimen/padding_normal"-->
+            <!--android:background="@color/label_blue"-->
+            <!--android:button="@null"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:layout_marginLeft="@dimen/padding_normal"-->
+            <!--android:background="@color/label_cyan"-->
+            <!--android:button="@null"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:layout_marginLeft="@dimen/padding_normal"-->
+            <!--android:background="@color/label_yellow"-->
+            <!--android:button="@null"/>-->
+    </RadioGroup>
+
+</android.support.v7.widget.GridLayout>

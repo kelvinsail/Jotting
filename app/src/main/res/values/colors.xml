@@ -23,4 +23,10 @@
     <color name="click_bg_white">#FFFFFF</color>
     <color name="click_bg_gray_alaph">#32000000</color>
 
+    <color name="label_green">#50E382</color>
+    <color name="label_red">#ff6666</color>
+    <color name="label_blue">#6699ff</color>
+    <color name="label_cyan">#66ccff</color>
+    <color name="label_yellow">#ffea86</color>
+
 </resources>

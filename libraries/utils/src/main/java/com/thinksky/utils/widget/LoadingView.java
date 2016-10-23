@@ -78,7 +78,7 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
         setMessage(null);
 
         //设置背景色,居中
-        setBackgroundResource(R.color.background_black_alpha);
+        setBackgroundResource(R.color.background_black_with_alpha);
         setGravity(Gravity.CENTER);
         //设置隐藏,可获取焦点点击事件
         setVisibility(View.GONE);

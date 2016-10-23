@@ -9,9 +9,10 @@ import android.view.View;
 import com.thinksky.utils.R;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
- * WidgetUtils
+ * WidgetUtils 控件工具类
  *
  * Created by yifan on 2016/8/18.
  */
@@ -38,6 +39,48 @@ public class WidgetUtils {
                     24, ResourcesUtils.getDisplayMetrics());
         }
         return statusbarHeight;
+    }
+
+    /**
+     * 获取虚拟按键栏高度
+     *
+     * @return 高度
+     */
+    public static int getNavigationBarHeight() {
+        int navigationBarHeight = 0;
+        int id = ResourcesUtils.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (id > 0 && checkDeviceHasNavigationBar()) {
+            navigationBarHeight = ResourcesUtils.getDimensionPixelSize(id);
+        }
+        return navigationBarHeight;
+    }
+
+    /**
+     * 判断系统是否拥有虚拟按键栏
+     *
+     * @return true：有；false：没有
+     */
+    private static boolean checkDeviceHasNavigationBar() {
+        boolean hasNavigationBar = false;
+        int id = ResourcesUtils.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (id > 0) {
+            hasNavigationBar = ResourcesUtils.getBoolean(id);
+        }
+        try {
+            Class systemPropertiesClass = Class.forName("android.os.SystemProperties");
+            Method m = systemPropertiesClass.getMethod("get", String.class);
+            String navBarOverride = (String) m.invoke(systemPropertiesClass, "qemu.hw.mainkeys");
+            if ("1".equals(navBarOverride)) {
+                hasNavigationBar = false;
+            } else if ("0".equals(navBarOverride)) {
+                hasNavigationBar = true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return hasNavigationBar;
+
     }
 
 
@@ -84,4 +127,5 @@ public class WidgetUtils {
         }
         array.recycle();
     }
+
 }

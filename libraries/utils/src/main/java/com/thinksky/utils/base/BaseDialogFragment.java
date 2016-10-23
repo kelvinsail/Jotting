@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.thinksky.utils.R;
@@ -33,9 +34,10 @@ public abstract class BaseDialogFragment extends LifeCycleDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity(), R.style.BaseDialog);
         if (getLayoutResID() > 0) {
-            dialog.setContentView(getLayoutResID());
+            dialog.getWindow().setContentView(
+                    LayoutInflater.from(getActivity()).inflate(getLayoutResID(), null));
         } else {
-            dialog.setContentView(getLayoutView());
+            dialog.getWindow().setContentView(getLayoutView());
         }
         dialog.setCancelable(isCancelable());
         dialog.setCanceledOnTouchOutside(isCanceledOnTouchOutside());

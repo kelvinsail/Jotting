@@ -12,6 +12,9 @@
         <item name="loading_dialog_text_color">@color/text_black</item>
         <item name="loading_dialog_text_size">@dimen/text_small</item>
         <item name="dialog_measure_button_style">@style/Dialog.Buttons</item>
+        <!--<item name="radiobutton_colorlabel">@style/ColorLabelRadioButton</item>-->
+        <item name="item_click_background">@drawable/background_item_white2gray</item>
+        <item name="item_click_background_transparent">@drawable/background_item_trans2gray</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -29,7 +32,7 @@
         <item name="dialog_measure_button_style">@style/Dialog.Buttons</item>
     </style>
 
-    <style name="Dialog" parent="AlertDialog.AppCompat.Light" />
+    <style name="Dialog" parent="AlertDialog.AppCompat.Light"/>
 
     <style name="Dialog.FullScreen">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -50,14 +53,48 @@
         <item name="android:layout_height">32dp</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <style name="Loading.ProgressBar" parent="@android:style/Widget.Holo.Light.ProgressBar.Inverse" />
+    <style name="Loading.ProgressBar" parent="@android:style/Widget.Holo.Light.ProgressBar.Inverse"/>
 
-    <style name="Loading.ProgressBar.Large" parent="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse" />
+    <style name="Loading.ProgressBar.Large" parent="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"/>
 
-    <style name="Loading.ProgressBar.Small" parent="@android:style/Widget.Holo.Light.ProgressBar.Small.Inverse" />
+    <style name="Loading.ProgressBar.Small" parent="@android:style/Widget.Holo.Light.ProgressBar.Small.Inverse"/>
+
+    <style name="TextAppearance"/>
+
+    <style name="TextAppearance.Dialog">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_gravity">fill</item>
+        <item name="android:gravity">center_vertical|left|</item>
+    </style>
+
+    <style name="TextAppearance.Dialog.NameText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_width">@dimen/dialog_new_item_name_width</item>
+        <item name="android:layout_height">@dimen/dialog_new_item_name_height</item>
+    </style>
+
+    <style name="TextAppearance.Dialog.ValueEdit">
+        <item name="android:maxWidth">@dimen/dialog_new_item_content_width</item>
+        <item name="android:ellipsize">start</item>
+    </style>
+
+    <style name="TextAppearance.Dialog.Title">
+        <item name="android:layout_height">@dimen/dialog_new_item_title_height</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/text_xxlarge</item>
+    </style>
+
+    <!--<style name="ColorLabelRadioButton">-->
+        <!--<item name="android:button">@drawable/seletor_label_color_radio</item>-->
+        <!--<item name="android:layout_height">36dp</item>-->
+        <!--<item name="android:layout_width">36dp</item>-->
+    <!--</style>-->
 
 </resources>

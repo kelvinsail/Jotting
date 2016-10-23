@@ -4,29 +4,36 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import com.thinksky.utils.base.TitleBarActivity;
 import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
 import com.thinksky.utils.base.widget.BaseRecyclerHolder;
+import com.thinksky.utils.utils.ResourcesUtils;
+import com.thinksky.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.database.InventoriesDataHelper;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * 清单列表界面
  *
  * Created by yifan on 2016/9/21.
  */
-public class InventoryActivity extends TitleBarActivity {
+public class InventoryActivity extends TitleBarActivity implements BaseRecyclerAdapter.OnItemClickListener,
+        BaseRecyclerAdapter.OnItemLongClickListener, Observer {
 
     public static final String TAG = "InventoryActivity";
     public static final String BUNDLE_KEY_PROJECT = "project";
@@ -60,14 +67,11 @@ public class InventoryActivity extends TitleBarActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Inventory inventory = new Inventory();
-        inventory.setName(DateFormat.format("yyyy-MM-dd HH:mm", System.currentTimeMillis()).toString());
-        inventory.setDate(System.currentTimeMillis());
-        InventoriesDataHelper.getInstance().insert(inventory);
         mData = InventoriesDataHelper.getInstance().query(100);
         mProject = getIntent().getParcelableExtra(BUNDLE_KEY_PROJECT);
         mInventoriesListView = new RecyclerView(this);
         setContentView(mInventoriesListView, 0, false);
+        InventoriesDataHelper.getInstance().regesiterDataObserver(this);
     }
 
     @Override
@@ -78,12 +82,58 @@ public class InventoryActivity extends TitleBarActivity {
         mInventoriesListView.setBackgroundResource(R.color.background_main);
         mInventoriesListView.setLayoutManager(new LinearLayoutManager(this));
         mInventoriesListView.setAdapter(mAdapter);
+        mInventoriesListView.setPadding(0, 0, 0, WidgetUtils.getNavigationBarHeight());
+        mInventoriesListView.setClipToPadding(false);
+        mAdapter.setOnItemClickListener(this);
+        mAdapter.setOnOnItemLongClickListener(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_inventory, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_add_new_inventory) {
+            AlertInventoryDialog.newInstance(null).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(View view, int itemType, int position) {
+        if (position >= 0 && position < mData.size()) {
+            CheckBox checkBox = (CheckBox) view.findViewById(R.id.cb_inventory);
+            checkBox.toggle();
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        if (null != arg && arg instanceof Inventory) {
+            mData.add((Inventory) arg);
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v, int itemType, int position) {
+        if (position >= 0 && position < mData.size()) {
+            Inventory inventory = mData.get(position);
+            AlertInventoryDialog.newInstance(inventory).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
+            return true;
+        }
+        return false;
     }
 
     /**
      * 清单列表数据适配器
      */
-    private class IncentoriesAdapter extends BaseRecyclerAdapter<IncentoriesAdapter.BaseHolder> {
+    private class IncentoriesAdapter extends BaseRecyclerAdapter<IncentoriesAdapter.BaseHolder> implements CompoundButton.OnCheckedChangeListener {
 
         /**
          * 布局加载器
@@ -101,7 +151,9 @@ public class InventoryActivity extends TitleBarActivity {
 
         @Override
         public BaseHolder onCreate(ViewGroup parent, int viewType) {
-            return new BaseHolder(mLayoutInflater.inflate(R.layout.item_inventory, parent, false));
+            BaseHolder holder = new BaseHolder(mLayoutInflater.inflate(R.layout.item_inventory, parent, false));
+            ((CheckBox) holder.itemView.findViewById(R.id.cb_inventory)).setOnCheckedChangeListener(this);
+            return holder;
         }
 
         @Override
@@ -124,6 +176,18 @@ public class InventoryActivity extends TitleBarActivity {
             super.onBindViewHolder(holder, position);
         }
 
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (null != buttonView && null != buttonView.getParent()) {
+                int position = BaseRecyclerHolder.getPositionFroView((View) buttonView.getParent());
+                if (position >= 0) {
+                    Inventory inventory = mData.get(position);
+                    inventory.setChecked(isChecked);
+                    InventoriesDataHelper.getInstance().alert(inventory);
+                }
+            }
+        }
+
         /**
          * ViewHolder基类
          */
@@ -134,9 +198,15 @@ public class InventoryActivity extends TitleBarActivity {
              */
             CheckBox mCheckView;
 
+            /**
+             * 颜色标签控件
+             */
+            View mLabelView;
+
             public BaseHolder(View itemView) {
                 super(itemView);
                 mCheckView = (CheckBox) itemView.findViewById(R.id.cb_inventory);
+                mLabelView = itemView.findViewById(R.id.view_inventory_tag);
             }
 
             /**
@@ -146,8 +216,14 @@ public class InventoryActivity extends TitleBarActivity {
              */
             public void setData(Inventory inventory) {
                 mCheckView.setText(inventory.getName());
+                mCheckView.setChecked(inventory.isChecked());
+                if (inventory.getLabelColor() == 0) {
+                    //mLabelColors[Integer.valueOf((int) (Math.random()*mLabelColors.length))]
+                    inventory.setLabelColor(ResourcesUtils.getColor(R.color.label_cyan));
+                    InventoriesDataHelper.getInstance().alert(inventory);
+                }
+                mLabelView.setBackgroundColor(inventory.getLabelColor());
             }
         }
-
     }
 }

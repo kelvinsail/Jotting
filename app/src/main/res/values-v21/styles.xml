@@ -8,6 +8,8 @@
         <!-- 点击背景 -->
         <item name="item_default_background">?attr/selectableItemBackground</item>
         <item name="item_card_background">?attr/selectableItemBackground</item>
+        <item name="item_click_background">@drawable/item_click_background_white2ripple</item>
+        <item name="item_click_background_transparent">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="Loading.ProgressBar" parent="@android:style/Widget.Material.Light.ProgressBar.Inverse">

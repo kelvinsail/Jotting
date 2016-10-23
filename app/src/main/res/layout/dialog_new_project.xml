@@ -1,82 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minWidth="@dimen/dialog_width_normal"
-    android:padding="@dimen/padding_normal"
-    app:columnCount="2"
-    app:orientation="horizontal"
-    app:useDefaultMargins="@dimen/padding_normal">
+                                      xmlns:app="http://schemas.android.com/apk/res-auto"
+                                      xmlns:tools="http://schemas.android.com/tools"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:minWidth="@dimen/dialog_width_normal"
+                                      android:padding="@dimen/padding_normal"
+                                      app:columnCount="2"
+                                      app:orientation="horizontal"
+                                      app:useDefaultMargins="@dimen/padding_normal">
 
     <TextView
-        android:layout_height="@dimen/dialog_new_project_title_height"
-        android:gravity="center_vertical|left"
+        style="@style/TextAppearance.Dialog.Title"
         android:text="@string/new_project"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/text_xxlarge"
         app:layout_columnSpan="2"
-        app:layout_columnWeight="1" />
+        app:layout_columnWeight="1"/>
 
     <TextView
-        android:layout_width="@dimen/dialog_new_project_name_width"
-        android:layout_height="@dimen/dialog_new_project_name_height"
-        android:gravity="center_vertical|left|"
-        android:text="@string/project_name"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_large"
-        app:layout_gravity="fill" />
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/project_name"/>
 
     <EditText
         android:id="@+id/et_dialog_new_project_name"
-        android:ellipsize="start"
-        android:gravity="center_vertical|left|"
+        style="@style/TextAppearance.Dialog.ValueEdit"
         android:hint="@string/project_name_hint"
-        android:maxLines="1"
-        android:maxWidth="@dimen/dialog_new_project_content_width"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_large"
-        app:layout_columnWeight="1"
-        app:layout_gravity="fill" />
+        app:layout_columnWeight="1"/>
 
     <TextView
-        android:layout_width="@dimen/dialog_new_project_name_width"
-        android:layout_height="@dimen/dialog_new_project_name_height"
-        android:gravity="center_vertical|left|"
-        android:text="@string/project_type"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_large"
-        app:layout_gravity="fill" />
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/project_type"/>
 
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/sp_dialog_new_project_type"
-        android:maxWidth="@dimen/dialog_new_project_content_width"
+        style="@style/TextAppearance.Dialog.ValueEdit"
         android:spinnerMode="dropdown"
         app:layout_columnWeight="1"
-        app:layout_gravity="fill"
-        tools:entries="@array/project_types" />
+        tools:entries="@array/project_types"/>
 
     <TextView
         android:id="@+id/tv_dialog_new_project_total_money"
-        android:layout_width="@dimen/dialog_new_project_name_width"
-        android:gravity="center_vertical|left|"
-        android:text="@string/project_total_money"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_large"
-        app:layout_gravity="fill" />
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/project_total_money"/>
 
     <EditText
         android:id="@+id/et_dialog_new_project_total_money"
-        android:ellipsize="start"
-        android:gravity="center_vertical|left|"
+        style="@style/TextAppearance.Dialog.ValueEdit"
         android:hint="@string/project_total_money_hint"
         android:inputType="numberDecimal"
-        android:maxLines="1"
-        android:maxWidth="@dimen/dialog_new_project_content_width"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/text_large"
-        app:layout_columnWeight="1"
-        app:layout_gravity="fill" />
+        app:layout_columnWeight="1"/>
 
 </android.support.v7.widget.GridLayout>

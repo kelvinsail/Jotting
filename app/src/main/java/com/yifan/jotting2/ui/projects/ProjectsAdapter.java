@@ -1,5 +1,6 @@
 package com.yifan.jotting2.ui.projects;
 
+import android.content.Context;
 import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.thinksky.utils.base.BaseActivity;
 import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
 import com.thinksky.utils.base.widget.BaseRecyclerHolder;
 import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.jotting2.JottingApplication;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Project;
 
@@ -29,11 +31,17 @@ public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.BaseHol
      */
     private List<Project> mList;
 
+    /**
+     * 布局加载器
+     */
+    private LayoutInflater mLayoutInflater;
+
     private int[] colors = new int[]{R.color.text_orange,
             R.color.colorPrimary, R.color.text_gray};
 
-    public ProjectsAdapter(List<Project> projectses) {
+    public ProjectsAdapter(Context context, List<Project> projectses) {
         mList = projectses;
+        mLayoutInflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -47,7 +55,7 @@ public class ProjectsAdapter extends BaseRecyclerAdapter<ProjectsAdapter.BaseHol
 
     @Override
     public ProjectViewHolder onCreate(ViewGroup parent, int viewType) {
-        return new ProjectViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_project, parent, false));
+        return new ProjectViewHolder(mLayoutInflater.inflate(R.layout.item_project, parent, false));
     }
 
     @Override

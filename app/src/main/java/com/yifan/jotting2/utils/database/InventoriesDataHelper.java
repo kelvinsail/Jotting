@@ -39,7 +39,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
      */
     public void insert(String name, String description, long date,
                        double money, int count) {
-        Inventory inventory = new Inventory(null, name, description, date, money, count);
+        Inventory inventory = new Inventory(null, name, description, date, money, count, false, 0);
         insert(inventory);
     }
 
@@ -60,12 +60,16 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
 
     @Override
     public void delete(Inventory inventory) {
-
+        if (null != inventory) {
+            getDao().delete(inventory);
+        }
     }
 
     @Override
     public void alert(Inventory inventory) {
-
+        if (null != inventory) {
+            getDao().update(inventory);
+        }
     }
 
     @Override

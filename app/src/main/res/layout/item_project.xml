@@ -13,7 +13,7 @@
 
     <View
         android:id="@+id/view_project_label"
-        android:layout_width="5dp"
+        android:layout_width="6dp"
         android:layout_height="match_parent"
         android:background="@color/text_orange" />
 

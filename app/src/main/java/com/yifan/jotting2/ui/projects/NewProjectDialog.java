@@ -1,8 +1,10 @@
 package com.yifan.jotting2.ui.projects;
 
+import android.content.Context;
 import android.support.v7.widget.AppCompatSpinner;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -81,6 +83,15 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
         addButton(R.id.dialog_button_cancel, ResourcesUtils.getString(R.string.cancel), this);
         addButton(R.id.dialog_button_measure, ResourcesUtils.getString(R.string.measure), this);
 
+        //自动弹出软键盘
+        mProjectNameEdit.post(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager inputManager = (InputMethodManager)
+                        mProjectNameEdit.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(mProjectNameEdit, 0);
+            }
+        });
     }
 
     @Override
@@ -129,7 +140,6 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
             case R.id.dialog_button_cancel:
                 break;
         }
-
         dismiss();
     }
 }

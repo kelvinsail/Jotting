@@ -5,6 +5,8 @@
     <string name="app_name">Jotting2</string>
     <string name="measure">确定</string>
     <string name="cancel">取消</string>
+    <string name="add_new">添加</string>
+    <string name="next">下一个</string>
 
     <!-- NavigationView -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -24,13 +26,6 @@
 
     <!-- 主界面 -->
     <string name="press_again_to_leave">再按一次退出程序</string>
-    <string name="new_project">新建项目</string>
-    <string name="project_name">项目名称</string>
-    <string name="project_name_hint">请输入项目名称</string>
-    <string name="project_type">项目类型</string>
-    <string name="project_type_hint">请输入项目类型</string>
-    <string name="project_total_money">总金额</string>
-    <string name="project_total_money_hint">请输入总金额</string>
 
     <!-- 首页的抽屉菜单 -->
     <string name="nav_menu_prijects">所有项目</string>
@@ -47,6 +42,13 @@
     <string name="title_name_files">@string/nav_menu_file_manager</string>
 
     <!-- Project -->
+    <string name="new_project">新建项目</string>
+    <string name="project_name">项目名称</string>
+    <string name="project_name_hint">请输入项目名称</string>
+    <string name="project_type">项目类型</string>
+    <string name="project_type_hint">请输入项目类型</string>
+    <string name="project_total_money">总金额</string>
+    <string name="project_total_money_hint">请输入总金额</string>
     <string name="description_total_money">总消费：¥ %s</string>
     <string name="description_startTime">建档时间：%1$tF %2$tT</string>
     <string name="description_modifyTime">修改时间：%1$tF %2$tT</string>
@@ -54,4 +56,19 @@
     <string name="description_state_normal">正常</string>
     <string name="description_state_end">已结束</string>
     <string name="description_type">类型：%s</string>
+
+    <!-- Inventory -->
+    <string name="new_inventory">新建清单项</string>
+    <string name="inventory_name">清单内容</string>
+    <string name="inventory_name_hint">请输入清单内容</string>
+    <string name="inventory_advance">详细内容</string>
+    <string name="inventory_description">描述</string>
+    <string name="inventory_description_hint">请填写描述</string>
+    <string name="inventory_time">时间</string>
+    <string name="inventory_time_hint">请选择时间</string>
+    <string name="inventory_money">金额</string>
+    <string name="inventory_money_hint">请输入清单金额</string>
+    <string name="inventory_count">数量</string>
+    <string name="inventory_count_hint">请输入清单数量</string>
+    <string name="color_label">标签颜色</string>
 </resources>

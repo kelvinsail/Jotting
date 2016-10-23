@@ -21,7 +21,7 @@ android {
 }
 
 greendao {
-    schemaVersion 2 //指定数据库schema版本号，迁移等操作会用到
+    schemaVersion 3 //指定数据库schema版本号，迁移等操作会用到
     daoPackage 'com.yifan.jotting2.utils.database.gen' //通过gradle插件生成的数据库相关文件的包名及路径
     targetGenDir 'src/main/java/' //自定义生成数据库文件的目录
 }

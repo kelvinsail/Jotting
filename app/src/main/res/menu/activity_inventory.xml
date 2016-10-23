@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_add_new_inventory"
+        android:icon="@drawable/ic_suggestions_add"
+        android:orderInCategory="90"
+        android:title="@string/add_new"
+        app:showAsAction="ifRoom" />
+</menu>
