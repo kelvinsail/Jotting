@@ -32,6 +32,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         public final static Property Count = new Property(5, int.class, "count", false, "COUNT");
         public final static Property IsChecked = new Property(6, boolean.class, "isChecked", false, "IS_CHECKED");
         public final static Property LabelColor = new Property(7, int.class, "labelColor", false, "LABEL_COLOR");
+        public final static Property ProjectID = new Property(8, long.class, "projectID", false, "PROJECT_ID");
     };
 
 
@@ -54,7 +55,8 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
                 "\"MONEY\" REAL NOT NULL ," + // 4: money
                 "\"COUNT\" INTEGER NOT NULL ," + // 5: count
                 "\"IS_CHECKED\" INTEGER NOT NULL ," + // 6: isChecked
-                "\"LABEL_COLOR\" INTEGER NOT NULL );"); // 7: labelColor
+                "\"LABEL_COLOR\" INTEGER NOT NULL ," + // 7: labelColor
+                "\"PROJECT_ID\" INTEGER NOT NULL );"); // 8: projectID
     }
 
     /** Drops the underlying database table. */
@@ -86,6 +88,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         stmt.bindLong(6, entity.getCount());
         stmt.bindLong(7, entity.getIsChecked() ? 1L: 0L);
         stmt.bindLong(8, entity.getLabelColor());
+        stmt.bindLong(9, entity.getProjectID());
     }
 
     @Override
@@ -111,6 +114,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         stmt.bindLong(6, entity.getCount());
         stmt.bindLong(7, entity.getIsChecked() ? 1L: 0L);
         stmt.bindLong(8, entity.getLabelColor());
+        stmt.bindLong(9, entity.getProjectID());
     }
 
     @Override
@@ -128,7 +132,8 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
             cursor.getDouble(offset + 4), // money
             cursor.getInt(offset + 5), // count
             cursor.getShort(offset + 6) != 0, // isChecked
-            cursor.getInt(offset + 7) // labelColor
+            cursor.getInt(offset + 7), // labelColor
+            cursor.getLong(offset + 8) // projectID
         );
         return entity;
     }
@@ -143,6 +148,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         entity.setCount(cursor.getInt(offset + 5));
         entity.setIsChecked(cursor.getShort(offset + 6) != 0);
         entity.setLabelColor(cursor.getInt(offset + 7));
+        entity.setProjectID(cursor.getLong(offset + 8));
      }
     
     @Override

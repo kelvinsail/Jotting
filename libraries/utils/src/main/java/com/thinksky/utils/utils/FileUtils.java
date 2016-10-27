@@ -1,6 +1,7 @@
 package com.thinksky.utils.utils;
 
 import android.os.Environment;
+import android.util.Log;
 
 
 import com.thinksky.utils.R;
@@ -25,9 +26,11 @@ public class FileUtils {
      * @param content
      */
     public static boolean printDataToFile(String dirName, String fileName, String content) {
-        String path = new StringBuilder(Environment.getExternalStorageDirectory().getAbsolutePath())
-                .append("/").append(ResourcesUtils.getString(R.string.root_dir_name))
-                .append("/").append(dirName).toString();
+        String rootPath = new StringBuilder(Environment.getExternalStorageDirectory().getAbsolutePath())
+                .append("/").append(ResourcesUtils.getString(R.string.root_dir_name)).toString();
+        String path = new StringBuilder(rootPath).append("/").append(dirName).toString();
+        File rootDir = new File(rootPath);
+        rootDir.mkdirs();
         File dir = new File(path);
         dir.mkdirs();
         String name = new StringBuilder(fileName).append("_").append(System.currentTimeMillis()).append(".txt").toString();

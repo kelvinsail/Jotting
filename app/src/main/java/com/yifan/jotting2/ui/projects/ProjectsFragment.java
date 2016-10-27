@@ -15,6 +15,7 @@ import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
 import com.thinksky.utils.utils.ResourcesUtils;
 import com.thinksky.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
+import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
@@ -106,18 +107,36 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
     }
 
     @Override
-    public void update(Observable observable, Object o) {
-        if (null != o) {
-            if (o instanceof Project) {
-                if (null != mList) {
-                    mList.add((Project) o);
+    public void update(Observable observable, Object arg) {
+        if (null != arg && arg instanceof DataEvent && null != ((DataEvent) arg).data) {
+            DataEvent event = (DataEvent) arg;
+            switch (event.action) {
+                case DataEvent.ALERT_ACTION_INSERT:
+                    if (event.data instanceof Project) {
+                        mList.add((Project) event.data);
+                    } else if (event.data instanceof List && ((List) event.data).size() > 0
+                            && ((List) event.data).get(0) instanceof Project) {
+                        mList.addAll(((List) event.data));
+                    }
                     mProjectsAdapter.notifyDataSetChanged();
-                }
-            } else if (o instanceof List && ((List) o).size() > 0 && ((List) o).get(0) instanceof Project) {
-                if (null != mList) {
-                    mList.addAll((List) o);
-                    mProjectsAdapter.notifyDataSetChanged();
-                }
+                    break;
+                default:
+                    if (event.data instanceof Project) {
+                        for (int i = 0; i < mList.size(); i++) {
+                            Project inventory = mList.get(i);
+                            if (inventory.getId() == ((Project) event.data).getId()) {
+                                if (event.action == DataEvent.ALERT_ACTION_ALERT) {
+                                    mList.remove(i);
+                                    mList.add(i, inventory);
+                                } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
+                                    mList.remove(i);
+                                }
+                                mProjectsAdapter.notifyDataSetChanged();
+                            }
+
+                        }
+                    }
+                    break;
             }
         }
     }

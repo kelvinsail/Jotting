@@ -1,13 +1,10 @@
 package com.yifan.jotting2.utils.database;
 
+import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.database.gen.ProjectDao;
 
-import org.greenrobot.greendao.AbstractDao;
-
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 项目数据管理工具
@@ -51,27 +48,39 @@ public class ProjectsDataHelp extends DataHelper<Project> implements DataHelpObs
 
     @Override
     public void insert(Project project) {
-        getDao().insert(project);
-        //通知所有观察者
-        notifyDataChanged(project);
+        if (null != project) {
+            project.setId(getDao().insert(project));
+            //通知所有观察者
+            notifyDataChanged(project);
+            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, project));
+        }
     }
 
     @Override
     public void insert(Project... projects) {
-        for (Project project : projects) {
-            getDao().insert(project);
+        if (null != projects && projects.length > 0) {
+            for (Project project : projects) {
+                project.setId(getDao().insert(project));
+            }
+            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, projects));
         }
-        notifyDataChanged(projects);
     }
 
     @Override
     public void delete(Project project) {
-
+        if (null != project) {
+            getDao().delete(project);
+            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, project));
+        }
     }
 
     @Override
     public void alert(Project project) {
-
+        if (null != project) {
+            getDao().update(project);
+            notifyDataChanged(project);
+            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, project));
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -115,8 +116,8 @@ public class MainActivity extends TitleBarActivity
         //加载抽屉头部
         mNavigationView.inflateHeaderView(R.layout.nav_header_main);
 
-       ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
-        lp.bottomMargin = WidgetUtils.getNavigationBarHeight()+ ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
+        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
+        lp.bottomMargin = WidgetUtils.getNavigationBarHeight() + ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
         mFloatingActionButton.setLayoutParams(lp);
     }
 

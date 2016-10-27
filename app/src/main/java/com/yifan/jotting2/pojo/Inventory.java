@@ -57,7 +57,26 @@ public class Inventory implements Parcelable {
      */
     private int labelColor;
 
+    /**
+     * 所属Project的ID
+     */
+    private long projectID;
+
     public Inventory() {
+    }
+
+    @Generated(hash = 1688368739)
+    public Inventory(Long id, String name, String description, long date, double money, int count,
+            boolean isChecked, int labelColor, long projectID) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.date = date;
+        this.money = money;
+        this.count = count;
+        this.isChecked = isChecked;
+        this.labelColor = labelColor;
+        this.projectID = projectID;
     }
 
     protected Inventory(Parcel in) {
@@ -68,19 +87,7 @@ public class Inventory implements Parcelable {
         count = in.readInt();
         isChecked = in.readByte() != 0;
         labelColor = in.readInt();
-    }
-
-    @Generated(hash = 19924482)
-    public Inventory(Long id, String name, String description, long date,
-            double money, int count, boolean isChecked, int labelColor) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.date = date;
-        this.money = money;
-        this.count = count;
-        this.isChecked = isChecked;
-        this.labelColor = labelColor;
+        projectID = in.readLong();
     }
 
     @Override
@@ -92,6 +99,7 @@ public class Inventory implements Parcelable {
         dest.writeInt(count);
         dest.writeByte((byte) (isChecked ? 1 : 0));
         dest.writeInt(labelColor);
+        dest.writeLong(projectID);
     }
 
     @Override
@@ -174,6 +182,14 @@ public class Inventory implements Parcelable {
 
     public void setLabelColor(int labelColor) {
         this.labelColor = labelColor;
+    }
+
+    public long getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(long projectID) {
+        this.projectID = projectID;
     }
 
     public boolean getIsChecked() {

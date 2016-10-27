@@ -19,6 +19,7 @@ import com.thinksky.utils.base.widget.BaseRecyclerHolder;
 import com.thinksky.utils.utils.ResourcesUtils;
 import com.thinksky.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
+import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.database.InventoriesDataHelper;
@@ -114,9 +115,38 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
 
     @Override
     public void update(Observable o, Object arg) {
-        if (null != arg && arg instanceof Inventory) {
-            mData.add((Inventory) arg);
-            mAdapter.notifyDataSetChanged();
+        if (null != arg && arg instanceof DataEvent && null != ((DataEvent) arg).data) {
+            DataEvent event = (DataEvent) arg;
+            switch (event.action) {
+                case DataEvent.ALERT_ACTION_INSERT:
+                    if (event.data instanceof Inventory) {
+                        mData.add((Inventory) event.data);
+                    } else if (event.data instanceof List && ((List) event.data).size() > 0
+                            && ((List) event.data).get(0) instanceof Inventory) {
+                        mData.addAll(((List) event.data));
+                    }
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                //                case DataEvent.ALERT_ACTION_ALERT:
+                //                case DataEvent.ALERT_ACTION_DELETE:
+                default:
+                    if (event.data instanceof Inventory) {
+                        for (int i = 0; i < mData.size(); i++) {
+                            Inventory inventory = mData.get(i);
+                            if (inventory.getId() == ((Inventory) event.data).getId()) {
+                                if (event.action == DataEvent.ALERT_ACTION_ALERT) {
+                                    mData.remove(i);
+                                    mData.add(i, inventory);
+                                } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
+                                    mData.remove(i);
+                                }
+                                mAdapter.notifyDataSetChanged();
+                            }
+
+                        }
+                    }
+                    break;
+            }
         }
     }
 

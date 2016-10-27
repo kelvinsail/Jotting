@@ -1,9 +1,9 @@
 package com.yifan.jotting2.utils.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.yifan.jotting2.JottingApplication;
-import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.utils.database.gen.DaoMaster;
 import com.yifan.jotting2.utils.database.gen.DaoSession;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
@@ -43,7 +43,7 @@ public class DataBaseManager {
         if (JottingApplication.DEBUG) {//调试模式，每次都会清空数据库再重建
             mOpenHelper = new DaoMaster.DevOpenHelper(JottingApplication.getInstance(), DATABASE_NAME);
         } else {//正常模式
-            mOpenHelper = new GDOpenHelper(JottingApplication.getInstance(), DATABASE_NAME);
+            mOpenHelper = new JottingDBOpenHelper(JottingApplication.getInstance(), DATABASE_NAME);
         }
         mDaoMaster = new DaoMaster(mOpenHelper.getWritableDb());
         mDaoSession = mDaoMaster.newSession();
@@ -107,24 +107,32 @@ public class DataBaseManager {
      *
      * Created by yifan on 2016/7/20.
      */
-    private class GDOpenHelper extends DaoMaster.OpenHelper {
+    private class JottingDBOpenHelper extends DaoMaster.OpenHelper {
+
+        private static final String TAG = "JottingDBOpenHelper";
 
         /**
          * 升级清单项数据库，增加标签颜色字段
          */
         private static final String UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR = "alter table INVENTORY add column LABELCOLOR Integer";
+        private static final String UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID = "alter table INVENTORY add column PROJECTID Long";
 
-        public GDOpenHelper(Context context, String name) {
+        public JottingDBOpenHelper(Context context, String name) {
             super(context, name);
         }
 
         @Override
         public void onUpgrade(Database db, int oldVersion, int newVersion) {
             super.onUpgrade(db, oldVersion, newVersion);
+            Log.i(TAG, "onUpgrade: " + oldVersion + " to " + newVersion);
             switch (oldVersion) {
                 case 2:
+                    Log.i(TAG, "onUpgrade: "+UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
                     db.execSQL(UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
                     break;
+                case 3:
+                    Log.i(TAG, "onUpgrade: "+UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID);
+                    db.execSQL(UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID);
             }
         }
     }
