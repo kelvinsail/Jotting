@@ -58,6 +58,7 @@ public class Project implements Parcelable {
     }
 
     protected Project(Parcel in) {
+        id = in.readLong();
         projectType = in.readInt();
         projectName = in.readString();
         description = in.readString();
@@ -83,6 +84,7 @@ public class Project implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeInt(projectType);
         dest.writeString(projectName);
         dest.writeString(description);

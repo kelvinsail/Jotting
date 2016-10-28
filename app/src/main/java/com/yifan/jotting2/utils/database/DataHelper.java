@@ -82,10 +82,10 @@ public abstract class DataHelper<VH extends Parcelable> implements DataHelpObser
      * 查询数据
      *
      * @param count 数量
-     * @param value 查询参数
+     * @param values 查询参数
      * @return
      */
-    public abstract List<VH> query(int count, String... value);
+    public abstract List<VH> query(int count, String... values);
 
     /**
      * 获取DAO处理对象

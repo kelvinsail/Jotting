@@ -20,6 +20,7 @@ import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Inventory;
+import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
 import com.yifan.jotting2.utils.database.InventoriesDataHelper;
 
@@ -31,6 +32,11 @@ import com.yifan.jotting2.utils.database.InventoriesDataHelper;
 public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     public static final String TAG = "AlertInventoryDialog";
+
+    /**
+     * 项目数据键值对key
+     */
+    public static final String BUNDLE_KEY_PROJECT = "project";
 
     /**
      * 根布局
@@ -83,6 +89,11 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
     private boolean isAlerting;
 
     /**
+     * 所属项目的数据
+     */
+    private Project mProject;
+
+    /**
      * 标签颜色
      */
     private int[] mLabelColors = new int[]{
@@ -98,9 +109,10 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
         return TAG;
     }
 
-    public static AlertInventoryDialog newInstance(Inventory inventory) {
+    public static AlertInventoryDialog newInstance(Project project, Inventory inventory) {
         Bundle args = new Bundle();
         args.putParcelable(Constans.BUNDLE_KEY_DATA, inventory);
+        args.putParcelable(BUNDLE_KEY_PROJECT, project);
         AlertInventoryDialog fragment = new AlertInventoryDialog();
         fragment.setArguments(args);
         return fragment;
@@ -112,6 +124,7 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mProject = getArguments().getParcelable(BUNDLE_KEY_PROJECT);
         mInventory = getArguments().getParcelable(Constans.BUNDLE_KEY_DATA);
         isAlerting = null != mInventory;
     }
@@ -215,6 +228,7 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
         inventory.setDate(System.currentTimeMillis());
         inventory.setDescription(mDescriptionEdit.getText().toString());
         inventory.setLabelColor(mLabelColors[mRadioLayout.getCheckedRadioButtonId()]);
+        inventory.setProjectID(mProject.getId());
         String moneyText = mMoneyEdit.getText().toString();
         if (!TextUtils.isEmpty(moneyText)) {
             inventory.setMoney(Double.valueOf(moneyText));

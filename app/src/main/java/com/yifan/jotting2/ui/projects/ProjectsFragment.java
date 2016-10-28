@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
 import com.yifan.jotting2.utils.database.ProjectsDataHelp;
+import com.yifan.jotting2.utils.database.gen.InventoryDao;
 
 import java.util.List;
 import java.util.Observable;
@@ -123,11 +125,11 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                 default:
                     if (event.data instanceof Project) {
                         for (int i = 0; i < mList.size(); i++) {
-                            Project inventory = mList.get(i);
-                            if (inventory.getId() == ((Project) event.data).getId()) {
+                            Project project = mList.get(i);
+                            if (project.getId() == ((Project) event.data).getId()) {
                                 if (event.action == DataEvent.ALERT_ACTION_ALERT) {
                                     mList.remove(i);
-                                    mList.add(i, inventory);
+                                    mList.add(i, project);
                                 } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
                                     mList.remove(i);
                                 }

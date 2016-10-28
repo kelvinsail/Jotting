@@ -23,7 +23,7 @@ public class JottingApplication extends BaseApplication {
     /**
      * 是否为开发调试状态
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
 
     public static JottingApplication getInstance() {

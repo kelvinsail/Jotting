@@ -4,6 +4,8 @@ import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
 
+import org.greenrobot.greendao.query.WhereCondition;
+
 import java.util.List;
 
 /**
@@ -80,8 +82,8 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
     }
 
     @Override
-    public List<Inventory> query(int count, String... value) {
-        return getDao().queryBuilder().where(InventoryDao.Properties.Id.notEq(count))
+    public List<Inventory> query(int count, String... values) {
+        return getDao().queryBuilder().where(InventoryDao.Properties.Id.notEq(count),InventoryDao.Properties.ProjectID.eq(values[0]))
                 .orderAsc(InventoryDao.Properties.Id)
                 .build().list();
     }

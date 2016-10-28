@@ -68,8 +68,8 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mData = InventoriesDataHelper.getInstance().query(100);
         mProject = getIntent().getParcelableExtra(BUNDLE_KEY_PROJECT);
+        mData = InventoriesDataHelper.getInstance().query(100, String.valueOf(null != mProject ? mProject.getId() : 0));
         mInventoriesListView = new RecyclerView(this);
         setContentView(mInventoriesListView, 0, false);
         InventoriesDataHelper.getInstance().regesiterDataObserver(this);
@@ -99,7 +99,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_add_new_inventory) {
-            AlertInventoryDialog.newInstance(null).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
+            AlertInventoryDialog.newInstance(mProject, null).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -154,7 +154,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     public boolean onLongClick(View v, int itemType, int position) {
         if (position >= 0 && position < mData.size()) {
             Inventory inventory = mData.get(position);
-            AlertInventoryDialog.newInstance(inventory).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
+            AlertInventoryDialog.newInstance(mProject, inventory).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);
             return true;
         }
         return false;

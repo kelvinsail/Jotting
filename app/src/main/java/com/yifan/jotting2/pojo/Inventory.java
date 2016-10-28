@@ -80,6 +80,7 @@ public class Inventory implements Parcelable {
     }
 
     protected Inventory(Parcel in) {
+        id = in.readLong();
         name = in.readString();
         description = in.readString();
         date = in.readLong();
@@ -92,6 +93,7 @@ public class Inventory implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(description);
         dest.writeLong(date);

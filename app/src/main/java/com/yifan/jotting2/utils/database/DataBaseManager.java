@@ -102,6 +102,7 @@ public class DataBaseManager {
         QueryBuilder.LOG_VALUES = debug;
     }
 
+
     /**
      * 封装数据库OpenHelp，自定义onUpgrade等数据库版本升级函数
      *
@@ -111,28 +112,24 @@ public class DataBaseManager {
 
         private static final String TAG = "JottingDBOpenHelper";
 
-        /**
-         * 升级清单项数据库，增加标签颜色字段
-         */
-        private static final String UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR = "alter table INVENTORY add column LABELCOLOR Integer";
-        private static final String UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID = "alter table INVENTORY add column PROJECTID Long";
 
         public JottingDBOpenHelper(Context context, String name) {
             super(context, name);
         }
 
+        /**
+         * 开发时升级数据库必须将{@link JottingApplication#DEBUG} 设置为false关闭调试模式，
+         * 否则将会清空数据库数据，详情见{@link DataBaseManager#DataBaseManager()}
+         */
         @Override
         public void onUpgrade(Database db, int oldVersion, int newVersion) {
             super.onUpgrade(db, oldVersion, newVersion);
-            Log.i(TAG, "onUpgrade: " + oldVersion + " to " + newVersion);
             switch (oldVersion) {
                 case 2:
-                    Log.i(TAG, "onUpgrade: "+UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
-                    db.execSQL(UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
+                    db.execSQL(SqlConstans.UPDATE_INVENTORY_TABLE_TO_ADD_LABELCOLOR);
                     break;
                 case 3:
-                    Log.i(TAG, "onUpgrade: "+UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID);
-                    db.execSQL(UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID);
+                    db.execSQL(SqlConstans.UPDATE_INVENTORY_TABLE_TO_ADD_PROJECTID);
             }
         }
     }

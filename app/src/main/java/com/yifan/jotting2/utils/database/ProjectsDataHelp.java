@@ -84,7 +84,7 @@ public class ProjectsDataHelp extends DataHelper<Project> implements DataHelpObs
     }
 
     @Override
-    public List<Project> query(int count, String... value) {
+    public List<Project> query(int count, String... values) {
         return getDao()
                 .queryBuilder().where(ProjectDao.Properties.Id.notEq(count))
                 .orderAsc(ProjectDao.Properties.Id)
