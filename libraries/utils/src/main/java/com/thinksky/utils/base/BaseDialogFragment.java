@@ -18,6 +18,11 @@ import com.thinksky.utils.base.lifecycle.LifeCycleDialogFragment;
  */
 public abstract class BaseDialogFragment extends LifeCycleDialogFragment {
 
+    /**
+     * 根布局
+     */
+    private View mRootViwe;
+
     @Override
     public abstract String getTAG();
 
@@ -34,11 +39,11 @@ public abstract class BaseDialogFragment extends LifeCycleDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity(), R.style.BaseDialog);
         if (getLayoutResID() > 0) {
-            dialog.getWindow().setContentView(
-                    LayoutInflater.from(getActivity()).inflate(getLayoutResID(), null));
+            mRootViwe = LayoutInflater.from(getActivity()).inflate(getLayoutResID(), null);
         } else {
-            dialog.getWindow().setContentView(getLayoutView());
+            mRootViwe = getLayoutView();
         }
+        dialog.getWindow().setContentView(mRootViwe);
         dialog.setCancelable(isCancelable());
         dialog.setCanceledOnTouchOutside(isCanceledOnTouchOutside());
         return dialog;
@@ -56,14 +61,18 @@ public abstract class BaseDialogFragment extends LifeCycleDialogFragment {
      *
      * @return 资源布局ID
      */
-    public abstract int getLayoutResID();
+    public int getLayoutResID() {
+        return 0;
+    }
 
     /**
      * 获取布局控件对象
      *
      * @return
      */
-    public abstract View getLayoutView();
+    public View getLayoutView() {
+        return null;
+    }
 
     /**
      * 窗口是否可以消除
@@ -84,4 +93,12 @@ public abstract class BaseDialogFragment extends LifeCycleDialogFragment {
         return true;
     }
 
+    /**
+     * 获取根布局
+     *
+     * @return
+     */
+    public View getRootView() {
+        return mRootViwe;
+    }
 }

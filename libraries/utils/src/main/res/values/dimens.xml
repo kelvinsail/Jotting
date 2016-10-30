@@ -11,7 +11,7 @@
     <dimen name="text_xxlarge">22sp</dimen>
     <dimen name="text_xxxlarge">26sp</dimen>
     <dimen name="text_app_label">56sp</dimen>
-
+    <dimen name="text_dialog_title">26sp</dimen>
 
     <!-- LoadingDialog -->
     <dimen name="loading_dialog_corners">3dp</dimen>

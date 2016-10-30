@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.yifan.jotting2.widget.RadiusLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/dialog_width_normal">
 
-    <RelativeLayout
-        android:layout_width="@dimen/dialog_width_normal"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/iv_project_details_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="108dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/background_project_details_dialog" />
+    <ImageView
+        android:id="@+id/iv_project_details_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="108dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_project_details_dialog"/>
 
-        <TextView
-            android:id="@+id/tv_project_details_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/iv_project_details_header"
-            android:layout_alignLeft="@id/iv_project_details_header"
-            android:layout_margin="@dimen/padding_normal"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/text_xxxlarge"
-            android:textStyle="bold"
-            tools:text="Travel" />
+    <TextView
+        android:id="@+id/tv_project_details_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/iv_project_details_header"
+        android:layout_alignLeft="@id/iv_project_details_header"
+        android:layout_margin="@dimen/padding_normal"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_dialog_title"
+        android:textStyle="bold"
+        tools:text="Travel"/>
 
-        <TextView
-            android:id="@+id/tv_project_details_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_project_details_header"
-            android:layout_margin="@dimen/padding_normal"
-            android:lineSpacingMultiplier="1.2"
-            android:textColor="@color/text_gray"
-            android:textSize="@dimen/text_large"
-            tools:text="anywhere" />
+    <TextView
+        android:id="@+id/tv_project_details_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_project_details_header"
+        android:layout_margin="@dimen/padding_normal"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text_large"
+        tools:text="anywhere"/>
 
-    </RelativeLayout>
-
-</com.yifan.jotting2.widget.RadiusLayout>
+</RelativeLayout>

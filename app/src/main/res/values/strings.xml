@@ -4,9 +4,12 @@
 
     <string name="app_name">Jotting2</string>
     <string name="measure">确定</string>
+    <string name="confirm">确认</string>
     <string name="cancel">取消</string>
     <string name="add_new">添加</string>
     <string name="next">下一个</string>
+    <string name="delete">删除</string>
+    <string name="to_alert">修改</string>
 
     <!-- NavigationView -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -56,6 +59,8 @@
     <string name="description_state_normal">正常</string>
     <string name="description_state_end">已结束</string>
     <string name="description_type">类型：%s</string>
+    <string name="alert_project">修改项目</string>
+    <string name="delete_project_tips">确认是否删除该项目</string>
 
     <!-- Inventory -->
     <string name="new_inventory">新建清单项</string>

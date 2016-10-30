@@ -4,5 +4,7 @@
     <item name="dialog_button_measure" type="id" />
     <item name="dialog_button_cancel" type="id" />
     <item name="dialog_button_next" type="id" />
+    <item name="dialog_button_delete" type="id" />
+    <item name="dialog_button_alert" type="id" />
 
 </resources>

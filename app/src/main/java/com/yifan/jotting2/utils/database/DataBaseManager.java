@@ -38,7 +38,7 @@ public class DataBaseManager {
 
     private DataBaseManager() {
         //设置是否可以输出后台数据库日志
-        setDebug(true);
+        setDebug(JottingApplication.DEBUG);
         //初始化对象实例
         if (JottingApplication.DEBUG) {//调试模式，每次都会清空数据库再重建
             mOpenHelper = new DaoMaster.DevOpenHelper(JottingApplication.getInstance(), DATABASE_NAME);

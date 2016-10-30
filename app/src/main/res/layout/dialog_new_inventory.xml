@@ -20,7 +20,6 @@
         style="@style/TextAppearance.Dialog.NameText"
         android:text="@string/inventory_name"/>
 
-
     <EditText
         android:id="@+id/et_dialog_new_inventory_name"
         style="@style/TextAppearance.Dialog.ValueEdit"
@@ -85,45 +84,45 @@
 
     <RadioGroup
         android:id="@+id/rg_dialog_new_inventory_label_color"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/padding_normal"
+        android:orientation="horizontal"
         app:columnCount="2"
         app:layout_columnSpan="2"
         app:layout_columnWeight="1">
 
         <!--<RadioButton-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:background="@color/label_green"-->
-            <!--android:button="@null"/>-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:background="@color/label_green"-->
+        <!--android:button="@null"/>-->
 
         <!--<RadioButton-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:layout_marginLeft="@dimen/padding_normal"-->
-            <!--android:background="@color/label_red"-->
-            <!--android:button="@null"/>-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginLeft="@dimen/padding_normal"-->
+        <!--android:background="@color/label_red"-->
+        <!--android:button="@null"/>-->
 
         <!--<RadioButton-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:layout_marginLeft="@dimen/padding_normal"-->
-            <!--android:background="@color/label_blue"-->
-            <!--android:button="@null"/>-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginLeft="@dimen/padding_normal"-->
+        <!--android:background="@color/label_blue"-->
+        <!--android:button="@null"/>-->
 
         <!--<RadioButton-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:layout_marginLeft="@dimen/padding_normal"-->
-            <!--android:background="@color/label_cyan"-->
-            <!--android:button="@null"/>-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginLeft="@dimen/padding_normal"-->
+        <!--android:background="@color/label_cyan"-->
+        <!--android:button="@null"/>-->
 
         <!--<RadioButton-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="36dp"-->
-            <!--android:layout_marginLeft="@dimen/padding_normal"-->
-            <!--android:background="@color/label_yellow"-->
-            <!--android:button="@null"/>-->
+        <!--android:layout_width="36dp"-->
+        <!--android:layout_height="36dp"-->
+        <!--android:layout_marginLeft="@dimen/padding_normal"-->
+        <!--android:background="@color/label_yellow"-->
+        <!--android:button="@null"/>-->
     </RadioGroup>
 
 </android.support.v7.widget.GridLayout>

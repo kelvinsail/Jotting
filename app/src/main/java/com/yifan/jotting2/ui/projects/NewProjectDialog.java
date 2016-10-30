@@ -99,8 +99,8 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
         mProjectTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mTotalMoneyEdit.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
-                mTatolMoneyText.setVisibility(i == 0 ? View.VISIBLE : View.GONE);
+                mTotalMoneyEdit.setVisibility(i != 2 ? View.VISIBLE : View.GONE);
+                mTatolMoneyText.setVisibility(i != 2 ? View.VISIBLE : View.GONE);
             }
 
             @Override

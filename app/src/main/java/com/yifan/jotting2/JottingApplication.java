@@ -23,9 +23,13 @@ public class JottingApplication extends BaseApplication {
     /**
      * 是否为开发调试状态
      */
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
-
+    /**
+     * 获取Application实例
+     *
+     * @return
+     */
     public static JottingApplication getInstance() {
         return mSingleton;
     }
