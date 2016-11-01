@@ -120,7 +120,13 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                             && ((List) event.data).get(0) instanceof Project) {
                         mList.addAll(((List) event.data));
                     }
-                    mProjectsAdapter.notifyDataSetChanged();
+                    //在UI线程执行刷新代码
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mProjectsAdapter.notifyDataSetChanged();
+                        }
+                    });
                     break;
                 default:
                     if (event.data instanceof Project) {
@@ -133,7 +139,13 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                                 } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
                                     mList.remove(i);
                                 }
-                                mProjectsAdapter.notifyDataSetChanged();
+                                //在UI线程执行刷新代码
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mProjectsAdapter.notifyDataSetChanged();
+                                    }
+                                });
                             }
 
                         }
@@ -141,6 +153,7 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                     break;
             }
         }
+
     }
 
     @Override

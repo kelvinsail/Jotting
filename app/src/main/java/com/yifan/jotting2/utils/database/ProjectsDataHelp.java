@@ -1,5 +1,6 @@
 package com.yifan.jotting2.utils.database;
 
+import com.yifan.jotting2.JottingApplication;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.database.gen.ProjectDao;

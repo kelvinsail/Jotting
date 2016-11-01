@@ -16,6 +16,22 @@ import org.greenrobot.greendao.annotation.Transient;
 @Entity
 public class Project implements Parcelable {
 
+    /**
+     * 普通账本
+     */
+    @Transient
+    public static final int PROJECT_TYPE_NORMAL = 0;
+    /**
+     * 流水账
+     */
+    @Transient
+    public static final int PROJECT_TYPE_DAYBOOK = 1;
+    /**
+     * 清单
+     */
+    @Transient
+    public static final int PROJECT_TYPE_INVENTORY = 2;
+
     @Id
     private Long id;
 
@@ -70,8 +86,8 @@ public class Project implements Parcelable {
 
     @Generated(hash = 849533932)
     public Project(Long id, int projectType, String projectName,
-            String description, double totalMoney, long startTime, long modifyTime,
-            boolean isEnded) {
+                   String description, double totalMoney, long startTime, long modifyTime,
+                   boolean isEnded) {
         this.id = id;
         this.projectType = projectType;
         this.projectName = projectName;

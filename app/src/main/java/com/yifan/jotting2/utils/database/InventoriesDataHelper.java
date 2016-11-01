@@ -4,6 +4,7 @@ import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
 
+import org.greenrobot.greendao.query.QueryBuilder;
 import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
@@ -73,6 +74,22 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
         }
     }
 
+    /**
+     * 删除项目的所有清单数据
+     *
+     * @param projectID
+     */
+    public void deleteByProjectID(long projectID) {
+        if (projectID >= 0) {
+            List<Inventory> list = query(0, String.valueOf(projectID));
+//            for (Inventory inventory : list) {
+//                delete(inventory);
+//            }
+            getDao().deleteInTx(list);
+            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, null));
+        }
+    }
+
     @Override
     public void alert(Inventory inventory) {
         if (null != inventory) {
@@ -83,9 +100,13 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
 
     @Override
     public List<Inventory> query(int count, String... values) {
-        return getDao().queryBuilder().where(InventoryDao.Properties.Id.notEq(count),InventoryDao.Properties.ProjectID.eq(values[0]))
-                .orderAsc(InventoryDao.Properties.Id)
-                .build().list();
+        QueryBuilder builder = getDao().queryBuilder();
+        if (count > 0) {
+            builder.where(InventoryDao.Properties.Id.notEq(count), InventoryDao.Properties.ProjectID.eq(values[0]));
+        } else {
+            builder.where(InventoryDao.Properties.ProjectID.eq(values[0]));
+        }
+        return builder.orderAsc(InventoryDao.Properties.Id).build().list();
     }
 
     @Override

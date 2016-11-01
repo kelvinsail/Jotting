@@ -125,7 +125,13 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
                             && ((List) event.data).get(0) instanceof Inventory) {
                         mData.addAll(((List) event.data));
                     }
-                    mAdapter.notifyDataSetChanged();
+                    //在UI线程执行刷新代码
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    });
                     break;
                 //                case DataEvent.ALERT_ACTION_ALERT:
                 //                case DataEvent.ALERT_ACTION_DELETE:
@@ -140,7 +146,13 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
                                 } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
                                     mData.remove(i);
                                 }
-                                mAdapter.notifyDataSetChanged();
+                                //在UI线程执行刷新代码
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                });
                             }
 
                         }

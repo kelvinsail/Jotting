@@ -72,11 +72,15 @@ public class ConfirmDialog extends BaseMeasureDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.dialog_button_measure:
                 if (null != mListener) {
-                    mListener.onMeasure();
+                    if (mListener.onMeasure()) {
+                        return;
+                    }
                 }
                 break;
         }
-        dismiss();
+        if (isCancelable()) {
+            dismiss();
+        }
     }
 
     /**
@@ -92,6 +96,10 @@ public class ConfirmDialog extends BaseMeasureDialog implements View.OnClickList
      * 确认按钮点击事件监听
      */
     public interface OnMeasureClickListener {
-        void onMeasure();
+
+        /**
+         * @return true：拦截dialog销毁动作，自行处理l；false：点击之后dialog自动销毁
+         */
+        boolean onMeasure();
     }
 }

@@ -23,6 +23,11 @@ public class DataEvent {
     public static final int ALERT_ACTION_INSERT = 0x103;
 
     /**
+     * 清空
+     */
+    public static final int ALERT_ACTION_CLEAR = 0x103;
+
+    /**
      * 操作标示
      */
     public int action;
