@@ -22,7 +22,7 @@ import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.InventoriesDataHelper;
+import com.yifan.jotting2.utils.database.datahalper.InventoriesDataHelper;
 
 /**
  * 新增清单项弹窗

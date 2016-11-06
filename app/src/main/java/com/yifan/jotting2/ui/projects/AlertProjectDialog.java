@@ -9,13 +9,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.thinksky.utils.base.BaseDialogFragment;
 import com.thinksky.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.ProjectsDataHelp;
+import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
 
 /**
  * Project修改弹窗

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +21,8 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
-import com.yifan.jotting2.utils.database.InventoriesDataHelper;
+import com.yifan.jotting2.utils.Constans;
+import com.yifan.jotting2.utils.database.datahalper.InventoriesDataHelper;
 
 import java.util.List;
 import java.util.Observable;
@@ -37,7 +37,6 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
         BaseRecyclerAdapter.OnItemLongClickListener, Observer {
 
     public static final String TAG = "InventoryActivity";
-    public static final String BUNDLE_KEY_PROJECT = "project";
 
     /**
      * 列表控件
@@ -68,7 +67,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProject = getIntent().getParcelableExtra(BUNDLE_KEY_PROJECT);
+        mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
         mData = InventoriesDataHelper.getInstance().query(100, String.valueOf(null != mProject ? mProject.getId() : 0));
         mInventoriesListView = new RecyclerView(this);
         setContentView(mInventoriesListView, 0, false);

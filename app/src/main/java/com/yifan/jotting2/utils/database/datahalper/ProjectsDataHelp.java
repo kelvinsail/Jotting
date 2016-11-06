@@ -1,8 +1,10 @@
-package com.yifan.jotting2.utils.database;
+package com.yifan.jotting2.utils.database.datahalper;
 
-import com.yifan.jotting2.JottingApplication;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
+import com.yifan.jotting2.utils.database.DataBaseManager;
+import com.yifan.jotting2.utils.database.datahalper.impl.DataHelpObservable;
+import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
 import com.yifan.jotting2.utils.database.gen.ProjectDao;
 
 import java.util.List;
@@ -12,7 +14,7 @@ import java.util.List;
  *
  * Created by yifan on 2016/7/20.
  */
-public class ProjectsDataHelp extends DataHelper<Project> implements DataHelpObservable {
+public class ProjectsDataHelp extends DataHelper<Project> {
 
     private static class ProjectHelp {
 
@@ -48,23 +50,31 @@ public class ProjectsDataHelp extends DataHelper<Project> implements DataHelpObs
     }
 
     @Override
-    public void insert(Project project) {
+    public long insert(Project project) {
+        long id = 0;
         if (null != project) {
-            project.setId(getDao().insert(project));
+            id = getDao().insert(project);
+            project.setId(id);
             //通知所有观察者
             notifyDataChanged(project);
             notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, project));
         }
+        return id;
     }
 
     @Override
-    public void insert(Project... projects) {
+    public long[] insert(Project... projects) {
+        long[] ids = null;
         if (null != projects && projects.length > 0) {
-            for (Project project : projects) {
-                project.setId(getDao().insert(project));
+            ids = new long[projects.length];
+            for (int i = 0; i < projects.length; i++) {
+                Project project = projects[i];
+                ids[i] = getDao().insert(project);
+                project.setId(ids[i]);
             }
             notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, projects));
         }
+        return ids;
     }
 
     @Override

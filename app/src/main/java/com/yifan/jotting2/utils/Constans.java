@@ -11,4 +11,9 @@ public class Constans {
      * Bundle键值对key - 数据
      */
     public static final String BUNDLE_KEY_DATA = "data";
+
+    /**
+     * Bundle键值对key - 项目数据
+     */
+    public static final String BUNDLE_KEY_PROJECT = "project";
 }

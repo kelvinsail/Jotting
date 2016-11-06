@@ -1,11 +1,12 @@
-package com.yifan.jotting2.utils.database;
+package com.yifan.jotting2.utils.database.datahalper;
 
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
+import com.yifan.jotting2.utils.database.DataBaseManager;
+import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
 
 import org.greenrobot.greendao.query.QueryBuilder;
-import org.greenrobot.greendao.query.WhereCondition;
 
 import java.util.List;
 
@@ -40,29 +41,37 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
      * @param count
      * @param projectID
      */
-    public void insert(String name, String description, long date,
+    public long insert(String name, String description, long date,
                        double money, int count, long projectID) {
         Inventory inventory = new Inventory(null, name, description, date, money, count, false, 0, projectID);
-        insert(inventory);
+        return insert(inventory);
     }
 
     @Override
-    public void insert(Inventory inventory) {
+    public long insert(Inventory inventory) {
+        long id = 0;
         if (null != inventory) {
-            inventory.setId(getDao().insert(inventory));
+            id = getDao().insert(inventory);
+            inventory.setId(id);
             //通知所有观察者
             notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventory));
         }
+        return id;
     }
 
     @Override
-    public void insert(Inventory... inventories) {
+    public long[] insert(Inventory... inventories) {
+        long[] ids = null;
         if (null != inventories && inventories.length > 0) {
-            for (Inventory inventory : inventories) {
-                inventory.setId(getDao().insert(inventory));
+            ids = new long[inventories.length];
+            for (int i = 0; i < inventories.length; i++) {
+                Inventory inventory = inventories[i];
+                ids[i] = getDao().insert(inventory);
+                inventory.setId(ids[i]);
             }
             notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventories));
         }
+        return ids;
     }
 
 

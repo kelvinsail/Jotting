@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,9 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
-import com.yifan.jotting2.utils.database.ProjectsDataHelp;
-import com.yifan.jotting2.utils.database.gen.InventoryDao;
+import com.yifan.jotting2.ui.normal.NormalProjectActivity;
+import com.yifan.jotting2.utils.Constans;
+import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
 
 import java.util.List;
 import java.util.Observable;
@@ -159,9 +159,20 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
     @Override
     public void onItemClick(View view, int itemType, int position) {
         Project project = mList.get(position);
-        Intent intent = new Intent(this.getActivity(), InventoryActivity.class);
-        intent.putExtra(InventoryActivity.BUNDLE_KEY_PROJECT, project);
-        startActivity(intent);
+        Intent intent = new Intent();
+        intent.putExtra(Constans.BUNDLE_KEY_PROJECT, project);
+        switch (project.getProjectType()) {
+            case Project.PROJECT_TYPE_NORMAL:
+                intent.setClass(this.getActivity(), NormalProjectActivity.class);
+                startActivity(intent);
+                break;
+            case Project.PROJECT_TYPE_INVENTORY:
+                intent.setClass(this.getActivity(), InventoryActivity.class);
+                startActivity(intent);
+                break;
+            case Project.PROJECT_TYPE_DAYBOOK:
+                break;
+        }
     }
 
     @Override

@@ -8,9 +8,15 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.yifan.jotting2.pojo.Action;
+import com.yifan.jotting2.pojo.ActionAssigns;
+import com.yifan.jotting2.pojo.Companion;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 
+import com.yifan.jotting2.utils.database.gen.ActionDao;
+import com.yifan.jotting2.utils.database.gen.ActionAssignsDao;
+import com.yifan.jotting2.utils.database.gen.CompanionDao;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
 import com.yifan.jotting2.utils.database.gen.ProjectDao;
 
@@ -23,9 +29,15 @@ import com.yifan.jotting2.utils.database.gen.ProjectDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig actionDaoConfig;
+    private final DaoConfig actionAssignsDaoConfig;
+    private final DaoConfig companionDaoConfig;
     private final DaoConfig inventoryDaoConfig;
     private final DaoConfig projectDaoConfig;
 
+    private final ActionDao actionDao;
+    private final ActionAssignsDao actionAssignsDao;
+    private final CompanionDao companionDao;
     private final InventoryDao inventoryDao;
     private final ProjectDao projectDao;
 
@@ -33,22 +45,52 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        actionDaoConfig = daoConfigMap.get(ActionDao.class).clone();
+        actionDaoConfig.initIdentityScope(type);
+
+        actionAssignsDaoConfig = daoConfigMap.get(ActionAssignsDao.class).clone();
+        actionAssignsDaoConfig.initIdentityScope(type);
+
+        companionDaoConfig = daoConfigMap.get(CompanionDao.class).clone();
+        companionDaoConfig.initIdentityScope(type);
+
         inventoryDaoConfig = daoConfigMap.get(InventoryDao.class).clone();
         inventoryDaoConfig.initIdentityScope(type);
 
         projectDaoConfig = daoConfigMap.get(ProjectDao.class).clone();
         projectDaoConfig.initIdentityScope(type);
 
+        actionDao = new ActionDao(actionDaoConfig, this);
+        actionAssignsDao = new ActionAssignsDao(actionAssignsDaoConfig, this);
+        companionDao = new CompanionDao(companionDaoConfig, this);
         inventoryDao = new InventoryDao(inventoryDaoConfig, this);
         projectDao = new ProjectDao(projectDaoConfig, this);
 
+        registerDao(Action.class, actionDao);
+        registerDao(ActionAssigns.class, actionAssignsDao);
+        registerDao(Companion.class, companionDao);
         registerDao(Inventory.class, inventoryDao);
         registerDao(Project.class, projectDao);
     }
     
     public void clear() {
+        actionDaoConfig.getIdentityScope().clear();
+        actionAssignsDaoConfig.getIdentityScope().clear();
+        companionDaoConfig.getIdentityScope().clear();
         inventoryDaoConfig.getIdentityScope().clear();
         projectDaoConfig.getIdentityScope().clear();
+    }
+
+    public ActionDao getActionDao() {
+        return actionDao;
+    }
+
+    public ActionAssignsDao getActionAssignsDao() {
+        return actionAssignsDao;
+    }
+
+    public CompanionDao getCompanionDao() {
+        return companionDao;
     }
 
     public InventoryDao getInventoryDao() {

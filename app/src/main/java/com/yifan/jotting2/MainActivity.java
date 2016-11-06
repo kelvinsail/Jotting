@@ -11,18 +11,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 
 import com.thinksky.utils.base.BaseFragment;
 import com.thinksky.utils.base.TitleBarActivity;
-import com.thinksky.utils.utils.ResourcesUtils;
-import com.thinksky.utils.utils.WidgetUtils;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
@@ -106,7 +102,7 @@ public class MainActivity extends TitleBarActivity
         //导航栏
         mToolBar = getSupportTitleBar();
         //浮动按钮
-        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab_add_new_project);
         //包含抽屉的根布局
         mDrawerLayout = getDrawerLayout();
         //抽屉控件
@@ -116,9 +112,9 @@ public class MainActivity extends TitleBarActivity
         //加载抽屉头部
         mNavigationView.inflateHeaderView(R.layout.nav_header_main);
 
-        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
-        lp.bottomMargin = WidgetUtils.getNavigationBarHeight() + ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
-        mFloatingActionButton.setLayoutParams(lp);
+//        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
+//        lp.bottomMargin = WidgetUtils.getNavigationBarHeight() + ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
+//        mFloatingActionButton.setLayoutParams(lp);
     }
 
     @Override

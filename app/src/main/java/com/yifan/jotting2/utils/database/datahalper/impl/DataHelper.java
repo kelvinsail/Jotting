@@ -1,10 +1,9 @@
-package com.yifan.jotting2.utils.database;
+package com.yifan.jotting2.utils.database.datahalper.impl;
 
 import android.os.Parcelable;
 
 import org.greenrobot.greendao.AbstractDao;
 
-import java.util.AbstractMap;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -55,14 +54,14 @@ public abstract class DataHelper<VH extends Parcelable> implements DataHelpObser
      *
      * @param object 需要插入的数据
      */
-    public abstract void insert(VH object);
+    public abstract long insert(VH object);
 
     /**
      * 插入多个数据
      *
      * @param objects 需要插入的数据
      */
-    public abstract void insert(VH... objects);
+    public abstract long[] insert(VH... objects);
 
     /**
      * 删除数据

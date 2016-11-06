@@ -4,6 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yifan.jotting2.JottingApplication;
+import com.yifan.jotting2.pojo.ActionAssigns;
+import com.yifan.jotting2.utils.database.gen.ActionAssignsDao;
+import com.yifan.jotting2.utils.database.gen.ActionDao;
+import com.yifan.jotting2.utils.database.gen.CompanionDao;
 import com.yifan.jotting2.utils.database.gen.DaoMaster;
 import com.yifan.jotting2.utils.database.gen.DaoSession;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
@@ -91,6 +95,34 @@ public class DataBaseManager {
     public InventoryDao getInventoryDao() {
         return mDaoSession.getInventoryDao();
     }
+
+    /**
+     * 获取Action表Dao类
+     *
+     * @return {@link ActionDao}
+     */
+    public ActionDao getActionDao() {
+        return mDaoSession.getActionDao();
+    }
+
+    /**
+     * 获取ActionAssigns表Dao类
+     *
+     * @return {@link ActionAssignsDao}
+     */
+    public ActionAssignsDao getActionAssignsDao() {
+        return mDaoSession.getActionAssignsDao();
+    }
+
+    /**
+     * 获取Companion表Dao类
+     *
+     * @return {@link ActionDao}
+     */
+    public CompanionDao getCompanionDao() {
+        return mDaoSession.getCompanionDao();
+    }
+
 
     /**
      * 设置是否输出debug日志

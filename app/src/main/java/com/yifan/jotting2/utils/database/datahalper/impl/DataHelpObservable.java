@@ -1,4 +1,4 @@
-package com.yifan.jotting2.utils.database;
+package com.yifan.jotting2.utils.database.datahalper.impl;
 
 import java.util.Observable;
 import java.util.Observer;
