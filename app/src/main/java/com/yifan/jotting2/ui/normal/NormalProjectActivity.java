@@ -7,9 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thinksky.utils.base.TitleBarActivity;
-import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
-import com.thinksky.utils.base.widget.BaseRecyclerHolder;
+import com.yifan.utils.base.TitleBarActivity;
+import com.yifan.utils.base.widget.BaseRecyclerAdapter;
+import com.yifan.utils.base.widget.BaseRecyclerHolder;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Action;
 import com.yifan.jotting2.pojo.Project;

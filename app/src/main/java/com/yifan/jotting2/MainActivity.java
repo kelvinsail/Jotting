@@ -17,8 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 
-import com.thinksky.utils.base.BaseFragment;
-import com.thinksky.utils.base.TitleBarActivity;
+import com.yifan.utils.base.BaseFragment;
+import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;

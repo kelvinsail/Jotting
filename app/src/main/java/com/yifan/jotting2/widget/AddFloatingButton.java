@@ -5,8 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-import com.thinksky.utils.utils.ResourcesUtils;
-import com.thinksky.utils.utils.WidgetUtils;
+import com.yifan.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 
 /**

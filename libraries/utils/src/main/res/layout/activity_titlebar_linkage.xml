@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.thinksky.utils.widget.LoadingView
+    <com.yifan.utils.widget.LoadingView
         android:id="@+id/loadingview_toolbar_activity"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -36,7 +36,7 @@
             android:fitsSystemWindows="false"
             android:visibility="gone" />
 
-        <com.thinksky.utils.widget.TitleBar
+        <com.yifan.utils.widget.TitleBar
             android:id="@+id/titlebar_toolbar_activity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

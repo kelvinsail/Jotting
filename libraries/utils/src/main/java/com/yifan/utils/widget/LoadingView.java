@@ -1,4 +1,4 @@
-package com.yifan.jotting2.widget;
+package com.yifan.utils.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.yifan.utils.R;
 import com.yifan.utils.utils.ResourcesUtils;
-import com.yifan.jotting2.R;
 
 /**
  * 加载Loading界面
@@ -67,7 +67,6 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
      */
     private OnCancelListener mOnCancelListener;
 
-
     /**
      * 初始化UI
      */
@@ -79,7 +78,7 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
         setMessage(null);
 
         //设置背景色,居中
-        setBackgroundResource(R.color.background_black_alpha);
+        setBackgroundResource(R.color.background_black_with_alpha);
         setGravity(Gravity.CENTER);
         //设置隐藏,可获取焦点点击事件
         setVisibility(View.GONE);
@@ -158,11 +157,6 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
         this.isCanceledOnTouchOutside = cancel;
     }
 
-    /**
-     * Called when a view has been clicked.
-     *
-     * @param v The view that was clicked.
-     */
     @Override
     public void onClick(View v) {
         if (isShowing() && isCanceledOnTouchOutside && isCancelable) {
@@ -179,10 +173,6 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
     public interface OnCancelListener {
         void onCancel(View v);
     }
-
-    /***
-     * other setter & getter
-     */
 
     /**
      * 是否可消除

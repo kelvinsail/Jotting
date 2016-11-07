@@ -9,11 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thinksky.utils.base.BaseActivity;
-import com.thinksky.utils.base.BaseFragment;
-import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
-import com.thinksky.utils.utils.ResourcesUtils;
-import com.thinksky.utils.utils.WidgetUtils;
+import com.yifan.utils.base.BaseActivity;
+import com.yifan.utils.base.BaseFragment;
+import com.yifan.utils.base.widget.BaseRecyclerAdapter;
+import com.yifan.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;

@@ -5,11 +5,10 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Project;
-import com.yifan.jotting2.ui.ConfirmDialog;
 import com.yifan.jotting2.utils.Constans;
 import com.yifan.jotting2.widget.RadiusLayout;
 

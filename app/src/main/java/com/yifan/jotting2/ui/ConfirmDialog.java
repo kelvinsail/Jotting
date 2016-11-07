@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 

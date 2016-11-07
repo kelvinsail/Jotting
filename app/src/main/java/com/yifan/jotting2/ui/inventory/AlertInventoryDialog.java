@@ -16,7 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Inventory;

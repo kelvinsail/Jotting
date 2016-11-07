@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
-import com.thinksky.utils.base.TitleBarActivity;
-import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
-import com.thinksky.utils.base.widget.BaseRecyclerHolder;
-import com.thinksky.utils.utils.ResourcesUtils;
-import com.thinksky.utils.utils.WidgetUtils;
+import com.yifan.utils.base.TitleBarActivity;
+import com.yifan.utils.base.widget.BaseRecyclerAdapter;
+import com.yifan.utils.base.widget.BaseRecyclerHolder;
+import com.yifan.utils.utils.ResourcesUtils;
+import com.yifan.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;

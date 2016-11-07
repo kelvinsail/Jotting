@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.thinksky.utils.base.BaseFragment;
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.base.BaseFragment;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 
 /**

@@ -1,12 +1,7 @@
 package com.yifan.jotting2;
 
-import android.app.Application;
-
-import com.thinksky.utils.base.BaseApplication;
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.base.BaseApplication;
 import com.yifan.jotting2.utils.database.DataBaseManager;
-
-import java.lang.ref.WeakReference;
 
 /**
  * Application实例

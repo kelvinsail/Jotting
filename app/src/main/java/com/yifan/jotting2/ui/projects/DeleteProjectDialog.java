@@ -1,11 +1,9 @@
 package com.yifan.jotting2.ui.projects;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
-import com.thinksky.utils.base.BaseAsyncTask;
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.base.BaseAsyncTask;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.task.DeleteProjectTask;

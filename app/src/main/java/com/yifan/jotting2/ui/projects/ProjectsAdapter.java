@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.thinksky.utils.base.BaseActivity;
-import com.thinksky.utils.base.widget.BaseRecyclerAdapter;
-import com.thinksky.utils.base.widget.BaseRecyclerHolder;
-import com.thinksky.utils.utils.ResourcesUtils;
-import com.yifan.jotting2.JottingApplication;
+import com.yifan.utils.base.widget.BaseRecyclerAdapter;
+import com.yifan.utils.base.widget.BaseRecyclerHolder;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Project;
 

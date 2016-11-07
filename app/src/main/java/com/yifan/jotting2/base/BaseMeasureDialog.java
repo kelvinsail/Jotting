@@ -1,15 +1,14 @@
 package com.yifan.jotting2.base;
 
 import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
 import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.thinksky.utils.base.BaseDialogFragment;
-import com.thinksky.utils.utils.ResourcesUtils;
+import com.yifan.utils.base.BaseDialogFragment;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 
 
