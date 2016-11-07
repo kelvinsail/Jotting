@@ -29,7 +29,15 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ui.normal.NormalProjectActivity"
+            android:name=".ui.normal.ActionsActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.normal.CompanionActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.normal.EditActionActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

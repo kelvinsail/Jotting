@@ -1,5 +1,6 @@
 package com.yifan.jotting2.ui.normal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,14 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 普通项目列表
+ * 普通项目活动列表界面
  *
  * Created by yifan on 2016/11/6.
  */
-public class NormalProjectActivity extends TitleBarActivity implements
+public class ActionsActivity extends TitleBarActivity implements
         BaseRecyclerAdapter.OnItemClickListener, View.OnClickListener {
 
-    private static final String TAG = "NormalProjectActivity";
+    private static final String TAG = "ActionsActivity";
 
     /**
      * 添加新活动按钮
@@ -100,6 +101,11 @@ public class NormalProjectActivity extends TitleBarActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_add_new_action:
+                Intent intent = new Intent();
+                intent.setClass(this, EditActionActivity.class);
+                intent.putExtra(Constans.BUNDLE_KEY_PROJECT, mProject);
+//                intent.putExtra(Constans.BUNDLE_KEY_ACTION, null);
+                startActivity(intent);
                 break;
         }
     }

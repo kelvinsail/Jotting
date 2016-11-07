@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:columnCount="3">
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_name"
+            app:layout_columnSpan="1"/>
+
+        <EditText
+            style="@style/TextAppearance.EditActions"
+            android:hint="@string/action_name_input_hint"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"/>
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_time"
+            app:layout_columnSpan="1"/>
+
+        <EditText
+            style="@style/TextAppearance.EditActions"
+            android:hint="@string/action_time_input_hint"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"/>
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_money"
+            app:layout_columnSpan="1"/>
+
+        <EditText
+            style="@style/TextAppearance.EditActions"
+            android:hint="@string/action_money_input_hint"
+            app:layout_columnSpan="1"
+            app:layout_columnWeight="1"/>
+
+        <Spinner
+            android:entries="@array/price_type"
+            android:minWidth="108dp"
+            android:spinnerMode="dropdown"
+            app:layout_columnSpan="1"/>
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_payer"
+            app:layout_columnSpan="1"/>
+
+        <EditText
+            style="@style/TextAppearance.EditActions"
+            android:hint="@string/action_payer_input_hint"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"/>
+
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_despriction"
+            app:layout_columnSpan="1"/>
+
+        <EditText
+            style="@style/TextAppearance.EditActions"
+            android:hint="@string/action_despriction_input_hint"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"/>
+
+        <TextView
+            style="@style/TextAppearance.EditActions.Tips"
+            android:text="@string/action_pay_assigns"
+            app:layout_columnSpan="1"/>
+
+        <android.support.v7.widget.RecyclerView
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="2"/>
+    </android.support.v7.widget.GridLayout>
+</ScrollView>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yifan.jotting2.ui.normal.ActionsActivity;
 import com.yifan.utils.base.BaseActivity;
 import com.yifan.utils.base.BaseFragment;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
@@ -18,7 +19,6 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
-import com.yifan.jotting2.ui.normal.NormalProjectActivity;
 import com.yifan.jotting2.utils.Constans;
 import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
 
@@ -163,7 +163,7 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
         intent.putExtra(Constans.BUNDLE_KEY_PROJECT, project);
         switch (project.getProjectType()) {
             case Project.PROJECT_TYPE_NORMAL:
-                intent.setClass(this.getActivity(), NormalProjectActivity.class);
+                intent.setClass(this.getActivity(), ActionsActivity.class);
                 startActivity(intent);
                 break;
             case Project.PROJECT_TYPE_INVENTORY:
