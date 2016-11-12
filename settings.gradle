@@ -1,1 +1,1 @@
-include ':app', ':libraries:utils', ':libraries:roundimageview'
+include ':app', ':libraries:utils'

@@ -1,5 +1,7 @@
 package com.yifan.jotting2.ui.normal;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,13 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedDrawable;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Companion;
 import com.yifan.jotting2.widget.AddFloatingButton;
+import com.yifan.roundimageview.RounderImageView;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
 import com.yifan.utils.base.widget.BaseRecyclerHolder;
+import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.utils.utils.WidgetUtils;
 
 import java.util.ArrayList;
@@ -107,7 +114,7 @@ public class CompanionActivity extends TitleBarActivity implements View.OnClickL
 
         @Override
         public void onBind(CompanionHolder viewHolder, int realPosition) {
-
+            viewHolder.setData(new Companion());
         }
 
         @Override
@@ -120,10 +127,41 @@ public class CompanionActivity extends TitleBarActivity implements View.OnClickL
             return null;
         }
 
+        /**
+         * 列表item复用holder类
+         */
         public class CompanionHolder extends BaseRecyclerHolder {
+
+            /**
+             * 成员头像
+             */
+            ImageView userIcon;
+
+            /**
+             * 成员姓名
+             */
+            TextView userName;
+
             public CompanionHolder(View itemView) {
                 super(itemView);
+                userIcon = (ImageView) itemView.findViewById(R.id.iv_item_companion_icon);
+                userName = (TextView) itemView.findViewById(R.id.tv_item_companion_name);
             }
+
+            /**
+             * 设置数据
+             *
+             * @param companion
+             */
+            public void setData(Companion companion) {
+                RoundedDrawable drawable = (RoundedDrawable) RoundedDrawable.fromDrawable(ResourcesUtils.getDrawable(R.drawable.icon_companions));
+                drawable.setOval(true);
+                RoundedDrawable background = (RoundedDrawable) RoundedDrawable.fromDrawable(new ColorDrawable(ResourcesUtils.getColor(R.color.background_gray)));
+                background.setOval(true);
+                userIcon.setImageDrawable(drawable);
+                userIcon.setBackgroundDrawable(background);
+            }
+
         }
     }
 }
