@@ -33,8 +33,8 @@ public class AddFloatingButton extends FloatingActionButton {
      * 初始化控件
      */
     private void initView() {
-        //设置图片
-        setImageResource(R.drawable.ic_suggestions_add);
+//        //设置图片
+//        setImageResource(R.drawable.icon_add);
     }
 
     @Override

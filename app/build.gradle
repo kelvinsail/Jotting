@@ -50,4 +50,5 @@ dependencies {
     compile 'org.greenrobot:greendao-generator:3.0.0'
 
     compile project(':libraries:utils')
+    compile project(':libraries:roundimageview')
 }

@@ -1,5 +1,6 @@
 package com.yifan.jotting2.ui.normal;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -7,6 +8,7 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Action;
 import com.yifan.jotting2.utils.Constans;
 import com.yifan.utils.base.TitleBarActivity;
+import com.yifan.utils.utils.ResourcesUtils;
 
 /**
  * 活动编辑界面
@@ -33,6 +35,7 @@ public class EditActionActivity extends TitleBarActivity {
         if (null != getIntent()) {
             mAction = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_ACTION);
         }
+        getWindow().setBackgroundDrawable(new ColorDrawable(ResourcesUtils.getColor(R.color.background_main)));
         setContentView(R.layout.activity_edit_action, 0, false);
     }
 

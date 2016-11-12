@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,6 +31,11 @@ public class ActionsActivity extends TitleBarActivity implements
         BaseRecyclerAdapter.OnItemClickListener, View.OnClickListener {
 
     private static final String TAG = "ActionsActivity";
+
+    /**
+     * Activity请求码
+     */
+    private static final int REQUEST_CODE_COMPANIONS = 0x001;
 
     /**
      * 添加新活动按钮
@@ -108,6 +115,24 @@ public class ActionsActivity extends TitleBarActivity implements
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_actions, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_companions:
+                Intent intent = new Intent(this, CompanionActivity.class);
+                intent.putExtra(Constans.BUNDLE_KEY_PROJECT, mProject);
+                startActivityForResult(intent, REQUEST_CODE_COMPANIONS);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     /**

@@ -77,7 +77,9 @@
     <string name="inventory_count_hint">请输入清单数量</string>
     <string name="color_label">标签颜色</string>
 
-    <!-- 普通项目 -->
+    <!-- 普通项目活动列表 -->
+    <string name="my_companions">活动成员</string>
+
     <!-- 活动编辑 -->
     <string name="new_action">新建项目</string>
     <string name="edit_action">编辑项目</string>
