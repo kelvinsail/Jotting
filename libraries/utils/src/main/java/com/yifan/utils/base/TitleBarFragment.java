@@ -5,10 +5,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ViewStubCompat;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -93,6 +95,11 @@ public abstract class TitleBarFragment extends BaseFragment implements TitleImpl
      */
     WeakReference<DrawerLayout> mDrawerLayout;
 
+    /**
+     * 加载弹窗
+     */
+    private LoadingDialogFragment mLoadingDialogFragment;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +124,7 @@ public abstract class TitleBarFragment extends BaseFragment implements TitleImpl
         }
         //初始化TitleBar控件
         mTitleBar = (TitleBar) mRootView.findViewById(R.id.titlebar_toolbar_activity);
+        setHasOptionsMenu(true);
         ((AppCompatActivity) getActivity()).setSupportActionBar(mTitleBar);
         if (isTitleBarBackEnable()) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -322,11 +330,31 @@ public abstract class TitleBarFragment extends BaseFragment implements TitleImpl
 
     @Override
     public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+        createLoadingdialog(message, canelable, touchOutsideCancelable, true);
+    }
+
+    @Override
+    public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable, boolean isFullScreen) {
         if (!isActived()) {
             return;
         }
-        if (mLoadingView != null && !mLoadingView.isShowing()) {
-            mLoadingView.show();
+        if (isFullScreen) {
+            if (null != mLoadingDialogFragment) {
+                Log.i(getTAG(), "createLoadingdialog: " + mLoadingDialogFragment);
+                mLoadingDialogFragment.setMessage(message);
+                mLoadingDialogFragment.setCancelable(canelable);
+                mLoadingDialogFragment.setTouchOutsideCancelable(touchOutsideCancelable);
+            } else {
+                mLoadingDialogFragment = LoadingDialogFragment.newInstance(message, canelable, touchOutsideCancelable);
+                mLoadingDialogFragment.show(getFragmentManager(), LoadingDialogFragment.TAG);
+            }
+        } else {
+            if (mLoadingView != null) {
+                mLoadingView.setCancelable(canelable);
+                mLoadingView.setCanceledOnTouchOutside(touchOutsideCancelable);
+                mLoadingView.setMessage(message);
+                mLoadingView.show();
+            }
         }
     }
 
@@ -338,6 +366,10 @@ public abstract class TitleBarFragment extends BaseFragment implements TitleImpl
         if (mLoadingView != null && mLoadingView.isShowing()) {
             mContentView.setVisibility(View.VISIBLE);
             mLoadingView.hide();
+        }
+        if (null != mLoadingDialogFragment) {
+            mLoadingDialogFragment.dismiss();
+            mLoadingDialogFragment = null;
         }
     }
 
@@ -355,6 +387,7 @@ public abstract class TitleBarFragment extends BaseFragment implements TitleImpl
     public boolean onOptionsItemSelected(MenuItem item) {
         if (isTitleBarBackEnable() && item.getItemId() == android.R.id.home) {
             getActivity().onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

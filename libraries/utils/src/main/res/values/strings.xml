@@ -2,11 +2,11 @@
 
     <string name="app_name">Utils</string>
 
-    <string name="root_dir_name">@string/app_name</string>
+    <string name="root_dir_name">Utils</string>
 
     <string name="navigation_drawer_open">navigation_drawer_open</string>
     <string name="navigation_drawer_close">navigation_drawer_close</string>
-    
+
     <!-- Loading -->
     <string name="loading">正在加载&#8230;</string>
     <string name="progressing">正在处理&#8230;</string>

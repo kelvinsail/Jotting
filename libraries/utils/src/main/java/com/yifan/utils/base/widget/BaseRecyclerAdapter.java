@@ -99,7 +99,7 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerHolder>
      *
      * @param onItemLongClickListener
      */
-    public void setOnOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
 
@@ -366,7 +366,7 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerHolder>
         if (null != view && null != mOnItemLongClickListener) {
             int position = BaseRecyclerHolder.getPositionFroView(view);
             if (position >= 0) {
-                return mOnItemLongClickListener.onLongClick(view, getItemViewType(position), position);
+                return mOnItemLongClickListener.onItemLongClick(view, getItemViewType(position), position);
             }
         }
         return false;
@@ -424,7 +424,7 @@ public abstract class BaseRecyclerAdapter<VH extends BaseRecyclerHolder>
      * 列表点击事件监听接口
      */
     public interface OnItemLongClickListener {
-        boolean onLongClick(View v, int itemType, int position);
+        boolean onItemLongClick(View v, int itemType, int position);
     }
 
     /**

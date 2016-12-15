@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
@@ -72,13 +74,18 @@ public class LoadingView extends LinearLayout implements View.OnClickListener {
      */
     private void initUI() {
         //加载布局
-        mContentView = inflate(getContext(), R.layout.layout_loading_dialog, this);
+        LayoutInflater mLayoutInflater = LayoutInflater.from(getContext());
+        Context themeContext = new ContextThemeWrapper(getContext(), R.style.LoadingDialog);
+        // 通过context构建新的inflater
+        // 再通过应用新主题的inflater加载视图
+        mLayoutInflater = mLayoutInflater.cloneInContext(themeContext);
+        mContentView = mLayoutInflater.inflate(R.layout.layout_loading_dialog, this);
         mProgressBar = (ProgressBar) mContentView.findViewById(R.id.pb_loading_dialog);
         mTvMessage = (TextView) mContentView.findViewById(R.id.tv_loading_dialog_message);
         setMessage(null);
 
         //设置背景色,居中
-        setBackgroundResource(R.color.background_black_with_alpha);
+        setBackgroundResource(R.color.background_black_alpha_light);
         setGravity(Gravity.CENTER);
         //设置隐藏,可获取焦点点击事件
         setVisibility(View.GONE);

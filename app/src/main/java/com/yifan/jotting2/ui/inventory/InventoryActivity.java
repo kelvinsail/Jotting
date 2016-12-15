@@ -85,7 +85,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
         mInventoriesListView.setPadding(0, 0, 0, WidgetUtils.getNavigationBarHeight());
         mInventoriesListView.setClipToPadding(false);
         mAdapter.setOnItemClickListener(this);
-        mAdapter.setOnOnItemLongClickListener(this);
+        mAdapter.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     }
 
     @Override
-    public boolean onLongClick(View v, int itemType, int position) {
+    public boolean onItemLongClick(View view, int itemType, int position) {
         if (position >= 0 && position < mData.size()) {
             Inventory inventory = mData.get(position);
             AlertInventoryDialog.newInstance(mProject, inventory).show(getSupportFragmentManager(), AlertInventoryDialog.TAG);

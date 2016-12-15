@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                      xmlns:app="http://schemas.android.com/apk/res-auto"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="match_parent"
+                                      android:minWidth="@dimen/dialog_width_normal"
+                                      android:padding="@dimen/padding_normal"
+                                      app:columnCount="2"
+                                      app:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_dialog_new_project_title"
+        style="@style/TextAppearance.Dialog.Title"
+        android:text="@string/new_companion"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1"/>
+
+    <TextView
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/companion_name"/>
+
+    <EditText
+        android:id="@+id/et_dialog_new_companion_name"
+        style="@style/TextAppearance.Dialog.ValueEdit"
+        android:hint="@string/companion_name_input_hint"
+        app:layout_columnSpan="1"
+        app:layout_columnWeight="1"/>
+
+    <TextView
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/companion_phone"/>
+
+    <EditText
+        android:id="@+id/et_dialog_new_companion_phone"
+        style="@style/TextAppearance.Dialog.ValueEdit"
+        android:hint="@string/companion_phone_input_hint"
+        android:inputType="phone"
+        app:layout_columnSpan="1"
+        app:layout_columnWeight="1"/>
+
+    <TextView
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/companion_recharge"/>
+
+    <EditText
+        android:id="@+id/et_dialog_new_companion_recharge"
+        style="@style/TextAppearance.Dialog.ValueEdit"
+        android:hint="@string/companion_recharge_input_hint"
+        android:inputType="numberDecimal"
+        android:text="0.0"
+        app:layout_columnSpan="1"
+        app:layout_columnWeight="1"/>
+
+    <CheckBox
+        android:id="@+id/cb_dialog_new_companion_payer"
+        style="@style/TextAppearance.Dialog.NameText"
+        android:text="@string/companion_default_payer"
+        app:layout_columnSpan="2"
+        app:layout_columnWeight="1"/>
+
+</android.support.v7.widget.GridLayout>

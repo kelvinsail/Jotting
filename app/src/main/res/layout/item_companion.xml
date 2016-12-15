@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="fill_horizontal"
-        android:layout_weight="1">
+        android:layout_height="88dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:layout_marginLeft="62dp"
+        android:layout_marginRight="@dimen/padding_xlarge"
+        android:background="@color/background_main"
+        android:elevation="2dp"
+        android:translationZ="4dp"
+        android:paddingLeft="36dp">
 
-        <ImageView
-            android:id="@+id/iv_item_companion_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:paddingLeft="@dimen/padding_large"
-            android:paddingRight="@dimen/padding_large"
-            android:paddingTop="@dimen/padding_large"/>
-    </FrameLayout>
+        <TextView
+            android:id="@+id/tv_item_companion_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.Main"
+            android:background="@android:color/transparent"
+            android:gravity="left"
+            android:padding="@dimen/padding_normal"
+            tools:text="yifan"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_item_companion_icon"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:layout_marginLeft="@dimen/padding_xlarge"
+        android:elevation="2dp"
+        android:translationZ="4dp"
+        tools:background="@color/background_main"/>
 
 
-    <TextView
-        android:id="@+id/tv_item_companion_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="@dimen/padding_normal"
-        android:text="yifan"/>
-
-</LinearLayout>
+</FrameLayout>

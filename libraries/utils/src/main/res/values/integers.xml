@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <item name="loading_footer_view" type="id"/>
+    <integer name="anim_duration">250</integer>
 
 </resources>

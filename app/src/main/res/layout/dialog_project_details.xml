@@ -36,7 +36,7 @@
         android:layout_margin="@dimen/padding_normal"
         android:lineSpacingMultiplier="1.2"
         android:textColor="@color/text_gray"
-        android:textSize="@dimen/text_large"
+        android:textSize="@dimen/base_text_large"
         tools:text="anywhere"/>
 
 </RelativeLayout>

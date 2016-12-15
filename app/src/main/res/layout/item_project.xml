@@ -29,7 +29,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/text_xxlarge"
+            android:textSize="@dimen/base_text_xxlarge"
             tools:text="Tavel" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_marginTop="@dimen/padding_large"
             android:layout_below="@id/tv_project_name"
             android:textColor="@color/text_gray"
-            android:textSize="@dimen/text_small"
+            android:textSize="@dimen/base_text_small"
             tools:text="2016/07/20" />
     </RelativeLayout>
 

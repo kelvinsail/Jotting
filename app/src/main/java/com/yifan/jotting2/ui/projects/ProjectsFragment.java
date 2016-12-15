@@ -83,7 +83,7 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
             mProjectsAdapter = new ProjectsAdapter(getActivity(), mList);
             mListView.setAdapter(mProjectsAdapter);
             mProjectsAdapter.setOnItemClickListener(this);
-            mProjectsAdapter.setOnOnItemLongClickListener(this);
+            mProjectsAdapter.setOnItemLongClickListener(this);
         }
     }
 
@@ -176,10 +176,10 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
     }
 
     @Override
-    public boolean onLongClick(View v, int itemType, int position) {
-        if (null != v.getContext() && v.getContext() instanceof BaseActivity) {
+    public boolean onItemLongClick(View view, int itemType, int position) {
+        if (null != view.getContext() && view.getContext() instanceof BaseActivity) {
             ProjectDetailsDialog dialog = ProjectDetailsDialog.newInstance(mList.get(position));
-            dialog.show(((BaseActivity) v.getContext()).getSupportFragmentManager(), ProjectDetailsDialog.TAG);
+            dialog.show(((BaseActivity) view.getContext()).getSupportFragmentManager(), ProjectDetailsDialog.TAG);
             return true;
         }
         return false;

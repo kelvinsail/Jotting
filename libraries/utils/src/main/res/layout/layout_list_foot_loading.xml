@@ -8,7 +8,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_gravity="center"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="@dimen/base_padding_large"
         android:indeterminate="true" />
 
     <TextView
@@ -18,7 +18,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textColor="@color/text_black"
-        android:textSize="@dimen/text_small"
+        android:textSize="@dimen/base_text_small"
         android:text="@string/loading" />
 
 </merge>

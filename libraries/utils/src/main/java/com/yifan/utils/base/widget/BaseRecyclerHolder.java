@@ -23,16 +23,26 @@ public abstract class BaseRecyclerHolder extends RecyclerView.ViewHolder {
      * @param position
      */
     public void setPosition(int position) {
+        setPosition(itemView, position);
+    }
+
+    /**
+     * 设置序号
+     *
+     * @param view     控件
+     * @param position 序号
+     */
+    public static void setPosition(View view, int position) {
         Bundle data;
-        if (null != itemView
-                && null != itemView.getTag()
-                && itemView.getTag() instanceof Bundle) {
-            data = (Bundle) itemView.getTag();
+        if (null != view
+                && null != view.getTag()
+                && view.getTag() instanceof Bundle) {
+            data = (Bundle) view.getTag();
         } else {
             data = new Bundle();
         }
         data.putInt(Constant.POSITION, position);
-        itemView.setTag(data);
+        view.setTag(data);
     }
 
 

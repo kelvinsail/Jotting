@@ -14,14 +14,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.yifan.jotting2.widget.AddFloatingButton;
 import com.yifan.utils.base.BaseFragment;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.jotting2.ui.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
+import com.yifan.utils.utils.WidgetUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -68,7 +71,7 @@ public class MainActivity extends TitleBarActivity
     /**
      * 浮动按钮
      */
-    private FloatingActionButton mFloatingActionButton;
+    private AddFloatingButton mFloatingActionButton;
 
     /**
      * Fragment事务
@@ -102,19 +105,17 @@ public class MainActivity extends TitleBarActivity
         //导航栏
         mToolBar = getSupportTitleBar();
         //浮动按钮
-        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab_add_new_project);
+        mFloatingActionButton = (AddFloatingButton) findViewById(R.id.fab_add_new_project);
         //包含抽屉的根布局
         mDrawerLayout = getDrawerLayout();
         //抽屉控件
         mNavigationView = getNavigationView();
+        mNavigationView.setPadding(0, 0, 0, WidgetUtils.getNavigationBarHeight());
         //加载菜单
         mNavigationView.inflateMenu(R.menu.activity_main_drawer);
         //加载抽屉头部
         mNavigationView.inflateHeaderView(R.layout.nav_header_main);
 
-//        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mFloatingActionButton.getLayoutParams();
-//        lp.bottomMargin = WidgetUtils.getNavigationBarHeight() + ResourcesUtils.getDimensionPixelOffset(R.dimen.fab_margin_bottom);
-//        mFloatingActionButton.setLayoutParams(lp);
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.ViewStubCompat;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -93,6 +94,11 @@ public abstract class TitleBarActivity extends BaseActivity implements TitleImpl
      * 布局加载器
      */
     private LayoutInflater mLayoutInflater;
+
+    /**
+     * 加载弹窗
+     */
+    private LoadingDialogFragment mLoadingDialogFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -329,34 +335,59 @@ public abstract class TitleBarActivity extends BaseActivity implements TitleImpl
 
 
     @Override
-    public void createLoadingdialog() {
+    public synchronized void createLoadingdialog() {
         createLoadingdialog(getString(R.string.loading));
     }
 
     @Override
-    public void createLoadingdialog(String message) {
+    public synchronized void createLoadingdialog(String message) {
         createLoadingdialog(message, true, true);
     }
 
     @Override
-    public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+    public synchronized void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+        createLoadingdialog(message, canelable, touchOutsideCancelable, true);
+    }
+
+    @Override
+    public synchronized void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable, boolean isFullScreen) {
+        Log.i(getTAG(), "createLoadingdialog: " + message);
         if (!isActived()) {
             return;
         }
-        if (mLoadingView != null && !mLoadingView.isShowing()) {
-            mLoadingView.setMessage(message);
-            mLoadingView.show();
+        if (isFullScreen) {
+            if (null != mLoadingDialogFragment) {
+                Log.i(getTAG(), "createLoadingdialog: " + mLoadingDialogFragment);
+                mLoadingDialogFragment.setMessage(message);
+                mLoadingDialogFragment.setCancelable(canelable);
+                mLoadingDialogFragment.setTouchOutsideCancelable(touchOutsideCancelable);
+            } else {
+                mLoadingDialogFragment = LoadingDialogFragment.newInstance(message, canelable, touchOutsideCancelable);
+                mLoadingDialogFragment.show(getSupportFragmentManager(), LoadingDialogFragment.TAG);
+            }
+        } else {
+            if (mLoadingView != null) {
+                mLoadingView.setCancelable(canelable);
+                mLoadingView.setCanceledOnTouchOutside(touchOutsideCancelable);
+                mLoadingView.setMessage(message);
+                mLoadingView.show();
+            }
         }
     }
 
     @Override
-    public void dissmissLoadingDialog() {
+    public synchronized void dissmissLoadingDialog() {
+        Log.i(getTAG(), "dissmissLoadingDialog: ");
         if (!isActived()) {
             return;
         }
         if (mLoadingView != null && mLoadingView.isShowing()) {
             mContentView.setVisibility(View.VISIBLE);
             mLoadingView.hide();
+        }
+        if (null != mLoadingDialogFragment) {
+            mLoadingDialogFragment.dismiss();
+            mLoadingDialogFragment = null;
         }
     }
 

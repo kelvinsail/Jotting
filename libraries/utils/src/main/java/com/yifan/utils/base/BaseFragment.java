@@ -38,11 +38,15 @@ public abstract class BaseFragment extends LifeCycleFragment implements LoadImpl
 
     @Override
     public void createLoadingdialog(String message) {
-
     }
 
     @Override
     public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+
+    }
+
+    @Override
+    public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable, boolean isFullScreen) {
 
     }
 

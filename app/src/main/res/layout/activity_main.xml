@@ -3,9 +3,7 @@
                                                  xmlns:app="http://schemas.android.com/apk/res-auto"
                                                  xmlns:tools="http://schemas.android.com/tools"
                                                  android:layout_width="match_parent"
-                                                 android:layout_height="match_parent"
-                                                 android:fitsSystemWindows="false"
-                                                 tools:context="com.yifan.jotting2.MainActivity">
+                                                 android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/layout_main_content"
@@ -16,7 +14,7 @@
         android:id="@+id/fab_add_new_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|right"
         android:src="@drawable/icon_add"/>
 
 </android.support.design.widget.CoordinatorLayout>

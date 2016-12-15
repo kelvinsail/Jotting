@@ -47,7 +47,7 @@ public abstract class BaseActivity extends LifeCycleActivity implements LoadImpl
 
     @Override
     public void createLoadingdialog() {
-
+        createLoadingdialog();
     }
 
     @Override
@@ -57,6 +57,11 @@ public abstract class BaseActivity extends LifeCycleActivity implements LoadImpl
 
     @Override
     public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable) {
+
+    }
+
+    @Override
+    public void createLoadingdialog(String message, boolean canelable, boolean touchOutsideCancelable, boolean isFullScreen) {
 
     }
 

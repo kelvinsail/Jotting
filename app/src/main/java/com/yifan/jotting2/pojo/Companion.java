@@ -128,14 +128,6 @@ public class Companion implements Parcelable {
         this.rechangeMoney = rechangeMoney;
     }
 
-    public boolean isDefaultPayer() {
-        return isDefaultPayer;
-    }
-
-    public void setDefaultPayer(boolean defaultPayer) {
-        isDefaultPayer = defaultPayer;
-    }
-
     public Long getProjectID() {
         return projectID;
     }

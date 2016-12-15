@@ -10,7 +10,7 @@
         <item name="loading_dialog_progress_bar_style">@style/Loading.ProgressBar</item>
         <item name="loading_dialog_background">@color/background_main</item>
         <item name="loading_dialog_text_color">@color/text_black</item>
-        <item name="loading_dialog_text_size">@dimen/text_small</item>
+        <item name="loading_dialog_text_size">@dimen/base_text_small</item>
         <item name="dialog_measure_button_style">@style/Dialog.Buttons</item>
         <!--<item name="radiobutton_colorlabel">@style/ColorLabelRadioButton</item>-->
         <item name="item_click_background">@drawable/background_item_white2gray</item>
@@ -28,7 +28,7 @@
         <item name="loading_dialog_progress_bar_style">@style/Loading.ProgressBar</item>
         <item name="loading_dialog_background">@drawable/background_loading_dialog_dark</item>
         <item name="loading_dialog_text_color">@color/text_white</item>
-        <item name="loading_dialog_text_size">@dimen/text_small</item>
+        <item name="loading_dialog_text_size">@dimen/base_text_small</item>
         <item name="dialog_measure_button_style">@style/Dialog.Buttons</item>
     </style>
 
@@ -46,7 +46,7 @@
     </style>
 
     <style name="Dialog.Buttons">
-        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:textSize">@dimen/base_text_middle</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:background">?attr/item_default_background</item>
         <item name="android:padding">@dimen/padding_normal</item>
@@ -65,9 +65,17 @@
 
     <style name="TextAppearance"/>
 
+    <style name="TextAppearance.Main">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/base_text_middle</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:minHeight">@dimen/dialog_new_item_name_height</item>
+        <item name="android:gravity">center_vertical|left|</item>
+    </style>
+
     <style name="TextAppearance.Dialog">
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:textSize">@dimen/base_text_middle</item>
         <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:minHeight">@dimen/dialog_new_item_name_height</item>
         <item name="android:maxLines">1</item>
@@ -89,12 +97,12 @@
     <style name="TextAppearance.Dialog.Title">
         <item name="android:layout_height">@dimen/dialog_new_item_title_height</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/text_xxlarge</item>
+        <item name="android:textSize">@dimen/base_text_xxlarge</item>
     </style>
 
     <style name="TextAppearance.EditActions">
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:textSize">@dimen/base_text_middle</item>
         <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:minHeight">48dp</item>
         <item name="android:padding">@dimen/padding_normal</item>
