@@ -27,11 +27,14 @@ greendao {
 }
 
 buildscript {
+
     repositories {
+        jcenter()
         mavenCentral()
     }
+
     dependencies {
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.0.0'
+        classpath 'com.android.tools.build:gradle:2.3.0'
     }
 }
 
@@ -46,7 +49,8 @@ dependencies {
     //圆角图片
     compile 'com.makeramen:roundedimageview:2.2.1'
     //数据库
-    compile 'org.greenrobot:greendao:3.0.1'
-    compile 'org.greenrobot:greendao-generator:3.0.0'
+    compile 'org.greenrobot:greendao:3.2.0'
+    //数据库升级辅助工具
+    compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v1.3.0'
     compile project(':libraries:utils')
 }
