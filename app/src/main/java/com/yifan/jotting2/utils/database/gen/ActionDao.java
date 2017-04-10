@@ -22,7 +22,7 @@ public class ActionDao extends AbstractDao<Action, Long> {
     /**
      * Properties of entity Action.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property ProjectID = new Property(1, Long.class, "projectID", false, "PROJECT_ID");
@@ -31,7 +31,7 @@ public class ActionDao extends AbstractDao<Action, Long> {
         public final static Property Date = new Property(4, long.class, "date", false, "DATE");
         public final static Property TotalMoney = new Property(5, double.class, "totalMoney", false, "TOTAL_MONEY");
         public final static Property PayerID = new Property(6, Long.class, "payerID", false, "PAYER_ID");
-    };
+    }
 
 
     public ActionDao(DaoConfig config) {
@@ -168,6 +168,11 @@ public class ActionDao extends AbstractDao<Action, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(Action entity) {
+        return entity.getId() != null;
     }
 
     @Override

@@ -74,11 +74,11 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
-        actionDaoConfig.getIdentityScope().clear();
-        actionAssignsDaoConfig.getIdentityScope().clear();
-        companionDaoConfig.getIdentityScope().clear();
-        inventoryDaoConfig.getIdentityScope().clear();
-        projectDaoConfig.getIdentityScope().clear();
+        actionDaoConfig.clearIdentityScope();
+        actionAssignsDaoConfig.clearIdentityScope();
+        companionDaoConfig.clearIdentityScope();
+        inventoryDaoConfig.clearIdentityScope();
+        projectDaoConfig.clearIdentityScope();
     }
 
     public ActionDao getActionDao() {

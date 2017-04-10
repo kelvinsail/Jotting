@@ -22,14 +22,14 @@ public class ActionAssignsDao extends AbstractDao<ActionAssigns, Long> {
     /**
      * Properties of entity ActionAssigns.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property ActionID = new Property(1, Long.class, "actionID", false, "ACTION_ID");
         public final static Property CompanionID = new Property(2, Long.class, "companionID", false, "COMPANION_ID");
         public final static Property PayMoney = new Property(3, double.class, "payMoney", false, "PAY_MONEY");
         public final static Property CompanionName = new Property(4, String.class, "companionName", false, "COMPANION_NAME");
-    };
+    }
 
 
     public ActionAssignsDao(DaoConfig config) {
@@ -148,6 +148,11 @@ public class ActionAssignsDao extends AbstractDao<ActionAssigns, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(ActionAssigns entity) {
+        return entity.getId() != null;
     }
 
     @Override

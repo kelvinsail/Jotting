@@ -41,7 +41,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      * @param throwable
      * @return
      */
-    private boolean handleException(final Throwable throwable) {
+    private boolean handleException(Throwable throwable) {
         if (BaseApplication.DEBUG) {
             //保存异常
             return FileUtils.printDataToFile("log", "log", getCrashInfo(throwable));

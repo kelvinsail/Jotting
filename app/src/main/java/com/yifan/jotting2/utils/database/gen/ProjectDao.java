@@ -22,7 +22,7 @@ public class ProjectDao extends AbstractDao<Project, Long> {
     /**
      * Properties of entity Project.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property ProjectType = new Property(1, int.class, "projectType", false, "PROJECT_TYPE");
@@ -32,7 +32,7 @@ public class ProjectDao extends AbstractDao<Project, Long> {
         public final static Property StartTime = new Property(5, long.class, "startTime", false, "START_TIME");
         public final static Property ModifyTime = new Property(6, long.class, "modifyTime", false, "MODIFY_TIME");
         public final static Property IsEnded = new Property(7, boolean.class, "isEnded", false, "IS_ENDED");
-    };
+    }
 
 
     public ProjectDao(DaoConfig config) {
@@ -158,6 +158,11 @@ public class ProjectDao extends AbstractDao<Project, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(Project entity) {
+        return entity.getId() != null;
     }
 
     @Override

@@ -22,7 +22,7 @@ public class CompanionDao extends AbstractDao<Companion, Long> {
     /**
      * Properties of entity Companion.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
@@ -30,7 +30,7 @@ public class CompanionDao extends AbstractDao<Companion, Long> {
         public final static Property RechangeMoney = new Property(3, double.class, "rechangeMoney", false, "RECHANGE_MONEY");
         public final static Property IsDefaultPayer = new Property(4, boolean.class, "isDefaultPayer", false, "IS_DEFAULT_PAYER");
         public final static Property ProjectID = new Property(5, Long.class, "projectID", false, "PROJECT_ID");
-    };
+    }
 
 
     public CompanionDao(DaoConfig config) {
@@ -154,6 +154,11 @@ public class CompanionDao extends AbstractDao<Companion, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(Companion entity) {
+        return entity.getId() != null;
     }
 
     @Override

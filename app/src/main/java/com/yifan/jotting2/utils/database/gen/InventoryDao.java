@@ -22,7 +22,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
     /**
      * Properties of entity Inventory.<br/>
      * Can be used for QueryBuilder and for referencing column names.
-    */
+     */
     public static class Properties {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
@@ -33,7 +33,7 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         public final static Property IsChecked = new Property(6, boolean.class, "isChecked", false, "IS_CHECKED");
         public final static Property LabelColor = new Property(7, int.class, "labelColor", false, "LABEL_COLOR");
         public final static Property ProjectID = new Property(8, long.class, "projectID", false, "PROJECT_ID");
-    };
+    }
 
 
     public InventoryDao(DaoConfig config) {
@@ -164,6 +164,11 @@ public class InventoryDao extends AbstractDao<Inventory, Long> {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public boolean hasKey(Inventory entity) {
+        return entity.getId() != null;
     }
 
     @Override

@@ -146,7 +146,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
                                     mData.remove(i);
                                 }
                                 //在UI线程执行刷新代码
-                                runOnUiThread(new Runnable() {
+                                mInventoriesListView.post(new Runnable() {
                                     @Override
                                     public void run() {
                                         mAdapter.notifyDataSetChanged();
