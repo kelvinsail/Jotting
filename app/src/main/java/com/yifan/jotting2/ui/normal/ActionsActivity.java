@@ -3,6 +3,7 @@ package com.yifan.jotting2.ui.normal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -10,6 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yifan.jotting2.pojo.Companion;
+import com.yifan.jotting2.utils.IntentUtils;
+import com.yifan.jotting2.utils.database.datahalper.CompanionDataHelper;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
 import com.yifan.utils.base.widget.BaseRecyclerHolder;
@@ -35,7 +39,7 @@ public class ActionsActivity extends TitleBarActivity implements
     /**
      * Activity请求码
      */
-    private static final int REQUEST_CODE_COMPANIONS = 0x001;
+    public static final int REQUEST_CODE_COMPANIONS = 0x001;
 
     /**
      * 添加新活动按钮
@@ -62,6 +66,11 @@ public class ActionsActivity extends TitleBarActivity implements
      */
     private List<Action> mData;
 
+    /**
+     * 项目同伴数据数组
+     */
+    private List<Companion> mCompanionsList;
+
     @Override
     public String getTAG() {
         return TAG;
@@ -75,6 +84,12 @@ public class ActionsActivity extends TitleBarActivity implements
         if (null != getIntent()) {
             mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
         }
+        //获取同伴列表数据
+        mCompanionsList = CompanionDataHelper.getInstance().getAllCompanionForProject(mProject.getId());
+        if (null == mCompanionsList) {
+            mCompanionsList = new ArrayList<>();
+        }
+        //设置界面
         setContentView(R.layout.activity_normal_project, 0, false);
     }
 
@@ -108,11 +123,17 @@ public class ActionsActivity extends TitleBarActivity implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fab_add_new_action:
-                Intent intent = new Intent();
-                intent.setClass(this, EditActionActivity.class);
-                intent.putExtra(Constans.BUNDLE_KEY_PROJECT, mProject);
-//                intent.putExtra(Constans.BUNDLE_KEY_ACTION, null);
-                startActivity(intent);
+                if (null != mCompanionsList && mCompanionsList.size() > 0) {
+                    IntentUtils.openActionEditPage(ActionsActivity.this, mProject);
+                } else {
+                    Snackbar.make(mNewActionButton, R.string.not_companions, Snackbar.LENGTH_SHORT)
+                            .setAction(R.string.add_new, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    IntentUtils.openProjectCompanionsPage(ActionsActivity.this, mProject);
+                                }
+                            }).show();
+                }
                 break;
         }
     }
@@ -127,9 +148,7 @@ public class ActionsActivity extends TitleBarActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_companions:
-                Intent intent = new Intent(this, CompanionActivity.class);
-                intent.putExtra(Constans.BUNDLE_KEY_PROJECT, mProject);
-                startActivityForResult(intent, REQUEST_CODE_COMPANIONS);
+                IntentUtils.openProjectCompanionsPage(ActionsActivity.this, mProject);
                 break;
         }
         return super.onOptionsItemSelected(item);

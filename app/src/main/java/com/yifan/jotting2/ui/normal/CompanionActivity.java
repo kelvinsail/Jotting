@@ -39,7 +39,7 @@ import java.util.Observer;
  * Created by yifan on 2016/11/7.
  */
 public class CompanionActivity extends TitleBarActivity implements
-        View.OnClickListener, Observer,BaseRecyclerAdapter.OnItemClickListener {
+        View.OnClickListener, Observer, BaseRecyclerAdapter.OnItemClickListener {
 
     private static final String TAG = "CompanionActivity";
 
@@ -78,7 +78,7 @@ public class CompanionActivity extends TitleBarActivity implements
         super.onCreate(savedInstanceState);
         //初始化数据数组
         mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
-        mData = CompanionDataHelper.getInstance().query(999, String.valueOf(mProject.getId()));
+        mData = CompanionDataHelper.getInstance().getAllCompanionForProject(mProject.getId());
         //设置界面
         setContentView(R.layout.activity_companion, 0, false);
         CompanionDataHelper.getInstance().regesiterDataObserver(this);

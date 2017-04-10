@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -125,9 +126,7 @@ public class MainActivity extends TitleBarActivity
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NewProjectDialog dialog = NewProjectDialog.newInstance();
-                dialog.show(getSupportFragmentManager(), NewProjectDialog.TAG);
-
+                showAddNewProjectDialog();
             }
         });
         //抽屉控件
@@ -138,6 +137,14 @@ public class MainActivity extends TitleBarActivity
         mNavigationView.setNavigationItemSelectedListener(this);
         //设置首页
         switchFragment(INTENT_MAIN_ACTION_PROJECTS);
+    }
+
+    /**
+     * 展示创建新项目弹窗
+     */
+    private void showAddNewProjectDialog() {
+        NewProjectDialog dialog = NewProjectDialog.newInstance();
+        dialog.show(getSupportFragmentManager(), NewProjectDialog.TAG);
     }
 
     @Override
@@ -210,6 +217,17 @@ public class MainActivity extends TitleBarActivity
                 break;
             case R.id.nav_main_file_manager:
                 switchFragment(INTENT_MAIN_ACTION_FILES);
+                break;
+            case R.id.nav_menu_function_new:
+                getContentView().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showAddNewProjectDialog();
+                    }
+                }, 150);
+                break;
+            default:
+                Snackbar.make(mFloatingActionButton, "function is developing...", Snackbar.LENGTH_SHORT).show();
                 break;
         }
 

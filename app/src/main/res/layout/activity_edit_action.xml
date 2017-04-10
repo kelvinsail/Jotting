@@ -8,6 +8,10 @@
     <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/padding_normal"
+        android:paddingLeft="@dimen/padding_large"
+        android:paddingRight="@dimen/padding_large"
+        android:paddingTop="@dimen/padding_normal"
         app:columnCount="3">
 
         <TextView
@@ -16,6 +20,7 @@
             app:layout_columnSpan="1"/>
 
         <EditText
+            android:id="@+id/et_edit_action_name"
             style="@style/TextAppearance.EditActions"
             android:hint="@string/action_name_input_hint"
             app:layout_columnSpan="2"
@@ -27,6 +32,7 @@
             app:layout_columnSpan="1"/>
 
         <EditText
+            android:id="@+id/et_edit_action_time"
             style="@style/TextAppearance.EditActions"
             android:hint="@string/action_time_input_hint"
             app:layout_columnSpan="2"
@@ -38,12 +44,14 @@
             app:layout_columnSpan="1"/>
 
         <EditText
+            android:id="@+id/et_edit_action_momey"
             style="@style/TextAppearance.EditActions"
             android:hint="@string/action_money_input_hint"
             app:layout_columnSpan="1"
             app:layout_columnWeight="1"/>
 
         <Spinner
+            android:id="@+id/sp_edit_action_pay_type"
             android:entries="@array/price_type"
             android:minWidth="108dp"
             android:spinnerMode="dropdown"
@@ -55,11 +63,11 @@
             app:layout_columnSpan="1"/>
 
         <EditText
+            android:id="@+id/et_edit_action_payer"
             style="@style/TextAppearance.EditActions"
             android:hint="@string/action_payer_input_hint"
             app:layout_columnSpan="2"
             app:layout_columnWeight="2"/>
-
 
         <TextView
             style="@style/TextAppearance.EditActions.Tips"

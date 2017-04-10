@@ -3,6 +3,8 @@ package com.yifan.jotting2.ui.normal;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Action;
@@ -47,5 +49,29 @@ public class EditActionActivity extends TitleBarActivity {
         } else {
             setTitle(R.string.edit_action);
         }
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_edit_action, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_edit_save) {
+            saveData();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * 保存数据
+     */
+    private void saveData() {
+        finish();
     }
 }

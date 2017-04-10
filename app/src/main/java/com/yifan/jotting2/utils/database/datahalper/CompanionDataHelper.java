@@ -12,6 +12,8 @@ import org.greenrobot.greendao.query.QueryBuilder;
 import java.util.List;
 
 /**
+ * 普通项目同伴数据库 数据管理工具
+ *
  * Created by yifan on 2016/11/6.
  */
 public class CompanionDataHelper extends DataHelper<Companion> {
@@ -86,5 +88,16 @@ public class CompanionDataHelper extends DataHelper<Companion> {
     @Override
     public AbstractDao getDao() {
         return DataBaseManager.getInstance().getCompanionDao();
+    }
+
+
+    /**
+     * 根据项目id查询所有同伴数据
+     *
+     * @param projectID 项目id
+     * @return
+     */
+    public List<Companion> getAllCompanionForProject(long projectID) {
+        return query(Integer.MAX_VALUE, String.valueOf(projectID));
     }
 }

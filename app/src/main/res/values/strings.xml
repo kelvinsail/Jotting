@@ -5,6 +5,7 @@
     <string name="app_name">Jotting2</string>
     <string name="measure">确定</string>
     <string name="confirm">确认</string>
+    <string name="save">保存</string>
     <string name="cancel">取消</string>
     <string name="add_new">添加</string>
     <string name="next">下一个</string>
@@ -79,6 +80,7 @@
 
     <!-- 普通项目活动列表 -->
     <string name="my_companions">活动成员</string>
+    <string name="not_companions">请先添加活动成员</string>
 
     <!-- 成员列表 -->
     <string name="new_companion">添加成员</string>
