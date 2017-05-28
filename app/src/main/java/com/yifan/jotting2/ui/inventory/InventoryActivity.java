@@ -4,29 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 
+import com.yifan.jotting2.utils.EventBusManager;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
-import com.yifan.utils.base.widget.BaseRecyclerHolder;
-import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.InventoriesDataHelper;
+import com.yifan.jotting2.model.InventoriesModel;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 清单列表界面
@@ -34,7 +31,7 @@ import java.util.Observer;
  * Created by yifan on 2016/9/21.
  */
 public class InventoryActivity extends TitleBarActivity implements BaseRecyclerAdapter.OnItemClickListener,
-        BaseRecyclerAdapter.OnItemLongClickListener, Observer {
+        BaseRecyclerAdapter.OnItemLongClickListener {
 
     public static final String TAG = "InventoryActivity";
 
@@ -67,18 +64,24 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBusManager.register(this);
         mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
-        mData = InventoriesDataHelper.getInstance().query(100, String.valueOf(null != mProject ? mProject.getId() : 0));
+        mData = InventoriesModel.getInstance().query(100, String.valueOf(null != mProject ? mProject.getId() : 0));
         mInventoriesListView = new RecyclerView(this);
         setContentView(mInventoriesListView, 0, false);
-        InventoriesDataHelper.getInstance().regesiterDataObserver(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBusManager.unregister(this);
     }
 
     @Override
     public void initView() {
         super.initView();
         setTitle(mProject.getProjectName());
-        mAdapter = new IncentoriesAdapter();
+        mAdapter = new IncentoriesAdapter(mData);
         mInventoriesListView.setBackgroundResource(R.color.background_main);
         mInventoriesListView.setLayoutManager(new LinearLayoutManager(this));
         mInventoriesListView.setAdapter(mAdapter);
@@ -112,10 +115,9 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
         }
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (null != arg && arg instanceof DataEvent && null != ((DataEvent) arg).data) {
-            DataEvent event = (DataEvent) arg;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void update(DataEvent event) {
+        if (null != event && null != event.data) {
             switch (event.action) {
                 case DataEvent.ALERT_ACTION_INSERT:
                     if (event.data instanceof Inventory) {
@@ -125,12 +127,7 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
                         mData.addAll(((List) event.data));
                     }
                     //在UI线程执行刷新代码
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mAdapter.notifyDataSetChanged();
-                        }
-                    });
+                    mAdapter.refresh();
                     break;
                 //                case DataEvent.ALERT_ACTION_ALERT:
                 //                case DataEvent.ALERT_ACTION_DELETE:
@@ -145,16 +142,10 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
                                 } else if (event.action == DataEvent.ALERT_ACTION_DELETE) {
                                     mData.remove(i);
                                 }
-                                //在UI线程执行刷新代码
-                                mInventoriesListView.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mAdapter.notifyDataSetChanged();
-                                    }
-                                });
                             }
-
                         }
+                        //在UI线程执行刷新代码
+                        mAdapter.refresh();
                     }
                     break;
             }
@@ -171,100 +162,5 @@ public class InventoryActivity extends TitleBarActivity implements BaseRecyclerA
         return false;
     }
 
-    /**
-     * 清单列表数据适配器
-     */
-    private class IncentoriesAdapter extends BaseRecyclerAdapter<IncentoriesAdapter.BaseHolder> implements CompoundButton.OnCheckedChangeListener {
 
-        /**
-         * 布局加载器
-         */
-        LayoutInflater mLayoutInflater;
-
-        public IncentoriesAdapter() {
-            this.mLayoutInflater = LayoutInflater.from(InventoryActivity.this);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData.size();
-        }
-
-        @Override
-        public BaseHolder onCreate(ViewGroup parent, int viewType) {
-            BaseHolder holder = new BaseHolder(mLayoutInflater.inflate(R.layout.item_inventory, parent, false));
-            ((CheckBox) holder.itemView.findViewById(R.id.cb_inventory)).setOnCheckedChangeListener(this);
-            return holder;
-        }
-
-        @Override
-        public void onBind(BaseHolder viewHolder, int realPosition) {
-            viewHolder.setData(mData.get(realPosition));
-        }
-
-        @Override
-        public int getRealItemCount() {
-            return mData.size();
-        }
-
-        @Override
-        public BaseHolder getFakeHolder(View view) {
-            return new BaseHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(BaseHolder holder, int position) {
-            super.onBindViewHolder(holder, position);
-        }
-
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (null != buttonView && null != buttonView.getParent()) {
-                int position = BaseRecyclerHolder.getPositionFroView((View) buttonView.getParent());
-                if (position >= 0) {
-                    Inventory inventory = mData.get(position);
-                    inventory.setChecked(isChecked);
-                    InventoriesDataHelper.getInstance().alert(inventory);
-                }
-            }
-        }
-
-        /**
-         * ViewHolder基类
-         */
-        class BaseHolder extends BaseRecyclerHolder {
-
-            /**
-             * 文本以及选中状态展示控件
-             */
-            CheckBox mCheckView;
-
-            /**
-             * 颜色标签控件
-             */
-            View mLabelView;
-
-            public BaseHolder(View itemView) {
-                super(itemView);
-                mCheckView = (CheckBox) itemView.findViewById(R.id.cb_inventory);
-                mLabelView = itemView.findViewById(R.id.view_inventory_tag);
-            }
-
-            /**
-             * 设置数据
-             *
-             * @param inventory
-             */
-            public void setData(Inventory inventory) {
-                mCheckView.setText(inventory.getName());
-                mCheckView.setChecked(inventory.isChecked());
-                if (inventory.getLabelColor() == 0) {
-                    //mLabelColors[Integer.valueOf((int) (Math.random()*mLabelColors.length))]
-                    inventory.setLabelColor(ResourcesUtils.getColor(R.color.label_cyan));
-                    InventoriesDataHelper.getInstance().alert(inventory);
-                }
-                mLabelView.setBackgroundColor(inventory.getLabelColor());
-            }
-        }
-    }
 }

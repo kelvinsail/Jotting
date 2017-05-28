@@ -1,14 +1,18 @@
 package com.yifan.jotting2.ui.projects;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.widget.Toast;
 
-import com.yifan.utils.base.BaseAsyncTask;
+import com.yifan.jotting2.base.impl.IView;
+import com.yifan.jotting2.presenter.ProjectPresenter;
+import com.yifan.utils.base.BaseDialogFragment;
 import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Project;
-import com.yifan.jotting2.task.DeleteProjectTask;
-import com.yifan.jotting2.ui.ConfirmDialog;
+import com.yifan.jotting2.ui.dialog.ConfirmDialog;
 import com.yifan.jotting2.utils.Constans;
+
 
 import java.lang.ref.WeakReference;
 
@@ -18,19 +22,11 @@ import java.lang.ref.WeakReference;
  * Created by yifan on 2016/10/30.
  */
 public class DeleteProjectDialog extends ConfirmDialog
-        implements ConfirmDialog.OnMeasureClickListener {
+        implements ConfirmDialog.OnConfirmClickListener {
 
     public static final String TAG = "DeleteProjectDialog";
 
-    /**
-     * 删除项目所有数据 异步任务
-     */
-    private DeleteProjectTask mTask;
-
-    /**
-     * 删除项目所有数据 异步任务监听
-     */
-    private OnDeleteProjectListener mListener;
+    private ProjectPresenter mPresenter;
 
     public static DeleteProjectDialog newInstance(Project project) {
         Bundle args = new Bundle();
@@ -45,72 +41,24 @@ public class DeleteProjectDialog extends ConfirmDialog
     }
 
     @Override
-    public boolean onMeasure() {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public boolean onConfirm() {
         if (null != getArguments()) {
             Project project = getArguments().getParcelable(Constans.BUNDLE_KEY_DATA);
             if (null != project) {
                 setCancelable(false);
-                if (null != mTask) {
-                    mTask.cancel(true);
-                    mTask = null;
+                if (null == mPresenter) {
+                    mPresenter = new ProjectPresenter(new ProjectDialogView(new WeakReference<BaseDialogFragment>(this)));
                 }
-                if (null == mListener) {
-                    mListener = new OnDeleteProjectListener(new WeakReference<DeleteProjectDialog>(this));
-                }
-                mTask = new DeleteProjectTask();
-                mTask.setOnAsyncListener(mListener);
-                mTask.asyncExecute(project);
+                mPresenter.deleteProjects(project);
                 return true;
             }
         }
         return false;
     }
 
-    /**
-     * 删除项目异步任务监听
-     */
-    private static class OnDeleteProjectListener implements BaseAsyncTask.OnAsyncListener {
-
-        /**
-         * 弹窗引用
-         */
-        private WeakReference<DeleteProjectDialog> mDialog;
-
-        public OnDeleteProjectListener(WeakReference<DeleteProjectDialog> dialog) {
-            this.mDialog = dialog;
-        }
-
-        @Override
-        public void onAsyncSuccess(Object data) {
-            if (null != mDialog.get()) {
-                if (null != data && data instanceof Boolean) {
-                    mDialog.get().setCancelable(true);
-                    if ((Boolean) data) {
-                        mDialog.get().dismiss();
-                    } else {
-                        onAsyncFail();
-                    }
-                }
-            }
-        }
-
-        @Override
-        public void onAsyncFail() {
-
-        }
-
-        @Override
-        public void onAsyncCancelled() {
-
-        }
-
-        @Override
-        public void onAsyncStart() {
-
-        }
-
-        @Override
-        public void onAsyncCompleted() {
-        }
-    }
 }

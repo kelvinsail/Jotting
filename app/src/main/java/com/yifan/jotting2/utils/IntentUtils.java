@@ -3,9 +3,8 @@ package com.yifan.jotting2.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
-import com.yifan.jotting2.MainActivity;
+import com.yifan.jotting2.ui.MainActivity;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.inventory.InventoryActivity;
 import com.yifan.jotting2.ui.normal.ActionsActivity;

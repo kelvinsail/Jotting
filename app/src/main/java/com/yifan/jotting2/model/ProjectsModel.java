@@ -1,10 +1,8 @@
-package com.yifan.jotting2.utils.database.datahalper;
+package com.yifan.jotting2.model;
 
-import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.database.DataBaseManager;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelpObservable;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
+import com.yifan.jotting2.utils.database.datahalper.DataHelper;
 import com.yifan.jotting2.utils.database.gen.ProjectDao;
 
 import java.util.List;
@@ -14,39 +12,20 @@ import java.util.List;
  *
  * Created by yifan on 2016/7/20.
  */
-public class ProjectsDataHelp extends DataHelper<Project> {
+public class ProjectsModel extends DataHelper<Project> {
 
     private static class ProjectHelp {
 
-        public static ProjectsDataHelp mInstance = new ProjectsDataHelp();
+        public static ProjectsModel mInstance = new ProjectsModel();
 
     }
 
-    public static ProjectsDataHelp getInstance() {
+    public static ProjectsModel getInstance() {
         return ProjectHelp.mInstance;
     }
 
-    private ProjectsDataHelp() {
+    private ProjectsModel() {
         super();
-    }
-
-    /**
-     * 插入新的项目
-     *
-     * @param projectType
-     * @param projectName
-     * @param description
-     * @param totalMoney
-     * @param startTime
-     * @param modifyTime
-     * @param isEnded
-     */
-    public void insertNewData(int projectType, String projectName, String description,
-                              double totalMoney, long startTime, long modifyTime, boolean isEnded) {
-        //插入数据
-        Project project = new Project(null, projectType,
-                projectName, description, totalMoney, startTime, modifyTime, isEnded);
-        insert(project);
     }
 
     @Override
@@ -55,9 +34,6 @@ public class ProjectsDataHelp extends DataHelper<Project> {
         if (null != project) {
             id = getDao().insert(project);
             project.setId(id);
-            //通知所有观察者
-            notifyDataChanged(project);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, project));
         }
         return id;
     }
@@ -72,7 +48,6 @@ public class ProjectsDataHelp extends DataHelper<Project> {
                 ids[i] = getDao().insert(project);
                 project.setId(ids[i]);
             }
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, projects));
         }
         return ids;
     }
@@ -81,7 +56,6 @@ public class ProjectsDataHelp extends DataHelper<Project> {
     public void delete(Project project) {
         if (null != project) {
             getDao().delete(project);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, project));
         }
     }
 
@@ -89,8 +63,6 @@ public class ProjectsDataHelp extends DataHelper<Project> {
     public void alert(Project project) {
         if (null != project) {
             getDao().update(project);
-            notifyDataChanged(project);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, project));
         }
     }
 

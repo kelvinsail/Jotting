@@ -1,4 +1,4 @@
-package com.yifan.jotting2.ui;
+package com.yifan.jotting2.ui.file;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

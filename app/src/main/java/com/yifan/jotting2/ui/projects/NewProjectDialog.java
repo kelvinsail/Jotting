@@ -11,10 +11,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yifan.jotting2.base.impl.IView;
+import com.yifan.jotting2.presenter.ProjectPresenter;
+import com.yifan.utils.base.BaseDialogFragment;
 import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
-import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
+
+import java.lang.ref.WeakReference;
 
 /**
  * 新建项目弹窗
@@ -132,14 +136,16 @@ public class NewProjectDialog extends BaseMeasureDialog implements View.OnClickL
                         totalMoney = String.valueOf(0);
                     }
                     //插入数据
-                    ProjectsDataHelp.getInstance().insertNewData(mProjectTypeSpinner.getSelectedItemPosition()
-                            , mProjectNameEdit.getText().toString(), null, Double.valueOf(totalMoney),
-                            System.currentTimeMillis(), System.currentTimeMillis(), false);
+                    new ProjectPresenter(new ProjectDialogView(new WeakReference<BaseDialogFragment>(this)))
+                            .addProject(mProjectTypeSpinner.getSelectedItemPosition()
+                                    , mProjectNameEdit.getText().toString(), null, Double.valueOf(totalMoney),
+                                    System.currentTimeMillis(), System.currentTimeMillis(), false);
                 }
                 break;
             case R.id.dialog_button_cancel:
+                dismiss();
                 break;
         }
-        dismiss();
     }
+
 }

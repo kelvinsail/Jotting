@@ -11,7 +11,7 @@ import com.yifan.utils.widget.TitleBar;
  *
  * Created by yifan on 2016/7/18.
  */
-public interface TitleImpl {
+public interface Title {
 
     /**
      * 获取TitleBar对象

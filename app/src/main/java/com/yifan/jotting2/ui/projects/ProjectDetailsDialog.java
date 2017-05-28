@@ -10,7 +10,7 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.widget.RadiusLayout;
+import com.yifan.jotting2.ui.widget.RadiusLayout;
 
 /**
  * 项目详情Dialog

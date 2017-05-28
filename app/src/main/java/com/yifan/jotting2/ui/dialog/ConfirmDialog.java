@@ -1,4 +1,4 @@
-package com.yifan.jotting2.ui;
+package com.yifan.jotting2.ui.dialog;
 
 import android.os.Bundle;
 import android.view.View;
@@ -32,7 +32,7 @@ public class ConfirmDialog extends BaseMeasureDialog implements View.OnClickList
     /**
      * 确认按钮点击事件监听
      */
-    private OnMeasureClickListener mListener;
+    private OnConfirmClickListener mListener;
 
     @Override
     public String getTAG() {
@@ -72,7 +72,7 @@ public class ConfirmDialog extends BaseMeasureDialog implements View.OnClickList
         switch (v.getId()) {
             case R.id.dialog_button_measure:
                 if (null != mListener) {
-                    if (mListener.onMeasure()) {
+                    if (mListener.onConfirm()) {
                         return;
                     }
                 }
@@ -88,18 +88,18 @@ public class ConfirmDialog extends BaseMeasureDialog implements View.OnClickList
      *
      * @param listener
      */
-    public void setOnMeasureClickListener(OnMeasureClickListener listener) {
+    public void setOnMeasureClickListener(OnConfirmClickListener listener) {
         this.mListener = listener;
     }
 
     /**
      * 确认按钮点击事件监听
      */
-    public interface OnMeasureClickListener {
+    public interface OnConfirmClickListener {
 
         /**
          * @return true：拦截dialog销毁动作，自行处理l；false：点击之后dialog自动销毁
          */
-        boolean onMeasure();
+        boolean onConfirm();
     }
 }

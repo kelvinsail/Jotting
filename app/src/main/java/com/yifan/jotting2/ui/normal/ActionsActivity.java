@@ -1,6 +1,5 @@
 package com.yifan.jotting2.ui.normal;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.yifan.jotting2.pojo.Companion;
 import com.yifan.jotting2.utils.IntentUtils;
-import com.yifan.jotting2.utils.database.datahalper.CompanionDataHelper;
+import com.yifan.jotting2.model.CompanionModel;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
 import com.yifan.utils.base.widget.BaseRecyclerHolder;
@@ -21,7 +20,7 @@ import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.Action;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.widget.AddFloatingButton;
+import com.yifan.jotting2.ui.widget.AddFloatingButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +84,7 @@ public class ActionsActivity extends TitleBarActivity implements
             mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
         }
         //获取同伴列表数据
-        mCompanionsList = CompanionDataHelper.getInstance().getAllCompanionForProject(mProject.getId());
+        mCompanionsList = CompanionModel.getInstance().getAllCompanionForProject(mProject.getId());
         if (null == mCompanionsList) {
             mCompanionsList = new ArrayList<>();
         }

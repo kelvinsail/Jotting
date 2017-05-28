@@ -9,12 +9,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.yifan.jotting2.base.impl.IView;
+import com.yifan.jotting2.presenter.ProjectPresenter;
 import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
 
 /**
  * Project修改弹窗
@@ -88,6 +89,10 @@ public class AlertProjectDialog extends BaseMeasureDialog implements View.OnClic
         addButton(R.id.dialog_button_cancel, ResourcesUtils.getString(R.string.cancel), this);
         addButton(R.id.dialog_button_measure, ResourcesUtils.getString(R.string.measure), this);
 
+        mNameEdit.setText(mProject.getProjectName());
+        mNameEdit.setSelection(mNameEdit.getText().length());
+        mTotalMoneyEdit.setText(String.valueOf(mProject.getTotalMoney()));
+
         //自动弹出软键盘
         mNameEdit.post(new Runnable() {
             @Override
@@ -97,12 +102,15 @@ public class AlertProjectDialog extends BaseMeasureDialog implements View.OnClic
                 inputManager.showSoftInput(mNameEdit, 0);
             }
         });
+
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_button_cancel:
+                dismiss();
                 break;
             case R.id.dialog_button_measure:
                 String name = mNameEdit.getText().toString();
@@ -114,9 +122,18 @@ public class AlertProjectDialog extends BaseMeasureDialog implements View.OnClic
                 if (!TextUtils.isEmpty(totalMoaney) && mProject.getProjectType() != 2) {
                     mProject.setTotalMoney(Double.valueOf(totalMoaney));
                 }
-                ProjectsDataHelp.getInstance().alert(mProject);
+                new ProjectPresenter(new IView<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean value) {
+                        dismiss();
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                }).alertProject(mProject);
                 break;
         }
-        dismiss();
     }
 }

@@ -1,9 +1,8 @@
-package com.yifan.jotting2;
+package com.yifan.jotting2.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -15,14 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 
-import com.yifan.jotting2.widget.AddFloatingButton;
+import com.yifan.jotting2.R;
+import com.yifan.jotting2.ui.widget.AddFloatingButton;
 import com.yifan.utils.base.BaseFragment;
 import com.yifan.utils.base.TitleBarActivity;
-import com.yifan.jotting2.ui.FilesManagerFragment;
+import com.yifan.jotting2.ui.file.FilesManagerFragment;
 import com.yifan.jotting2.ui.projects.NewProjectDialog;
 import com.yifan.jotting2.ui.projects.ProjectsFragment;
 import com.yifan.utils.utils.WidgetUtils;

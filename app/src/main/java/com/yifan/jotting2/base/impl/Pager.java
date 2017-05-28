@@ -5,7 +5,7 @@ package com.yifan.jotting2.base.impl;
  *
  * Created by yifan on 2016/7/15.
  */
-public interface PagerImpl {
+public interface Pager {
 
     /**
      * 初始化控件

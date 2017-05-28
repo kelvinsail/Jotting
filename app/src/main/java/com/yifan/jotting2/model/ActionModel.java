@@ -1,10 +1,8 @@
-package com.yifan.jotting2.utils.database.datahalper;
+package com.yifan.jotting2.model;
 
 import com.yifan.jotting2.pojo.Action;
-import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.utils.database.DataBaseManager;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelpObservable;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
+import com.yifan.jotting2.utils.database.datahalper.DataHelper;
 import com.yifan.jotting2.utils.database.gen.ActionDao;
 
 import org.greenrobot.greendao.AbstractDao;
@@ -17,19 +15,19 @@ import java.util.List;
  *
  * Created by yifan on 2016/11/6.
  */
-public class ActionDataHelper extends DataHelper<Action>{
+public class ActionModel extends DataHelper<Action>{
 
     private static class ActionHelp {
 
-        public static ActionDataHelper mInstance = new ActionDataHelper();
+        public static ActionModel mInstance = new ActionModel();
 
     }
 
-    public static ActionDataHelper getInstance() {
+    public static ActionModel getInstance() {
         return ActionHelp.mInstance;
     }
 
-    private ActionDataHelper() {
+    private ActionModel() {
         super();
     }
 
@@ -40,7 +38,7 @@ public class ActionDataHelper extends DataHelper<Action>{
         if (null != action) {
             id = getDao().insert(action);
             action.setId(id);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, action));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, action));
         }
         return id;
     }
@@ -55,7 +53,7 @@ public class ActionDataHelper extends DataHelper<Action>{
                 ids[i] = getDao().insert(action);
                 action.setId(ids[i]);
             }
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, actions));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, actions));
         }
         return ids;
     }
@@ -64,7 +62,7 @@ public class ActionDataHelper extends DataHelper<Action>{
     public void delete(Action action) {
         if (null != action) {
             getDao().delete(action);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, action));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, action));
         }
     }
 
@@ -72,7 +70,7 @@ public class ActionDataHelper extends DataHelper<Action>{
     public void alert(Action action) {
         if (null != action) {
             getDao().update(action);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, action));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, action));
         }
     }
 

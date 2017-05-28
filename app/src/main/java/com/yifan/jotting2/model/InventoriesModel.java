@@ -1,9 +1,8 @@
-package com.yifan.jotting2.utils.database.datahalper;
+package com.yifan.jotting2.model;
 
-import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.utils.database.DataBaseManager;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
+import com.yifan.jotting2.utils.database.datahalper.DataHelper;
 import com.yifan.jotting2.utils.database.gen.InventoryDao;
 
 import org.greenrobot.greendao.query.QueryBuilder;
@@ -15,19 +14,19 @@ import java.util.List;
  *
  * Created by yifan on 2016/9/21.
  */
-public class InventoriesDataHelper extends DataHelper<Inventory> {
+public class InventoriesModel extends DataHelper<Inventory> {
 
     private static class InventoriesDataHelp {
 
-        public static InventoriesDataHelper mInstance = new InventoriesDataHelper();
+        public static InventoriesModel mInstance = new InventoriesModel();
 
     }
 
-    public static InventoriesDataHelper getInstance() {
+    public static InventoriesModel getInstance() {
         return InventoriesDataHelp.mInstance;
     }
 
-    private InventoriesDataHelper() {
+    private InventoriesModel() {
         super();
     }
 
@@ -54,7 +53,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
             id = getDao().insert(inventory);
             inventory.setId(id);
             //通知所有观察者
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventory));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventory));
         }
         return id;
     }
@@ -69,7 +68,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
                 ids[i] = getDao().insert(inventory);
                 inventory.setId(ids[i]);
             }
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventories));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, inventories));
         }
         return ids;
     }
@@ -79,7 +78,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
     public void delete(Inventory inventory) {
         if (null != inventory) {
             getDao().delete(inventory);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, inventory));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, inventory));
         }
     }
 
@@ -95,7 +94,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
 //                delete(inventory);
 //            }
             getDao().deleteInTx(list);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, null));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, null));
         }
     }
 
@@ -103,7 +102,7 @@ public class InventoriesDataHelper extends DataHelper<Inventory> {
     public void alert(Inventory inventory) {
         if (null != inventory) {
             getDao().update(inventory);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, inventory));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, inventory));
         }
     }
 

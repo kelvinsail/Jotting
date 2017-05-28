@@ -63,4 +63,5 @@ public abstract class BaseFragment extends LifeCycleFragment implements LoadImpl
     public String getTitleName() {
         return null;
     }
+
 }

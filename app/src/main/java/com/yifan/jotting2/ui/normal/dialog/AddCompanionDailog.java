@@ -15,10 +15,8 @@ import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Companion;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.CompanionDataHelper;
+import com.yifan.jotting2.model.CompanionModel;
 import com.yifan.utils.utils.ResourcesUtils;
-
-import org.w3c.dom.Text;
 
 /**
  * 添加新成员 Dialog
@@ -122,7 +120,7 @@ public class AddCompanionDailog extends BaseMeasureDialog implements View.OnClic
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }
-                CompanionDataHelper.getInstance().insert(companion);
+                CompanionModel.getInstance().insert(companion);
                 break;
         }
         dismiss();

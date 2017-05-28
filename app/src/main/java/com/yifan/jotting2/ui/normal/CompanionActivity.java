@@ -1,10 +1,8 @@
 package com.yifan.jotting2.ui.normal;
 
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,18 +18,19 @@ import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.ui.normal.dialog.AddCompanionDailog;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.CompanionDataHelper;
-import com.yifan.jotting2.widget.AddFloatingButton;
+import com.yifan.jotting2.model.CompanionModel;
+import com.yifan.jotting2.utils.EventBusManager;
+import com.yifan.jotting2.ui.widget.AddFloatingButton;
 import com.yifan.utils.base.TitleBarActivity;
 import com.yifan.utils.base.widget.BaseRecyclerAdapter;
 import com.yifan.utils.base.widget.BaseRecyclerHolder;
 import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.utils.utils.WidgetUtils;
 
-import java.util.ArrayList;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 同伴列表界面
@@ -39,7 +38,7 @@ import java.util.Observer;
  * Created by yifan on 2016/11/7.
  */
 public class CompanionActivity extends TitleBarActivity implements
-        View.OnClickListener, Observer, BaseRecyclerAdapter.OnItemClickListener {
+        View.OnClickListener, BaseRecyclerAdapter.OnItemClickListener {
 
     private static final String TAG = "CompanionActivity";
 
@@ -76,12 +75,12 @@ public class CompanionActivity extends TitleBarActivity implements
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBusManager.register(this);
         //初始化数据数组
         mProject = getIntent().getParcelableExtra(Constans.BUNDLE_KEY_PROJECT);
-        mData = CompanionDataHelper.getInstance().getAllCompanionForProject(mProject.getId());
+        mData = CompanionModel.getInstance().getAllCompanionForProject(mProject.getId());
         //设置界面
         setContentView(R.layout.activity_companion, 0, false);
-        CompanionDataHelper.getInstance().regesiterDataObserver(this);
     }
 
     @Override
@@ -114,7 +113,7 @@ public class CompanionActivity extends TitleBarActivity implements
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        CompanionDataHelper.getInstance().unregesiterDataObserver(this);
+        EventBusManager.unregister(this);
     }
 
     @Override
@@ -127,10 +126,9 @@ public class CompanionActivity extends TitleBarActivity implements
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (null != arg && arg instanceof DataEvent) {
-            DataEvent event = (DataEvent) arg;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void update(DataEvent event) {
+        if (null != event) {
             switch (event.action) {
                 case DataEvent.ALERT_ACTION_INSERT:
                     if (null != event.data && event.data instanceof Companion) {

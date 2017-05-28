@@ -1,6 +1,5 @@
 package com.yifan.jotting2.ui.projects;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yifan.jotting2.ui.normal.ActionsActivity;
+import com.yifan.jotting2.base.impl.IView;
+import com.yifan.jotting2.presenter.ProjectPresenter;
+import com.yifan.jotting2.utils.EventBusManager;
 import com.yifan.jotting2.utils.IntentUtils;
 import com.yifan.utils.base.BaseActivity;
 import com.yifan.utils.base.BaseFragment;
@@ -19,20 +20,21 @@ import com.yifan.utils.utils.WidgetUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.pojo.Project;
-import com.yifan.jotting2.ui.inventory.InventoryActivity;
-import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.ProjectsDataHelp;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * 所有项目列表
  *
  * Created by yifan on 2016/7/16.
  */
-public class ProjectsFragment extends BaseFragment implements Observer, BaseRecyclerAdapter.OnItemClickListener, BaseRecyclerAdapter.OnItemLongClickListener {
+public class ProjectsFragment extends BaseFragment implements
+        BaseRecyclerAdapter.OnItemClickListener, BaseRecyclerAdapter.OnItemLongClickListener {
 
     public static final String TAG = "ProjectsFragment";
 
@@ -51,6 +53,16 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
      */
     List<Project> mList;
 
+    /**
+     * ProjectView接口
+     */
+    IView<List<Project>> mProjectView;
+
+    /**
+     * Project Presenter
+     */
+    ProjectPresenter mProjectPresenter;
+
     public static ProjectsFragment newInstance() {
         return new ProjectsFragment();
     }
@@ -61,9 +73,16 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //获取列表数据
-        mList = ProjectsDataHelp.getInstance().query(999);
-        ProjectsDataHelp.getInstance().regesiterDataObserver(this);
+        EventBusManager.register(this);
+        mList = new ArrayList<>();
+        mProjectView = new ProjectListView(new WeakReference<ProjectsFragment>(this));
+        mProjectPresenter = new ProjectPresenter(mProjectView);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EventBusManager.unregister(this);
     }
 
     @Nullable
@@ -86,6 +105,7 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
             mProjectsAdapter.setOnItemClickListener(this);
             mProjectsAdapter.setOnItemLongClickListener(this);
         }
+        mProjectPresenter.loadProjectList(0, Integer.MAX_VALUE);
     }
 
     @Override
@@ -105,14 +125,12 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
 
     @Override
     public void onDestroy() {
-        ProjectsDataHelp.getInstance().unregesiterDataObserver(this);
         super.onDestroy();
     }
 
-    @Override
-    public void update(Observable observable, Object arg) {
-        if (null != arg && arg instanceof DataEvent && null != ((DataEvent) arg).data) {
-            DataEvent event = (DataEvent) arg;
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void update(DataEvent event) {
+        if (null != event && null != event.data) {
             switch (event.action) {
                 case DataEvent.ALERT_ACTION_INSERT:
                     if (event.data instanceof Project) {
@@ -122,12 +140,7 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                         mList.addAll(((List) event.data));
                     }
                     //在UI线程执行刷新代码
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mProjectsAdapter.notifyDataSetChanged();
-                        }
-                    });
+                    mProjectsAdapter.notifyDataSetChanged();
                     break;
                 default:
                     if (event.data instanceof Project) {
@@ -141,14 +154,8 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
                                     mList.remove(i);
                                 }
                                 //在UI线程执行刷新代码
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mProjectsAdapter.notifyDataSetChanged();
-                                    }
-                                });
+                                mProjectsAdapter.notifyDataSetChanged();
                             }
-
                         }
                     }
                     break;
@@ -171,5 +178,70 @@ public class ProjectsFragment extends BaseFragment implements Observer, BaseRecy
             return true;
         }
         return false;
+    }
+
+    /**
+     * Projects列表界面View接口
+     */
+    private static class ProjectListView implements IView<List<Project>> {
+
+        private WeakReference<ProjectsFragment> mFragment;
+
+        /**
+         * 是否为刷新界面
+         */
+        private boolean isRefresh;
+
+        public ProjectListView(WeakReference<ProjectsFragment> fragment) {
+            this.mFragment = fragment;
+            this.isRefresh = true;
+        }
+
+        @Override
+        public void onSuccess(List<Project> object) {
+            if (null != mFragment && null != mFragment.get()) {
+                if (null != object && object.size() > 0) {//有数据
+                    //
+                    if (isRefresh && null != mFragment.get().mList) {
+                        mFragment.get().mList.clear();
+                    } else if (null == mFragment.get().mList) {
+                        mFragment.get().mList = new ArrayList<>();
+                    }
+                    mFragment.get().mList.addAll(object);
+                    if (null == mFragment.get().mProjectsAdapter) {
+                        mFragment.get().mProjectsAdapter = new ProjectsAdapter(
+                                mFragment.get().getActivity(), mFragment.get().mList);
+                        mFragment.get().mListView.setAdapter(mFragment.get().mProjectsAdapter);
+                    } else {
+                        mFragment.get().mProjectsAdapter.notifyDataSetChanged();
+                    }
+                } else {//无数据
+
+                }
+            }
+        }
+
+        @Override
+        public void onError(Throwable error) {
+
+        }
+
+        /**
+         * 是否刷新
+         *
+         * @param refresh
+         */
+        public void setRefresh(boolean refresh) {
+            isRefresh = refresh;
+        }
+
+        /**
+         * 是否刷新
+         *
+         * @return
+         */
+        public boolean isRefresh() {
+            return isRefresh;
+        }
     }
 }

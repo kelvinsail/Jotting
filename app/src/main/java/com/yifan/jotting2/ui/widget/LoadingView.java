@@ -1,4 +1,4 @@
-package com.yifan.jotting2.widget;
+package com.yifan.jotting2.ui.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

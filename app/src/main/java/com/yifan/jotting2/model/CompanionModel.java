@@ -1,9 +1,8 @@
-package com.yifan.jotting2.utils.database.datahalper;
+package com.yifan.jotting2.model;
 
 import com.yifan.jotting2.pojo.Companion;
-import com.yifan.jotting2.pojo.DataEvent;
 import com.yifan.jotting2.utils.database.DataBaseManager;
-import com.yifan.jotting2.utils.database.datahalper.impl.DataHelper;
+import com.yifan.jotting2.utils.database.datahalper.DataHelper;
 import com.yifan.jotting2.utils.database.gen.CompanionDao;
 
 import org.greenrobot.greendao.AbstractDao;
@@ -16,19 +15,19 @@ import java.util.List;
  *
  * Created by yifan on 2016/11/6.
  */
-public class CompanionDataHelper extends DataHelper<Companion> {
+public class CompanionModel extends DataHelper<Companion> {
 
     private static class CompanionHelper {
 
-        public static CompanionDataHelper mInstance = new CompanionDataHelper();
+        public static CompanionModel mInstance = new CompanionModel();
 
     }
 
-    public static CompanionDataHelper getInstance() {
+    public static CompanionModel getInstance() {
         return CompanionHelper.mInstance;
     }
 
-    public CompanionDataHelper() {
+    public CompanionModel() {
         super();
     }
 
@@ -38,7 +37,7 @@ public class CompanionDataHelper extends DataHelper<Companion> {
         if (null != companion) {
             id = getDao().insert(companion);
             companion.setId(id);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, companion));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, companion));
         }
         return id;
     }
@@ -53,7 +52,7 @@ public class CompanionDataHelper extends DataHelper<Companion> {
                 ids[i] = getDao().insert(companion);
                 companion.setId(ids[i]);
             }
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, companions));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_INSERT, companions));
         }
         return ids;
     }
@@ -62,7 +61,7 @@ public class CompanionDataHelper extends DataHelper<Companion> {
     public void delete(Companion companion) {
         if (null != companion) {
             getDao().delete(companion);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, companion));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_DELETE, companion));
         }
     }
 
@@ -70,7 +69,7 @@ public class CompanionDataHelper extends DataHelper<Companion> {
     public void alert(Companion companion) {
         if (null != companion) {
             getDao().update(companion);
-            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, companion));
+//            notifyDataChanged(new DataEvent(DataEvent.ALERT_ACTION_ALERT, companion));
         }
     }
 

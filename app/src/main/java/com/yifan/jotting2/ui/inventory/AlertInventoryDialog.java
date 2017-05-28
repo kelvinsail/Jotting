@@ -16,20 +16,24 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.yifan.jotting2.base.impl.IView;
+import com.yifan.jotting2.presenter.InventoryPresenter;
 import com.yifan.utils.utils.ResourcesUtils;
 import com.yifan.jotting2.R;
 import com.yifan.jotting2.base.BaseMeasureDialog;
 import com.yifan.jotting2.pojo.Inventory;
 import com.yifan.jotting2.pojo.Project;
 import com.yifan.jotting2.utils.Constans;
-import com.yifan.jotting2.utils.database.datahalper.InventoriesDataHelper;
+
+import java.lang.ref.WeakReference;
 
 /**
  * 新增清单项弹窗
  *
  * Created by yifan on 2016/10/22.
  */
-public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class AlertInventoryDialog extends BaseMeasureDialog
+        implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     public static final String TAG = "AlertInventoryDialog";
 
@@ -94,6 +98,11 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
     private Project mProject;
 
     /**
+     * Presenter
+     */
+    private InventoryPresenter mPresenter;
+
+    /**
      * 标签颜色
      */
     private int[] mLabelColors = new int[]{
@@ -127,6 +136,8 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
         mProject = getArguments().getParcelable(BUNDLE_KEY_PROJECT);
         mInventory = getArguments().getParcelable(Constans.BUNDLE_KEY_DATA);
         isAlerting = null != mInventory;
+        mPresenter = new InventoryPresenter(new AlertOrAddView(isAlerting,
+                new WeakReference<AlertInventoryDialog>(this)));
     }
 
     @Override
@@ -239,9 +250,9 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
         }
         //判断是修改还是插入
         if (isAlerting) {
-            InventoriesDataHelper.getInstance().alert(inventory);
+            mPresenter.alertInventory(inventory, true);
         } else {
-            InventoriesDataHelper.getInstance().insert(inventory);
+            mPresenter.addInventory(inventory);
         }
         return true;
     }
@@ -263,6 +274,40 @@ public class AlertInventoryDialog extends BaseMeasureDialog implements View.OnCl
     private void clearInput(EditText... editTexts) {
         for (EditText editText : editTexts) {
             editText.setText(null);
+        }
+    }
+
+    /**
+     * IView接口
+     */
+    private static class AlertOrAddView implements IView<Boolean> {
+
+        private boolean isAlert;
+
+        private WeakReference<AlertInventoryDialog> mDialog;
+
+        public AlertOrAddView(boolean isAlert, WeakReference<AlertInventoryDialog> dialog) {
+            this.isAlert = isAlert;
+            this.mDialog = dialog;
+        }
+
+        @Override
+        public void onSuccess(Boolean object) {
+
+        }
+
+        @Override
+        public void onError(Throwable error) {
+            if (null != mDialog && null != mDialog.get()) {
+                if (null != error && error instanceof NullPointerException) {
+                    Toast.makeText(mDialog.get().getActivity(), ResourcesUtils.getString(R.string.inventory_name_hint),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mDialog.get().getActivity(), ResourcesUtils.getString(
+                            isAlert ? R.string.toast_submit_fail : R.string.add_fail),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 }

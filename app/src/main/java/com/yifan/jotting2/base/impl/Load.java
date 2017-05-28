@@ -9,7 +9,7 @@ import com.yifan.jotting2.R;
  *
  * Created by yifan on 2016/7/18.
  */
-public interface LoadImpl {
+public interface Load {
 
     /**
      * 显示加载Loading弹窗

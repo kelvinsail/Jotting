@@ -3,6 +3,8 @@ package com.yifan.jotting2;
 import com.yifan.utils.base.BaseApplication;
 import com.yifan.jotting2.utils.database.DataBaseManager;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Application实例
  *
